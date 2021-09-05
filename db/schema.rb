@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_05_125455) do
+ActiveRecord::Schema.define(version: 2021_09_05_154926) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -24,6 +24,20 @@ ActiveRecord::Schema.define(version: 2021_09_05_125455) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "artworks", force: :cascade do |t|
+    t.string "image_id"
+    t.text "description"
+    t.boolean "is_private"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "creators", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -32,8 +46,43 @@ ActiveRecord::Schema.define(version: 2021_09_05_125455) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "last_name"
+    t.string "first_name"
+    t.string "last_name_kana"
+    t.string "first_name_kana"
+    t.string "nickname"
+    t.string "phone_number"
+    t.text "schedule"
+    t.text "price"
+    t.string "image_id"
+    t.text "introduction"
+    t.boolean "is_deleted"
     t.index ["email"], name: "index_creators_on_email", unique: true
     t.index ["reset_password_token"], name: "index_creators_on_reset_password_token", unique: true
+  end
+
+  create_table "entries", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.string "subject"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "issues", force: :cascade do |t|
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "content"
+    t.boolean "is_musician"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "musicians", force: :cascade do |t|
@@ -44,8 +93,36 @@ ActiveRecord::Schema.define(version: 2021_09_05_125455) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "last_name"
+    t.string "first_name"
+    t.string "last_name_kana"
+    t.string "first_name_kana"
+    t.string "nickname"
+    t.string "phone_number"
+    t.string "image_id"
+    t.text "introduction"
+    t.boolean "is_deleted"
     t.index ["email"], name: "index_musicians_on_email", unique: true
     t.index ["reset_password_token"], name: "index_musicians_on_reset_password_token", unique: true
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.boolean "checked"
+    t.string "action"
+    t.boolean "is_musician"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "recruitments", force: :cascade do |t|
+    t.string "title"
+    t.text "detail"
+    t.date "deadline"
+    t.integer "price"
+    t.boolean "is_closed"
+    t.boolean "is_private"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

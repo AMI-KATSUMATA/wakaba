@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  checked: false
+  action: MyString
+  is_musician: false
+
+two:
+  checked: false
+  action: MyString
+  is_musician: false
