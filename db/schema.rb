@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_06_040641) do
+ActiveRecord::Schema.define(version: 2021_09_06_034648) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2021_09_06_040641) do
   end
 
   create_table "artworks", force: :cascade do |t|
+    t.integer "creator_id"
     t.text "description"
     t.boolean "is_private"
     t.datetime "created_at", null: false
@@ -53,6 +54,8 @@ ActiveRecord::Schema.define(version: 2021_09_06_040641) do
   end
 
   create_table "contacts", force: :cascade do |t|
+    t.integer "creator_id"
+    t.integer "musician_"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -61,11 +64,6 @@ ActiveRecord::Schema.define(version: 2021_09_06_040641) do
   create_table "creators", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "last_name"
     t.string "first_name"
     t.string "last_name_kana"
@@ -76,28 +74,43 @@ ActiveRecord::Schema.define(version: 2021_09_06_040641) do
     t.text "price"
     t.text "introduction"
     t.boolean "is_deleted"
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["email"], name: "index_creators_on_email", unique: true
     t.index ["reset_password_token"], name: "index_creators_on_reset_password_token", unique: true
   end
 
   create_table "entries", force: :cascade do |t|
+    t.integer "creator_id"
+    t.integer "recruitment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "favorites", force: :cascade do |t|
+    t.integer "creator_id"
+    t.integer "musician_id"
     t.string "subject"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "issues", force: :cascade do |t|
+    t.integer "recruitment_id"
+    t.integer "creator_id"
+    t.integer "musician_"
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "messages", force: :cascade do |t|
+    t.integer "creator_id"
+    t.integer "musician_id"
+    t.integer "issue_id"
     t.text "content"
     t.boolean "is_musician"
     t.datetime "created_at", null: false
@@ -107,11 +120,6 @@ ActiveRecord::Schema.define(version: 2021_09_06_040641) do
   create_table "musicians", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "last_name"
     t.string "first_name"
     t.string "last_name_kana"
@@ -120,11 +128,21 @@ ActiveRecord::Schema.define(version: 2021_09_06_040641) do
     t.string "phone_number"
     t.text "introduction"
     t.boolean "is_deleted"
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["email"], name: "index_musicians_on_email", unique: true
     t.index ["reset_password_token"], name: "index_musicians_on_reset_password_token", unique: true
   end
 
   create_table "notifications", force: :cascade do |t|
+    t.integer "visitor_id"
+    t.integer "visited_id"
+    t.integer "message_id"
+    t.integer "issue_id"
+    t.integer "entry_"
     t.boolean "checked"
     t.string "action"
     t.boolean "is_musician"
@@ -133,6 +151,7 @@ ActiveRecord::Schema.define(version: 2021_09_06_040641) do
   end
 
   create_table "recruitments", force: :cascade do |t|
+    t.integer "musician_id"
     t.string "title"
     t.text "detail"
     t.date "deadline"
