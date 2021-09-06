@@ -1,0 +1,2 @@
+module RecruitUser::HomesHelper
+end

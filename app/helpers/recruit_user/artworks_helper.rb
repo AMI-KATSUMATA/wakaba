@@ -1,0 +1,2 @@
+module RecruitUser::ArtworksHelper
+end

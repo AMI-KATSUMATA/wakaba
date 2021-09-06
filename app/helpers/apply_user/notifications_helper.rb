@@ -1,0 +1,2 @@
+module ApplyUser::NotificationsHelper
+end

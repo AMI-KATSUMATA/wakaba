@@ -1,0 +1,2 @@
+module ApplyUser::MusiciansHelper
+end

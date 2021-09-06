@@ -1,0 +1,2 @@
+module RecruitUser::ContactsHelper
+end

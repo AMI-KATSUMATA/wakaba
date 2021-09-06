@@ -1,0 +1,2 @@
+module ApplyUser::MessagesHelper
+end
