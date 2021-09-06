@@ -1,15 +1,37 @@
-<h2>Sign up</h2>
+<h2>つのりて新規登録</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "musicians/shared/error_messages", resource: resource %>
-
   <div class="field">
-    <%= f.label :email %><br />
+    <%= f.label :氏名 %><br />
+  　<%= f.text_field :last_name, autofocus: true %>
+  　<%= f.text_field :first_name, autofocus: true %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :フリガナ %><br />
+  　<%= f.text_field :last_name_kana, autofocus: true %>
+  　<%= f.text_field :first_name_kana, autofocus: true %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :バンド名 %><br />
+  　<%= f.text_field :nickname, autofocus: true, placeholder: "20字以内で入力してください" %>
+  </div>
+  <p>*アカウント表示名として使用します</p>
+  
+  <div class="field">
+    <%= f.label :電話番号 %><br />
+  　<%= f.text_field :nickname, autofocus: true %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :メールアドレス %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
+    <%= f.label :パスワード %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
@@ -17,13 +39,37 @@
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.label :パスワード確認 %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "もう一度パスワードを入力してください" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "新規登録" %>
   </div>
 <% end %>
 
-<%= render "musicians/shared/links" %>
+  <div>
+   <p>つのりてでログインする
+    <%= link_to new_musician_session_path, class:"text-secondary" do %>
+    <i class="far fa-hand-point-right"></i>
+    <% end %>
+   </p>
+ </div>
+ 
+ <div>
+   <p>つくりてでアカウントをつくる
+    <%= link_to new_creator_registration_path, class:"text-secondary" do %>
+    <i class="far fa-hand-point-right"></i>
+    <% end %>
+   </p>
+ </div>
+
+  <div>
+   <p>つくりてでログインする
+    <%= link_to new_creator_session_path, class:"text-secondary" do %>
+    <i class="far fa-hand-point-right"></i>
+    <% end %>
+   </p>
+ </div>
+
+<!--%= render "musicians/shared/links" %>-->
