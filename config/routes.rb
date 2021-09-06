@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root to: 'apply_user/homes#top'
+  
   devise_for :musicians, controllers: {
   sessions:      'musicians/sessions',
   passwords:     'musicians/passwords',
