@@ -1,0 +1,2 @@
+module RecruitUser::NotificationsHelper
+end

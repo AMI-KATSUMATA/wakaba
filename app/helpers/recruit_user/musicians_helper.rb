@@ -1,0 +1,2 @@
+module RecruitUser::MusiciansHelper
+end

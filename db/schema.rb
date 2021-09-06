@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_06_034648) do
+ActiveRecord::Schema.define(version: 2021_09_06_040641) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -46,7 +46,6 @@ ActiveRecord::Schema.define(version: 2021_09_06_034648) do
   end
 
   create_table "artworks", force: :cascade do |t|
-    t.string "image_id"
     t.text "description"
     t.boolean "is_private"
     t.datetime "created_at", null: false
@@ -75,7 +74,6 @@ ActiveRecord::Schema.define(version: 2021_09_06_034648) do
     t.string "phone_number"
     t.text "schedule"
     t.text "price"
-    t.string "image_id"
     t.text "introduction"
     t.boolean "is_deleted"
     t.index ["email"], name: "index_creators_on_email", unique: true
@@ -120,7 +118,6 @@ ActiveRecord::Schema.define(version: 2021_09_06_034648) do
     t.string "first_name_kana"
     t.string "nickname"
     t.string "phone_number"
-    t.string "image_id"
     t.text "introduction"
     t.boolean "is_deleted"
     t.index ["email"], name: "index_musicians_on_email", unique: true
