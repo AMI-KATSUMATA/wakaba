@@ -1,0 +1,42 @@
+<div>
+  <% if @creator.profile_image.attached? %>
+   <%= image_tag @creator.profile_image %>
+  <% else %>
+   <%= image_tag 'no_image.jpg' %>
+  <% end %>
+</div>
+<div>
+  <h3><%= @creator.nickname %></h3>
+    <% if @creator.id == current_creator.id %>
+      <p>
+        <%= link_to edit_creator_path, class:"text-secondary" do %>
+         <i class="fas fa-cog"></i>
+        <% end %>
+      </p>
+    <% end %>
+</div>
+<div>
+  <p>スケジュール
+   <%= @creator.schedule %>
+  </p>
+  <p>参考価格
+    <%= @creator.price %>
+  </p>
+</div>
+<div>
+  <%= @creator.introduction %>
+</div>
+
+<!--投稿ポートフォリオ一覧-->
+<!--% if @artworks.blank? %>-->
+<!--  <h4>まだポートフォリオの投稿はありません</h4>-->
+<!--% else %>-->
+<!--  % @artworks.each do |artwork| %>-->
+<!--    <div>-->
+<!--      %= link_to artwork_path(artwork.id) do %>-->
+<!--        %= image_tag artwork.image %>-->
+<!--      % end %>-->
+<!--    </div>-->
+<!--    % end %>-->
+<!--  %= paginate @arkworks %>-->
+<!--% end %>-->

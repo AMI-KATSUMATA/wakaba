@@ -1,0 +1,5 @@
+<h3>退会処理を行います</h3>
+<div>
+  <%= link_to "続行", withdraw_creator_path(@creator), method: :patch, "data-confirm" => "本当に退会しますか？", class: "btn btn-outline-danger" %>
+  <%= link_to "キャンセル", creator_path(@creator), class: "btn btn-outline-danger" %>
+</div>

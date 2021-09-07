@@ -3,7 +3,7 @@ class CreateArtworks < ActiveRecord::Migration[5.2]
     create_table :artworks do |t|
       t.integer :creator_id
       t.text :description
-      t.boolean :is_private
+      t.boolean :is_private, null: false, default: "false"
 
       t.timestamps
     end
