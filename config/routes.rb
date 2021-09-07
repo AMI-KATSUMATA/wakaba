@@ -26,7 +26,18 @@ Rails.application.routes.draw do
       end
     end
   end
-  
+ 
+  # recruit_user 
+  get '/recruit_user' => 'recruit_user/homes#top'
+  namespace :recruit_user do
+    # creator
+    resources :musicians, only: [:show, :index, :edit, :update] do
+      member do
+       get :unsubscribe
+       patch :withdraw
+      end
+    end
+  end
   
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
