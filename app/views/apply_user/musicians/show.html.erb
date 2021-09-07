@@ -1,0 +1,27 @@
+<div>
+  <% if @musician.profile_image.attached? %>
+   <%= image_tag @musician.profile_image %>
+  <% else %>
+   <%= image_tag 'no_image.jpg' %>
+  <% end %>
+</div>
+<div>
+  <h3><%= @musician.nickname %></h3>
+</div>
+<div>
+  <%= @musician.introduction %>
+</div>
+
+<!--投稿ポートフォリオ一覧-->
+<!--% if @artworks.blank? %>-->
+<!--  <h4>まだポートフォリオの投稿はありません</h4>-->
+<!--% else %>-->
+<!--  % @artworks.each do |artwork| %>-->
+<!--    <div>-->
+<!--      %= link_to artwork_path(artwork.id) do %>-->
+<!--        %= image_tag artwork.image %>-->
+<!--      % end %>-->
+<!--    </div>-->
+<!--    % end %>-->
+<!--  %= paginate @arkworks %>-->
+<!--% end %>-->

@@ -25,6 +25,10 @@ Rails.application.routes.draw do
        patch :withdraw
       end
     end
+    
+    # musician
+    resources :musicians, only: [:index, :show]
+    
   end
  
   # recruit_user 
