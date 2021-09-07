@@ -1,7 +1,7 @@
 class RecruitUser::MusiciansController < ApplicationController
     
   def index
-     @creators = Creator.where(is_deleted: "false")
+     @musicians = Musicians.where(is_deleted: "false")
   end
   
   def show

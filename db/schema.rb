@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2021_09_06_034648) do
 
   create_table "contacts", force: :cascade do |t|
     t.integer "creator_id"
-    t.integer "musician_i"
+    t.integer "musician_id"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

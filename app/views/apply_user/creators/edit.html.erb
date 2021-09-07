@@ -1,0 +1,81 @@
+<h3><%= @creator.nickname %>さんの登録情報編集</h3>
+      <%= form_with model: @creator, local: true do |f| %>
+        <table class="table table-borderless">
+          <tbody>
+            <tr>
+              <th scope="col"><strong><%= f.label :プロフィール画像 %></strong></th>
+              <td scope="col"><%= f.file_field :profile_image %></td>
+            </tr>
+          </tbody>
+          
+          <tbody>
+            <tr>
+              <th scope="col"><strong><%= f.label :氏名 %></strong></th>
+              <td scope="col"><%= f.text_field :last_name, class: "form-control" %></td>
+              <td scope="col"><%= f.text_field :first_name, class: "form-control" %></td>
+            </tr>
+          </tbody>
+
+          <tbody>
+            <tr>
+              <th scope="col"><strong><%= f.label :フリガナ %></strong></th>
+              <td scope="col"><%= f.text_field :last_name_kana, class: "form-control" %></td>
+              <td scope="col"><%= f.text_field :first_name_kana, class: "form-control" %></td>
+            </tr>
+          </tbody>
+
+          <tbody>
+            <tr>
+              <th scope="row"><strong><%= f.label :アカウント名 %></strong></th>
+              <td scope="row"><%= f.text_field :nickname, class: "form-control" %></td>
+            </tr>
+          </tbody>
+
+          <tbody>
+            <tr>
+              <th scope="row"><strong><%= f.label :電話番号 %></strong></th>
+              <td scope="row"><%= f.text_field :phone_number, class: "form-control" %></td>
+            </tr>
+          </tbody>
+
+          <tbody>
+            <tr>
+              <th scope="row"><strong><%= f.label :アドレス %></strong></th>
+              <td scope="row" colspan="2"><%= f.text_field :email, class: "form-control" %></td>
+            </tr>
+          </tbody>
+
+          <tbody>
+            <tr>
+              <th scope="row"><strong><%= f.label :スケジュール %></strong></th>
+              <td scope="row"><%= f.text_field :schedule, class: "form-control" %></td>
+            </tr>
+          </tbody>
+
+         <tbody>
+            <tr>
+              <th scope="row"><strong><%= f.label :参考価格 %></strong></th>
+              <td scope="row"><%= f.text_field :price, class: "form-control" %></td>
+            </tr>
+          </tbody>
+
+          <tbody>
+            <tr>
+              <th scope="row"><strong><%= f.label :紹介文 %></strong></th>
+              <td scope="row"><%= f.text_field :introduction, class: "form-control" %></td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+  　       <div>
+            <%= f.submit "変更", class: "btn btn-outline-success btn-lg" %>
+          </div>
+          <div>
+            <p>退会される方
+            　<%= link_to unsubscribe_creator_path(@creator), class:"text-secondary" do %>
+    　　　　　　　　　　<i class="far fa-hand-point-right"></i>
+    　　　　　　　　　<% end %>
+            </p>
+          </div>
+        </div>
+      <% end %>

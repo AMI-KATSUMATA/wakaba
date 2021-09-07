@@ -2,6 +2,8 @@
 
 class Musicians::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
+  before_action :reject_musician, only: [:create]
+
 
   # GET /resource/sign_in
   # def new
@@ -24,4 +26,18 @@ class Musicians::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+
+ protected
+
+  def reject_musician
+    @musician = Musician.find_by(email: params[:musician][:email].downcase)
+    if @musician
+      if (@musician.valid_password?(params[:musician][:password]) && (@musician.active_for_authentication? == false))
+        flash[:alert] = "退会済みです。"
+        redirect_to new_musician_session_path
+      end
+    else
+      flash[:error] = "項目を入力してください。"
+    end
+  end
 end
