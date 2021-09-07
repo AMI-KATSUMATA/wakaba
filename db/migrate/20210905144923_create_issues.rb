@@ -3,8 +3,8 @@ class CreateIssues < ActiveRecord::Migration[5.2]
     create_table :issues do |t|
       t.integer :recruitment_id
       t.integer :creator_id
-      t.integer :musician_
-      t.integer :status
+      t.integer :musician_id
+      t.integer :status, null: false, default: "0"
 
       t.timestamps
     end

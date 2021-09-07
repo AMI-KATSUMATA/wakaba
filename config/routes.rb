@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'apply_user/homes#top'
-  
-  devise_for :musicians, controllers: {
+    devise_for :musicians, controllers: {
   sessions:      'musicians/sessions',
   passwords:     'musicians/passwords',
   registrations: 'musicians/registrations'
@@ -17,5 +15,19 @@ Rails.application.routes.draw do
   sessions:      'admins/sessions',
   passwords:     'admins/passwords',
 }
+  # apply_user
+  root to: 'apply_user/homes#top'
+  scope module: :apply_user do
+    # creator
+    resources :creators, only: [:show, :index, :edit, :update] do
+      member do
+       get :unsubscribe
+       patch :withdraw
+      end
+    end
+  end
+  
+  
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

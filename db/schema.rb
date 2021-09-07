@@ -48,14 +48,14 @@ ActiveRecord::Schema.define(version: 2021_09_06_034648) do
   create_table "artworks", force: :cascade do |t|
     t.integer "creator_id"
     t.text "description"
-    t.boolean "is_private"
+    t.boolean "is_private", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "contacts", force: :cascade do |t|
     t.integer "creator_id"
-    t.integer "musician_"
+    t.integer "musician_i"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 2021_09_06_034648) do
     t.text "schedule"
     t.text "price"
     t.text "introduction"
-    t.boolean "is_deleted"
+    t.boolean "is_deleted", default: false, null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -101,8 +101,8 @@ ActiveRecord::Schema.define(version: 2021_09_06_034648) do
   create_table "issues", force: :cascade do |t|
     t.integer "recruitment_id"
     t.integer "creator_id"
-    t.integer "musician_"
-    t.integer "status"
+    t.integer "musician_id"
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(version: 2021_09_06_034648) do
     t.integer "musician_id"
     t.integer "issue_id"
     t.text "content"
-    t.boolean "is_musician"
+    t.boolean "is_musician", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -127,7 +127,7 @@ ActiveRecord::Schema.define(version: 2021_09_06_034648) do
     t.string "nickname"
     t.string "phone_number"
     t.text "introduction"
-    t.boolean "is_deleted"
+    t.boolean "is_deleted", default: false, null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -142,10 +142,10 @@ ActiveRecord::Schema.define(version: 2021_09_06_034648) do
     t.integer "visited_id"
     t.integer "message_id"
     t.integer "issue_id"
-    t.integer "entry_"
-    t.boolean "checked"
+    t.integer "entry_id"
+    t.boolean "checked", default: false, null: false
     t.string "action"
-    t.boolean "is_musician"
+    t.boolean "is_musician", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -156,8 +156,8 @@ ActiveRecord::Schema.define(version: 2021_09_06_034648) do
     t.text "detail"
     t.date "deadline"
     t.integer "price"
-    t.boolean "is_closed"
-    t.boolean "is_private"
+    t.boolean "is_closed", default: false, null: false
+    t.boolean "is_private", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

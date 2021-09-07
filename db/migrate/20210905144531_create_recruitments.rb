@@ -6,8 +6,8 @@ class CreateRecruitments < ActiveRecord::Migration[5.2]
       t.text :detail
       t.date :deadline
       t.integer :price
-      t.boolean :is_closed
-      t.boolean :is_private
+      t.boolean :is_closed, null: false, default: "false"
+      t.boolean :is_private, null: false, default: "false"
 
       t.timestamps
     end

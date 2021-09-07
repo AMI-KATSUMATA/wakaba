@@ -5,10 +5,10 @@ class CreateNotifications < ActiveRecord::Migration[5.2]
       t.integer :visited_id
       t.integer :message_id
       t.integer :issue_id
-      t.integer :entry_
-      t.boolean :checked
+      t.integer :entry_id
+      t.boolean :checked, null: false, default: "false"
       t.string :action
-      t.boolean :is_musician
+      t.boolean :is_musician, null: false, default: "false"
 
       t.timestamps
     end

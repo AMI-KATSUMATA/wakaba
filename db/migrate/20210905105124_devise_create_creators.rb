@@ -15,7 +15,7 @@ class DeviseCreateCreators < ActiveRecord::Migration[5.2]
       t.text :schedule
       t.text :price
       t.text :introduction
-      t.boolean :is_deleted
+      t.boolean :is_deleted, null:false, default: "false"
       ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at

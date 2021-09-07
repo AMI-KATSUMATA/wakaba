@@ -13,7 +13,7 @@ class DeviseCreateMusicians < ActiveRecord::Migration[5.2]
       t.string :nickname
       t.string :phone_number
       t.text :introduction
-      t.boolean :is_deleted
+      t.boolean :is_deleted, null: false, default: "false"
 
       ## Recoverable
       t.string   :reset_password_token
