@@ -1,7 +1,7 @@
 class RecruitUser::MusiciansController < ApplicationController
     
   def index
-     @creators = Creator.where(is_deleted: "false")
+     @musicians = Musician.where(is_deleted: "false")
   end
   
   def show
@@ -38,7 +38,7 @@ class RecruitUser::MusiciansController < ApplicationController
     private
 
     def musician_params
-      params.require(:musician).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :nickname, :email, :phone_number, :intriduction, :is_deleted, :profile_image)
+      params.require(:musician).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :nickname, :email, :phone_number, :introduction, :is_deleted, :profile_image)
     end
   
 end

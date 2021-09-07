@@ -46,7 +46,7 @@
           <!--つのりてログイン後-->
           <% elsif musician_signed_in? %>
             <li class="nav-item">
-             <%= link_to "マイページ", root_path, class: "nav-link text-dark" %>
+             <%= link_to "マイページ", recruit_user_musician_path(current_musician.id), class: "nav-link text-dark" %>
             </li>
             <li class="nav-item">
               <%= link_to "依頼管理", root_path, class:"nav-link text-dark" %>
