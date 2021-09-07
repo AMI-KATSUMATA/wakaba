@@ -1,0 +1,5 @@
+<h3>退会処理を行いますか？</h3>
+<div>
+  <%= link_to "続行", withdraw_recruit_user_musician_path(@musician), method: :patch, "data-confirm" => "本当に退会しますか？", class: "btn btn-outline-danger" %>
+  <%= link_to "キャンセル", recruit_user_musician_path(@musician), class: "btn btn-outline-danger" %>
+</div>
