@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       member do
        get :unsubscribe
        patch :withdraw
+       get :entries
       end
     end
 
@@ -30,7 +31,9 @@ Rails.application.routes.draw do
     resources :musicians, only: [:index, :show]
     
     # recruitment
-    resources :recruitments, only:[:index, :show]
+    resources :recruitments, only:[:index, :show] do
+      resource :entries, only: [:create, :destroy, :index]
+    end
 
   end
 
@@ -48,9 +51,14 @@ Rails.application.routes.draw do
       end
     end
     
+    # entry
+    
     # recruitment
-    resources :recruitments, except:[:edit]
-
+    resources :recruitments, except:[:edit, :destroy] do
+      member do
+        patch :private
+      end
+    end
   end
 
 

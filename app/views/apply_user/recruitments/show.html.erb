@@ -48,6 +48,37 @@
       </td>
     </tr>
   </tbody>
+
+ <tbody>
+    <tr>
+      <th>エントリー数</th>
+      <td><%= @recruitment.entries.count %></td>
+    </tr>
+  </tbody>
   
+  <!--依頼へのエントリー-->
+ <tbody>
+    <tr>
+      <th></th>
+        <td>
+         <% if @recruitment.entried_by?(current_creator) %>
+          <p>
+            <%= link_to "エントリーを取り消す", recruitment_entries_path(@recruitment), method: :delete %>
+          </p>
+        <% else %>
+         <p>
+           <%= link_to "エントリーする", recruitment_entries_path(@recruitment), method: :post %>
+         </p>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
 </table>
+
+
+  
+
+
+
+
   

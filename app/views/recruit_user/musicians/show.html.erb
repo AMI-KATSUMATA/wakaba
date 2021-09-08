@@ -19,9 +19,14 @@
   <%= @musician.introduction %>
 </div>
 
+<% if @musician.id == current_musician.id %>
+  <%= link_to new_recruit_user_recruitment_path, class:"text-secondary" do %>
+  <i class="fas fa-plus"></i>
+  <% end %>
+<%end %>
 
 <% if @recruitments.blank? %>
-  <h4>まだポートフォリオの投稿はありません</h4>
+  <h4>まだ依頼の投稿はありません</h4>
 <% else %>
 <table>
      <% @recruitments.each do |recruitment| %>
@@ -31,7 +36,7 @@
           <%= recruitment.title %>
          <% end %>
         </td>
-  
+        
         <td>
            <%= recruitment.detail %>
         </td>

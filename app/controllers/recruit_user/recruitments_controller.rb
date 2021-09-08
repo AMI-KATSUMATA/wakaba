@@ -22,6 +22,8 @@ class RecruitUser::RecruitmentsController < ApplicationController
 
   def show
     @recruitment = Recruitment.find(params[:id])
+    entries = Entry.where(recruitment_id: @recruitment.id).pluck(:creator_id)
+    @entry_creators = Creator.find(entries)
   end
 
   def update
@@ -34,20 +36,17 @@ class RecruitUser::RecruitmentsController < ApplicationController
       render :edit
     end
   end
-
-  def destroy
+  
+  def private
     @recruitment = Recruitment.find(params[:id])
-    if @recruitment.destroy
-      flash[:success] = "依頼を削除しました"
-    else
-      flash[:alert] = "依頼の削除に失敗しました"
-    end
+    @recruitment.update(is_private: true)
+    flash[:success] = "依頼を削除しました"
+    redirect_to recruit_user_musician_path(current_musician)
   end
-
 
   private
 
   def recruitment_params
-    params.require(:recruitment).permit(:title, :detail, :deadline, :price, :is_closed)
+    params.require(:recruitment).permit(:title, :detail, :deadline, :price, :is_closed, :is_private)
   end
 end

@@ -1,0 +1,23 @@
+<h3>エントリーした依頼一覧</h3>
+<% if @entry_recruitments.blank? %>-->
+  <h4>エントリー中の依頼はありません</h4>
+<% else %>
+   <table>
+     <% @entry_recruitments.each do |entry_recruitment| %>
+     <tr>
+        <td>
+         <%= link_to recruitment_path(entry_recruitment) do %>
+          <%= entry_recruitment.title %>
+         <% end %>
+        </td>
+  
+        <td>
+          <%= link_to musician_path(entry_recruitment.musician_id) do %>
+           <%= entry_recruitment.musician.nickname %>
+          <% end %>
+        </td>
+  
+     </tr>
+     <% end %>
+   </table>
+   <% end %>

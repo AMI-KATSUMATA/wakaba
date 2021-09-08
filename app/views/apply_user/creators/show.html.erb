@@ -23,6 +23,14 @@
     <%= @creator.price %>
   </p>
 </div>
+
+    <% if @creator.id == current_creator.id %>
+    <!--エントリーした依頼一覧-->
+      <p>
+        <%= link_to "エントリー中の依頼", entries_creator_path(@creator), class:"text-secondary" %>
+      </p>
+    <% end %>
+
 <div>
   <%= @creator.introduction %>
 </div>

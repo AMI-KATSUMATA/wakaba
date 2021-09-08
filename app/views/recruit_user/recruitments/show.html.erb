@@ -55,16 +55,29 @@
       </td>
     </tr>
   </tbody>
+  </table>
   
+  <!--削除ボタン/エントリーしたつくりて一覧-->
   <% if @recruitment.musician == current_musician %>
-  <tbody>
-    <tr>
-      <th>
-        <%= link_to "削除", recruit_user_recruitment_path(@recruitment.id), class: "btn btn-outline-success btn-lg mr-1" %>
+  　<% if @entry_creators.blank? %>
+        <%= link_to "削除", private_recruit_user_recruitment_path(@recruitment.musician_id), method: :patch, "data-confirm" => "本当に削除してよろしいですか？", class: "btn btn-outline-danger" %>
         *つくりてのエントリー後は依頼の削除はできません
-      </th>
-    </tr>
-  </tbody>
+    <% else %>
+     <h3>エントリーした依頼一覧</h3>
+      <table>
+       <% @entry_creators.each do |entry_creator| %>
+     <tr>
+        <td>
+         <%= link_to recruit_user_creator_path(entry_creator) do %>
+          <%= entry_creator.nickname %>
+         <% end %>
+        </td>
+     </tr>
+     <% end %>
+   </table>
+   <% end %>
+    
+    
   <% end %>
-</table>
+
   

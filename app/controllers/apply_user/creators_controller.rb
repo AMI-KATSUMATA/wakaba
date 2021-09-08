@@ -35,6 +35,12 @@ class ApplyUser::CreatorsController < ApplicationController
     flash[:alert] = "退会しました"
     redirect_to root_path
   end
+  
+  def entries
+    @creator = Creator.find(params[:id])
+    entries = Entry.where(creator_id: @creator.id).pluck(:recruitment_id)
+    @entry_recruitments = Recruitment.find(entries)
+  end
 
 
 
