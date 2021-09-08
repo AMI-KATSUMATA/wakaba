@@ -1,0 +1,53 @@
+<h3>依頼詳細</h3>
+
+<table class="table">
+  <tbody>
+    <tr>
+      <th>タイトル</th>
+      <td><%= @recruitment.title %></td>
+    </tr>
+  </tbody>
+  
+  <tbody>
+    <tr>
+      <th>投稿</th>
+      <td><%= l @recruitment.created_at %></td>
+    </tr>
+  </tbody>
+  
+  <tbody>
+    <tr>
+      <th>完成目安</th>
+      <td><%= @recruitment.deadline %></td>
+    </tr>
+  </tbody>
+  
+  <tbody>
+    <tr>
+      <th>依頼価格</th>
+      <td><%= @recruitment.price %>円</td>
+    </tr>
+  </tbody> 
+  
+  <tbody>
+    <tr>
+      <th>詳細</th>
+      <td><%= @recruitment.detail %></td>
+    </tr>
+  </tbody>
+  
+  <tbody>
+    <tr>
+      <th>募集状況</th>
+      <td>
+        <% if @recruitment.is_closed == false %>
+          <%= @recruitment.is_closed = "募集中" %>
+        <% else %>
+          <%= @recruitment.is_closed = "募集終了" %> 
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+  
+</table>
+  

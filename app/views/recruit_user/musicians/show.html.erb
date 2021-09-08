@@ -19,16 +19,24 @@
   <%= @musician.introduction %>
 </div>
 
-<!--投稿ポートフォリオ一覧-->
-<!--% if @artworks.blank? %>-->
-<!--  <h4>まだポートフォリオの投稿はありません</h4>-->
-<!--% else %>-->
-<!--  % @artworks.each do |artwork| %>-->
-<!--    <div>-->
-<!--      %= link_to artwork_path(artwork.id) do %>-->
-<!--        %= image_tag artwork.image %>-->
-<!--      % end %>-->
-<!--    </div>-->
-<!--    % end %>-->
-<!--  %= paginate @arkworks %>-->
-<!--% end %>-->
+
+<% if @recruitments.blank? %>
+  <h4>まだポートフォリオの投稿はありません</h4>
+<% else %>
+<table>
+     <% @recruitments.each do |recruitment| %>
+     <tr>
+        <td>
+         <%= link_to recruit_user_recruitment_path(recruitment) do %>
+          <%= recruitment.title %>
+         <% end %>
+        </td>
+  
+        <td>
+           <%= recruitment.detail %>
+        </td>
+     </tr>
+     <% end %>
+   </table>
+  <%= paginate @recruitments %>
+<% end %>

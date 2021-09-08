@@ -28,6 +28,9 @@ Rails.application.routes.draw do
 
     # musician
     resources :musicians, only: [:index, :show]
+    
+    # recruitment
+    resources :recruitments, only:[:index, :show]
 
   end
 
@@ -44,6 +47,9 @@ Rails.application.routes.draw do
        patch :withdraw
       end
     end
+    
+    # recruitment
+    resources :recruitments, except:[:edit]
 
   end
 

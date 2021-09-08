@@ -1,23 +1,24 @@
 <h3>つのりて一覧</h3>
- <table>
-   <% @musicians.each do |musician| %>
-   <tr>
-      <td> 
-       <%= link_to musician_path(musician) do %>
-        <% if musician.profile_image.attached? %>
-         <%= image_tag creator.profile_image %>
-        <% else %>
-         <%= image_tag 'no_image.jpg' %>
-        <% end %>
-      <% end %>
-      </td> 
-      
-      <td>
-        <%= link_to musician_path(musician) do %>
-         <%= musician.nickname %>
-        <% end %>
-      </td>
 
-   </tr>
-   <% end %>
- </table>
+<table>
+  <% @musicians.each do |musician| %>
+  <tr>
+     <td> 
+      <%= link_to musician_path(musician) do %>
+       <% if musician.profile_image.attached? %>
+        <%= image_tag creator.profile_image %>
+       <% else %>
+        <%= image_tag 'no_image.jpg' %>
+       <% end %>
+     <% end %>
+     </td> 
+     
+     <td>
+       <%= link_to musician_path(musician) do %>
+        <%= musician.nickname %>
+       <% end %>
+     </td>
+
+  </tr>
+  <% end %>
+</table>
