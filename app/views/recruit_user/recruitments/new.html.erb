@@ -1,0 +1,46 @@
+<h3>依頼新規投稿</h3>
+<%= form_with model: @recruitment, url: recruit_user_recruitments_path, local:true do |f| %>
+  <table class="table table-borderless">
+    <tbody>
+      <tr>
+        <th><%= f.label :title, "タイトル" %></th>
+        <td><%= f.text_field :title %></td>
+      </tr>
+    </tbody>
+        
+    <tbody>
+      <tr>
+        <th><%= f.label :deadline, "完成目安" %></th>
+        <td><%= f.date_field :deadline %></td>
+      </tr>
+    </tbody>
+    
+    <tbody>
+      <tr>
+        <th><%= f.label :price, "単価" %></th>
+        <td><%= f.number_field :price, min: 1 %>円</td>
+      </tr>
+    </tbody>
+    
+    <tbody>
+      <tr>
+        <th><%= f.label :detail, "詳細内容" %></th>
+        <td><%= f.text_area :detail %></td>
+      </tr>
+    </tbody>
+    
+    <tbody>
+      <tr>
+        <th><%= f.label :is_closed, "募集状況" %></th>
+        <td><%= f.radio_button :is_closed, "false", checked: true %>募集中<%= f.radio_button :is_closed, "true" %>募集終了</td>
+      </tr>
+    </tbody>
+    
+    <tbody>
+      <tr>
+        <th></th>
+        <td><%= f.submit '投稿' %></td>
+      </tr>
+    </tbody>
+　</table>
+<% end %>

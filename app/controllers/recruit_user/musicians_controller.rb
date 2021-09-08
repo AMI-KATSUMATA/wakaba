@@ -1,17 +1,18 @@
 class RecruitUser::MusiciansController < ApplicationController
-    
+
   def index
      @musicians = Musician.where(is_deleted: "false")
   end
-  
+
   def show
      @musician = Musician.find(params[:id])
+     @recruitments = @musician.recruitments.page(params[:page]).reverse_order
   end
-  
+
   def edit
     @musician = Musician.find(params[:id])
   end
-  
+
   def update
     @musician = Musician.find(params[:id])
     if @musician.update(musician_params)
@@ -22,11 +23,11 @@ class RecruitUser::MusiciansController < ApplicationController
       render :edit
     end
   end
-  
+
   def unsubscribe
     @musician = Musician.find(params[:id])
   end
-  
+
   def withdraw
     @musician = Musician.find(params[:id])
     @musician.update(is_deleted: true)
@@ -34,11 +35,11 @@ class RecruitUser::MusiciansController < ApplicationController
     flash[:alert] = "退会しました"
     redirect_to root_path
   end
-  
+
     private
 
     def musician_params
       params.require(:musician).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :nickname, :email, :phone_number, :introduction, :is_deleted, :profile_image)
     end
-  
+
 end
