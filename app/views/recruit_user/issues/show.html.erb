@@ -1,0 +1,9 @@
+<div><%= @issur.recruitment.title %></div>
+<div><%= @issue.recruitment.detail %></div>
+<div>依頼したつくりて：<%= @issue.creator.nickname %></div>
+<div><%= @issue.recruitment.price %></div>
+<div> 
+ <%= form_with model: @issue, url: recruit_user_recruitment_issue_path, method: :patch, local:true do |f| %>
+  <%= f.select :status, Issue.statuses.keys %>
+  <%= f.submit "更新" , class: "btn btn-outline-success" %>
+<% end %></div>

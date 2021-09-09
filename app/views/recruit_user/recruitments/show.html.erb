@@ -57,7 +57,7 @@
   </tbody>
   </table>
 
-  <!--削除ボタン/エントリーしたつくりて一覧--> 
+  <!--削除ボタン/エントリーしたつくりて一覧-->
   <% if @recruitment.musician == current_musician && @recruitment.is_closed == false %>
   　<% if @entry_creators.blank? %>
         <%= link_to "削除", private_recruit_user_recruitment_path(@recruitment.musician_id), method: :patch, "data-confirm" => "本当に削除してよろしいですか？", class: "btn btn-outline-danger" %>
@@ -74,8 +74,9 @@
         </td>
         <td>
           <p>
-           <%= link_to "依頼する", recruit_user_issues_path(@recruitment), method: :post %>
-         </p></td>
+           <%= link_to "依頼する", recruit_user_recruitment_issues_path(@recruitment), method: :post %>
+         </p>
+         </td>
      </tr>
      <% end %>
    </table>

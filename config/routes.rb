@@ -55,14 +55,16 @@ Rails.application.routes.draw do
 
     # recruitment
     resources :recruitments, except:[:edit, :destroy] do
+      resources :issues, only:[:create, :update, :show]
       member do
         patch :private
       end
     end
+    
+  end
 
    # issue
-   resources :issues, only:[:create, :update, :index, :show]
-  end
+   
 
 
 
