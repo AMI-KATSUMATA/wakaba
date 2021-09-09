@@ -14,7 +14,4 @@ class ApplyUser::EntriesController < ApplicationController
     redirect_to recruitment_path(recruitment)  
   end
   
-  def index
-  end
-
 end

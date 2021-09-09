@@ -8,20 +8,44 @@
 <div>
   <h3><%= @musician.nickname %></h3>
 </div>
+
+<div>
+  <!--いいね-->
+    <% if @musician.favorited_by?(current_creator) %>
+    <p>
+      <%= link_to musician_favorites_path(@musician), method: :delete do %>
+       ♥
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to musician_favorites_path(@musician), method: :post do %>
+        ♡
+      <% end %>
+    </p>
+  <% end %>
+</div>
 <div>
   <%= @musician.introduction %>
 </div>
 
-<!--投稿ポートフォリオ一覧-->
-<!--% if @artworks.blank? %>-->
-<!--  <h4>まだポートフォリオの投稿はありません</h4>-->
-<!--% else %>-->
-<!--  % @artworks.each do |artwork| %>-->
-<!--    <div>-->
-<!--      %= link_to artwork_path(artwork.id) do %>-->
-<!--        %= image_tag artwork.image %>-->
-<!--      % end %>-->
-<!--    </div>-->
-<!--    % end %>-->
-<!--  %= paginate @arkworks %>-->
-<!--% end %>-->
+<% if @recruitments.blank? %>
+  <h4>まだ依頼の投稿はありません</h4>
+<% else %>
+<table>
+     <% @recruitments.each do |recruitment| %>
+     <tr>
+        <td>
+         <%= link_to recruit_user_recruitment_path(recruitment) do %>
+          <%= recruitment.title %>
+         <% end %>
+        </td>
+        
+        <td>
+           <%= recruitment.detail %>
+        </td>
+     </tr>
+     <% end %>
+   </table>
+  <%= paginate @recruitments %>
+<% end %>

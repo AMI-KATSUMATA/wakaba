@@ -28,12 +28,18 @@ Rails.application.routes.draw do
     end
 
     # musician
-    resources :musicians, only: [:index, :show]
-    
-    # recruitment
-    resources :recruitments, only:[:index, :show] do
-      resource :entries, only: [:create, :destroy, :index]
+    resources :musicians, only: [:index, :show] do
+      post 'favorites' => 'favorites#create_musicians'
+      delete 'favorites' => 'favorites#destroy_musicians'
     end
+    
+    # recruitment/entry
+    resources :recruitments, only:[:index, :show] do
+      resource :entries, only: [:create, :destroy]
+      post 'favorites' => 'favorites#create_recruitments'
+      delete 'favorites' => 'favorites#destroy_recruitments'
+    end
+ 
 
   end
 
