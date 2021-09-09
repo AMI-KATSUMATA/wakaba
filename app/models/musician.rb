@@ -6,6 +6,7 @@ class Musician < ApplicationRecord
          
   has_one_attached :profile_image
   has_many :recruitments, dependent: :destroy
+  has_many :issues, dependent: :destroy
 
   # 退会ずみのユーザーを弾く
   def active_for_authentication?

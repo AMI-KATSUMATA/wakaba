@@ -7,35 +7,35 @@
       <td><%= @recruitment.title %></td>
     </tr>
   </tbody>
-  
+
   <tbody>
     <tr>
       <th>投稿</th>
       <td><%= l @recruitment.created_at %></td>
     </tr>
   </tbody>
-  
+
   <tbody>
     <tr>
       <th>完成目安</th>
       <td><%= @recruitment.deadline %></td>
     </tr>
   </tbody>
-  
+
   <tbody>
     <tr>
       <th>依頼価格</th>
       <td><%= @recruitment.price %>円</td>
     </tr>
-  </tbody> 
-  
+  </tbody>
+
   <tbody>
     <tr>
       <th>詳細</th>
       <td><%= @recruitment.detail %></td>
     </tr>
   </tbody>
-  
+
   <tbody>
     <tr>
       <th>募集状況</th>
@@ -49,16 +49,16 @@
           <% if @recruitment.is_closed == false %>
             <%= @recruitment.is_closed = "募集中" %>
           <% else %>
-            <%= @recruitment.is_closed = "募集終了" %> 
+            <%= @recruitment.is_closed = "募集終了" %>
           <% end %>
         <% end %>
       </td>
     </tr>
   </tbody>
   </table>
-  
-  <!--削除ボタン/エントリーしたつくりて一覧-->
-  <% if @recruitment.musician == current_musician %>
+
+  <!--削除ボタン/エントリーしたつくりて一覧--> 
+  <% if @recruitment.musician == current_musician && @recruitment.is_closed == false %>
   　<% if @entry_creators.blank? %>
         <%= link_to "削除", private_recruit_user_recruitment_path(@recruitment.musician_id), method: :patch, "data-confirm" => "本当に削除してよろしいですか？", class: "btn btn-outline-danger" %>
         *つくりてのエントリー後は依頼の削除はできません
@@ -72,12 +72,15 @@
           <%= entry_creator.nickname %>
          <% end %>
         </td>
+        <td>
+          <p>
+           <%= link_to "依頼する", recruit_user_issues_path(@recruitment), method: :post %>
+         </p></td>
      </tr>
      <% end %>
    </table>
    <% end %>
-    
-    
-  <% end %>
 
-  
+ <% end %>
+
+

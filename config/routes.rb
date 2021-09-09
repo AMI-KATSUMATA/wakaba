@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
     # musician
     resources :musicians, only: [:index, :show]
-    
+
     # recruitment
     resources :recruitments, only:[:index, :show] do
       resource :entries, only: [:create, :destroy, :index]
@@ -50,16 +50,21 @@ Rails.application.routes.draw do
        patch :withdraw
       end
     end
-    
+
     # entry
-    
+
     # recruitment
     resources :recruitments, except:[:edit, :destroy] do
       member do
         patch :private
       end
     end
+
+   # issue
+   resources :issues, only:[:create, :update, :index, :show]
   end
+
+
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

@@ -13,8 +13,5 @@ class ApplyUser::EntriesController < ApplicationController
     entry.destroy
     redirect_to recruitment_path(recruitment)  
   end
-  
-  def index
-  end
 
 end
