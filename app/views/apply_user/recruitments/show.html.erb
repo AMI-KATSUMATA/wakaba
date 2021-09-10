@@ -50,7 +50,17 @@
       <td><%= @recruitment.detail %></td>
     </tr>
   </tbody>
-
+  <tbody>
+    <% @recruitment.recruitment_postscripts.each do |recruitment_postscript| %>
+    <tr>
+      <th>追記</th>
+      <td><%= recruitment_postscript.postscript %></td>
+    </tr>
+    <tr>
+      <th>追記日時</th>
+      <td><%= l recruitment_postscript.created_at %></td>
+    </tr>
+    <% end %>
   <tbody>
     <tr>
       <th>募集状況</th>

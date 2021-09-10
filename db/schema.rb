@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_06_034648) do
+ActiveRecord::Schema.define(version: 2021_09_10_101338) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -147,6 +147,14 @@ ActiveRecord::Schema.define(version: 2021_09_06_034648) do
     t.boolean "checked", default: false, null: false
     t.string "action"
     t.boolean "is_musician", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "recruitment_postscripts", force: :cascade do |t|
+    t.text "postscript"
+    t.integer "musician_id"
+    t.integer "recruitment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

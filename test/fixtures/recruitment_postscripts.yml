@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  postscript: MyText
+  musician_id: 1
+  recruitment_id: 1
+
+two:
+  postscript: MyText
+  musician_id: 1
+  recruitment_id: 1
