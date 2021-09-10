@@ -22,6 +22,7 @@ class RecruitUser::RecruitmentsController < ApplicationController
 
   def show
     @recruitment = Recruitment.find(params[:id])
+    @postscript = RecruitmentPostscript.new
     entries = Entry.where(recruitment_id: @recruitment.id).pluck(:creator_id)
     @entry_creators = Creator.find(entries)
   end

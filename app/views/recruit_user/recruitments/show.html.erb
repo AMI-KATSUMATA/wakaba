@@ -36,6 +36,27 @@
     </tr>
   </tbody>
 
+　<tbody>
+    <!--追記一覧-->
+    <% @recruitment.recruitment_postscripts.each do |recruitment_postscript| %>
+    <tr>
+      <th>追記</th>
+      <td><%= recruitment_postscript.postscript %></td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>投稿日時<%= l recruitment_postscript.created_at %></td>
+    </tr>
+    <% if recruitment_postscript.musician == current_musician %>
+      <tr>
+        <th></th>
+        <td><%= link_to "削除", recruit_user_recruitment_recruitment_postscript_path(recruitment_postscript.recruitment, recruitment_postscript), method: :delete %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </div>
+　</tbody>
+
   <tbody>
     <tr>
       <th>募集状況</th>
@@ -57,8 +78,15 @@
   </tbody>
   </table>
 
-  <!--削除ボタン/エントリーしたつくりて一覧-->
+  <!--依頼削除ボタン/エントリーしたつくりて一覧-->
   <% if @recruitment.musician == current_musician && @recruitment.is_closed == false %>
+<!--追記入力欄-->
+<div>
+<%= form_with(model:[@recruitment, @postscript], url: recruit_user_recruitment_recruitment_postscripts_path(@recruitment.id), local: true) do |f| %>
+  <%= f.text_area :postscript, rows:'5',placeholder: "追記事項を入力してください" %>
+  <%= f.submit "送信する" %>
+<% end %>
+</div>
   　<% if @entry_creators.blank? %>
         <%= link_to "削除", private_recruit_user_recruitment_path(@recruitment.musician_id), method: :patch, "data-confirm" => "本当に削除してよろしいですか？", class: "btn btn-outline-danger" %>
         *つくりてのエントリー後は依頼の削除はできません

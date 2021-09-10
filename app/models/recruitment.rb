@@ -4,6 +4,7 @@ class Recruitment < ApplicationRecord
   has_many :entries, dependent: :destroy
   has_one :issue
   has_many :favorites, dependent: :destroy
+  has_many :recruitment_postscripts, dependent: :destroy
   
   # entryテーブルに引数creator_idが存在するか
   def entried_by?(creator)

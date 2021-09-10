@@ -8,6 +8,7 @@ class Musician < ApplicationRecord
   has_many :recruitments, dependent: :destroy
   has_many :issues, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :recruitment_postscripts, dependent: :destroy
   
   # 退会ずみのユーザーを弾く
   def active_for_authentication?
