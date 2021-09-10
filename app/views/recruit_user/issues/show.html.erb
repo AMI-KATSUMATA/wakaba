@@ -1,9 +1,13 @@
-<div><%= @issur.recruitment.title %></div>
-<div><%= @issue.recruitment.detail %></div>
-<div>依頼したつくりて：<%= @issue.creator.nickname %></div>
-<div><%= @issue.recruitment.price %></div>
-<div> 
- <%= form_with model: @issue, url: recruit_user_recruitment_issue_path, method: :patch, local:true do |f| %>
+<h4><%= @issue.recruitment.title %></h4>
+<div>詳細<%= @issue.recruitment.detail %></div>
+<div>依頼したつくりて<%= @issue.creator.nickname %></div>
+<div>依頼単価<%= @issue.recruitment.price %>円</div>
+<% if @issue.status == "作成完了" %>
+<% else %>
+<div>進捗状況*作成完了後は進捗状況の変更とメッセージの送信はできません
+ <%= form_with model: @issue, url: recruit_user_issue_path(@issue), method: :patch, local:true do |f| %>
   <%= f.select :status, Issue.statuses.keys %>
   <%= f.submit "更新" , class: "btn btn-outline-success" %>
-<% end %></div>
+<% end %>
+</div>
+<% end %>

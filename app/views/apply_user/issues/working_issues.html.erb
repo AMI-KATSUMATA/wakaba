@@ -1,0 +1,31 @@
+<h3>進行中の依頼一覧</h3>
+<% if @issues.blank? %>
+  <h4>進行中の依頼はありません</h4>
+<% else %>
+   <table>
+     <% @issues.each do |issue| %>
+     <tr>
+        <td>
+         <%= link_to issue_path(issue) do %>
+          <%= issue.recruitment.title %>
+         <% end %>
+        </td>
+
+        <td>
+          <%= link_to musician_path(issue.musician_id) do %>
+           <%= issue.musician.nickname %>
+          <% end %>
+        </td>
+
+        <td>
+           <%= issue.status %>
+        </td>
+
+     </tr>
+     <% end %>
+   </table>
+   <% end %>
+
+   <div>
+     <%= link_to "作成完了した依頼", completed_issues_path(current_creator.id) %>
+   </div>

@@ -23,17 +23,34 @@ Rails.application.routes.draw do
       member do
        get :unsubscribe
        patch :withdraw
-       get :entries
       end
     end
 
     # musician
-    resources :musicians, only: [:index, :show]
-
-    # recruitment
-    resources :recruitments, only:[:index, :show] do
-      resource :entries, only: [:create, :destroy, :index]
+    resources :musicians, only: [:index, :show] do
+      post 'favorites' => 'favorites#create_musicians'
+      delete 'favorites' => 'favorites#destroy_musicians'
     end
+
+    # recruitment/entry
+    resources :recruitments, only:[:index, :show] do
+      resource :entries, only: [:create, :destroy]
+      post 'favorites' => 'favorites#create_recruitments'
+      delete 'favorites' => 'favorites#destroy_recruitments'
+    end
+
+    # entry
+    get '/entries/:id' => 'entries#entries', as:'entries'
+
+    # favorite
+    get '/favorite_recruitments/:id' => 'favorites#favorite_recruitments', as:'favorite_recruitments'
+    get '/favorite_musicians/:id' => 'favorites#favorite_musicians', as:'favorite_musicians'
+    
+    # issue
+    resources :issues, only:[:show]
+    get '/working_issues/:id' => 'issues#working_issues', as:'working_issues'
+    get '/completed_issues/:id' => 'issues#completed_issues', as:'completed_issues'
+
 
   end
 
@@ -51,22 +68,20 @@ Rails.application.routes.draw do
       end
     end
 
-    # entry
-
     # recruitment
     resources :recruitments, except:[:edit, :destroy] do
-      resources :issues, only:[:create, :update, :show]
+      resource :issue, only:[:create]
       member do
         patch :private
       end
     end
-    
+
+    # issue
+    resources :issues, only:[:show, :update]
+    get '/working_issues/:id' => 'issues#working_issues', as:'working_issues'
+    get '/completed_issues/:id' => 'issues#completed_issues', as:'completed_issues'
+
   end
-
-   # issue
-   
-
-
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

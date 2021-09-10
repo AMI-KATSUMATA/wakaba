@@ -1,2 +1,21 @@
 class ApplyUser::IssuesController < ApplicationController
+  
+  def show
+   @issue = Issue.find(params[:id])
+  end
+
+  def working_issues
+    @creator = Creator.find(current_creator.id)
+    # 作成中のissueを取得する
+    @issues = Issue.where(creator_id: @creator.id)
+                   .where(status: "未着手")
+                   .or(Issue.where(status: "作成中"))
+  end
+  
+  def completed_issues
+    @creator = Creator.find(current_creator.id)
+    # 作成完了後のissueを取得する
+    @issues = Issue.where(creator_id: @creator.id)
+                   .where(status: "作成完了")
+  end
 end
