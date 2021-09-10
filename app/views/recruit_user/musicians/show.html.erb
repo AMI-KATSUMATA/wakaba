@@ -23,6 +23,9 @@
   <%= link_to new_recruit_user_recruitment_path, class:"text-secondary" do %>
   <i class="fas fa-plus"></i>
   <% end %>
+  <p>
+    <%= link_to "依頼管理", recruit_user_working_issues_path(@musician), class:"text-secondary" %>
+  </p>
 <%end %>
 
 <% if @recruitments.blank? %>
@@ -36,7 +39,7 @@
           <%= recruitment.title %>
          <% end %>
         </td>
-        
+
         <td>
            <%= recruitment.detail %>
         </td>

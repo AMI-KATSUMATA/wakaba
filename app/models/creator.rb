@@ -5,7 +5,9 @@ class Creator < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_one_attached :profile_image
   has_many :entries, dependent: :destroy
+  has_many :issues,dependent: :destroy
   has_many :favorites, dependent: :destroy
+
 
   # 退会済みユーザーを弾く
   def active_for_authentication?

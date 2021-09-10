@@ -47,6 +47,19 @@ Rails.application.routes.draw do
     get '/favorite_musicians/:id' => 'favorites#favorite_musicians', as:'favorite_musicians'
  
 
+    # entry
+    get '/entries/:id' => 'entries#entries', as:'entries'
+
+    # favorite
+    get '/favorite_recruitments/:id' => 'favorites#favorite_recruitments', as:'favorite_recruitments'
+    get '/favorite_musicians/:id' => 'favorites#favorite_musicians', as:'favorite_musicians'
+    
+    # issue
+    resources :issues, only:[:show]
+    get '/working_issues/:id' => 'issues#working_issues', as:'working_issues'
+    get '/completed_issues/:id' => 'issues#completed_issues', as:'completed_issues'
+
+
   end
 
   # recruit_user
@@ -62,15 +75,20 @@ Rails.application.routes.draw do
        patch :withdraw
       end
     end
-    
-    # entry
-    
+
     # recruitment
     resources :recruitments, except:[:edit, :destroy] do
+      resource :issue, only:[:create]
       member do
         patch :private
       end
     end
+
+    # issue
+    resources :issues, only:[:show, :update]
+    get '/working_issues/:id' => 'issues#working_issues', as:'working_issues'
+    get '/completed_issues/:id' => 'issues#completed_issues', as:'completed_issues'
+
   end
 
 

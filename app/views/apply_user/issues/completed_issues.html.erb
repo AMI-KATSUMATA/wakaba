@@ -1,0 +1,27 @@
+<h3>作成完了した依頼一覧</h3>
+<% if @issues.blank? %>
+  <h4>作成が完了した依頼はありません</h4>
+<% else %>
+   <table>
+     <% @issues.each do |issue| %>
+     <tr>
+        <td>
+         <%= link_to issue_path(issue) do %>
+          <%= issue.recruitment.title %>
+         <% end %>
+        </td>
+
+        <td>
+          <%= link_to musician_path(issue.musician_id) do %>
+           <%= issue.musician.nickname %>
+          <% end %>
+        </td>
+
+        <td>
+           <%= issue.status %>
+        </td>
+
+     </tr>
+     <% end %>
+   </table>
+   <% end %>
