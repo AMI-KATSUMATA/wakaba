@@ -27,8 +27,17 @@
     <% if @creator.id == current_creator.id %>
     <!--エントリーした依頼一覧-->
       <p>
-        <%= link_to "エントリー中の依頼", entries_creator_path(@creator), class:"text-secondary" %>
+        <%= link_to "エントリー中の依頼", entries_path(@creator), class:"text-secondary" %>
       </p>
+      <!--お気に入り依頼一覧-->
+      <p>
+        <%= link_to "お気に入りした依頼", favorite_recruitments_path(@creator), class:"text-secondary" %>
+      </p>
+      <!--お気に入りしたつのりて-->
+      <p>
+        <%= link_to "お気に入りしたつのりて", favorite_musicians_path(@creator), class:"text-secondary" %>
+      </p>
+
     <% end %>
 
 <div>

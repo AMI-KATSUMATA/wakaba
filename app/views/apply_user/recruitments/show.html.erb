@@ -8,6 +8,21 @@
     </tr>
   </tbody>
   
+  <!--いいね-->
+    <% if @recruitment.favorited_by?(current_creator) %>
+    <p>
+      <%= link_to recruitment_favorites_path(@recruitment), method: :delete do %>
+       ♥
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to recruitment_favorites_path(@recruitment), method: :post do %>
+        ♡
+      <% end %>
+    </p>
+  <% end %>
+  
   <tbody>
     <tr>
       <th>投稿</th>

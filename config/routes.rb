@@ -23,17 +23,29 @@ Rails.application.routes.draw do
       member do
        get :unsubscribe
        patch :withdraw
-       get :entries
       end
     end
 
     # musician
-    resources :musicians, only: [:index, :show]
-    
-    # recruitment
-    resources :recruitments, only:[:index, :show] do
-      resource :entries, only: [:create, :destroy, :index]
+    resources :musicians, only: [:index, :show] do
+      post 'favorites' => 'favorites#create_musicians'
+      delete 'favorites' => 'favorites#destroy_musicians'
     end
+    
+    # recruitment/entry
+    resources :recruitments, only:[:index, :show] do
+      resource :entries, only: [:create, :destroy]
+      post 'favorites' => 'favorites#create_recruitments'
+      delete 'favorites' => 'favorites#destroy_recruitments'
+    end
+    
+    # entry
+    get '/entries/:id' => 'entries#entries', as:'entries'
+    
+    # favorite
+    get '/favorite_recruitments/:id' => 'favorites#favorite_recruitments', as:'favorite_recruitments'
+    get '/favorite_musicians/:id' => 'favorites#favorite_musicians', as:'favorite_musicians'
+ 
 
   end
 
