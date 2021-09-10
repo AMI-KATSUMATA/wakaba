@@ -1,0 +1,27 @@
+<h3>お気に入りつのりて</h3>
+<% if @favorite_musicians.blank? %>
+  <h4>お気に入りつのりてはありません</h4>
+<% else %>
+   <table>
+     <% @favorite_musicians.each do |favorite_musician| %>
+     <tr>
+        <td>
+         <%= link_to musician_path(favorite_musician) do %>
+            <% if favorite_musician.profile_image.attached? %>
+             <%= image_tag favorite_musician.profile_image %>
+            <% else %>
+             <%= image_tag 'no_image.jpg' %>
+            <% end %>
+         <% end %>
+        </td>
+
+        <td>
+          <%= link_to musician_path(favorite_musician) do %>
+           <%= favorite_musician.nickname %>
+          <% end %>
+        </td>
+
+     </tr>
+     <% end %>
+   </table>
+   <% end %>

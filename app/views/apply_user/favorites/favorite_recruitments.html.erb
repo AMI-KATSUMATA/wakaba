@@ -1,0 +1,31 @@
+<h3>お気に入り依頼</h3>
+<% if @favorite_recruitments.blank? %>
+  <h4>お気に入り依頼はありません</h4>
+<% else %>
+   <table>
+     <% @favorite_recruitments.each do |favorite_recruitment| %>
+     <tr>
+        <td>
+         <%= link_to recruitment_path(favorite_recruitment) do %>
+          <%= favorite_recruitment.title %>
+         <% end %>
+        </td>
+
+        <td>
+          <%= link_to musician_path(favorite_recruitment.musician_id) do %>
+           <%= favorite_recruitment.musician.nickname %>
+          <% end %>
+        </td>
+
+        <td>
+          <% if favorite_recruitment.is_closed == true %>
+           <%= favorite_recruitment.is_closed = "募集終了" %>
+          <% else %>
+          <%= favorite_recruitment.is_closed = "募集中" %>
+          <% end %>
+        </td>
+
+     </tr>
+     <% end %>
+   </table>
+   <% end %>

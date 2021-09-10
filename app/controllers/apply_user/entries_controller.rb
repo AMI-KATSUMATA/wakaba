@@ -14,4 +14,10 @@ class ApplyUser::EntriesController < ApplicationController
     redirect_to recruitment_path(recruitment)  
   end
 
+  def entries
+    @creator = Creator.find(params[:id])
+    entries = Entry.where(creator_id: @creator.id).pluck(:recruitment_id)
+    @entry_recruitments = Recruitment.find(entries)
+  end
+  
 end

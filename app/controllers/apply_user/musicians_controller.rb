@@ -6,5 +6,6 @@ class ApplyUser::MusiciansController < ApplicationController
   
   def show
      @musician = Musician.find(params[:id])
+     @recruitments = @musician.recruitments.page(params[:page]).reverse_order
   end
 end
