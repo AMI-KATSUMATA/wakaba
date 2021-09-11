@@ -6,7 +6,8 @@ class RecruitUser::MusiciansController < ApplicationController
 
   def show
      @musician = Musician.find(params[:id])
-     @recruitments = @musician.recruitments.page(params[:page]).reverse_order
+     @recruitments = Recruitment.where(musician_id: @musician.id, is_private: "false")
+                                .page(params[:page]).reverse_order
   end
 
   def edit

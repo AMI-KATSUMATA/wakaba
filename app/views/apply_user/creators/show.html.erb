@@ -37,23 +37,35 @@
       <p>
         <%= link_to "お気に入りしたつのりて", favorite_musicians_path(@creator), class:"text-secondary" %>
       </p>
+      <p>
+        <%= link_to "依頼管理", working_issues_path(@creator), class:"text-secondary" %>
+      </p>
 
     <% end %>
 
 <div>
   <%= @creator.introduction %>
 </div>
+<% if @creator.id == current_creator.id %>
+  <%= link_to new_artwork_path, class:"text-secondary" do %>
+  <i class="fas fa-plus"></i>
+  <% end %>
+<%end %>
 
-<!--投稿ポートフォリオ一覧-->
-<!--% if @artworks.blank? %>-->
-<!--  <h4>まだポートフォリオの投稿はありません</h4>-->
-<!--% else %>-->
-<!--  % @artworks.each do |artwork| %>-->
-<!--    <div>-->
-<!--      %= link_to artwork_path(artwork.id) do %>-->
-<!--        %= image_tag artwork.image %>-->
-<!--      % end %>-->
-<!--    </div>-->
-<!--    % end %>-->
-<!--  %= paginate @arkworks %>-->
-<!--% end %>-->
+<h4>投稿ポートフォリオ一覧</h4>
+<% if @artworks.blank? %>
+  <h4>まだポートフォリオの投稿はありません</h4>
+<% else %>
+  <% @artworks.each do |artwork| %>
+    <div>
+      <%= link_to artwork_path(artwork.id) do %>
+        <% if artwork.artwork_image.attached? %>
+         <%= image_tag artwork.artwork_image %>
+        <% else %>
+         <%= image_tag 'no_image.jpg' %>
+        <% end %>
+      <% end %>
+    </div>
+    <% end %>
+ <!--%= paginate @arkworks %>-->
+<% end %>

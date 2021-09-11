@@ -1,0 +1,25 @@
+<h3>編集</h3>
+<%= form_with model: @artwork, url: artwork_path(@artwork), local:true do |f| %>
+  <table class="table table-borderless">
+    <tbody>
+      <tr>
+        <th scope="col"><strong><%= f.label :ポートフォリオ画像 %></strong></th>
+        <td scope="col"><%= f.file_field :artwork_image %></td>
+      </tr>
+    </tbody>
+    
+    <tbody>
+      <tr>
+        <th></th>
+        <td><%= f.text_area :description %></td>
+      </tr>
+    </tbody>
+    
+    <tbody>
+      <tr>
+        <th></th>
+        <td><%= f.submit '更新' %></td>
+      </tr>
+    </tbody>
+　</table>
+<% end %>

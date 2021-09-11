@@ -32,6 +32,13 @@ Rails.application.routes.draw do
       delete 'favorites' => 'favorites#destroy_musicians'
     end
 
+    # artwork
+    resources :artworks, except: [:destroy] do
+      member do
+        patch :private
+      end
+    end
+
     # recruitment/entry
     resources :recruitments, only:[:index, :show] do
       resource :entries, only: [:create, :destroy]
@@ -54,8 +61,8 @@ Rails.application.routes.draw do
     end
     get '/working_issues/:id' => 'issues#working_issues', as:'working_issues'
     get '/completed_issues/:id' => 'issues#completed_issues', as:'completed_issues'
-    
-    # message 
+
+    # message
     resource :message, only:[:create]
 
 
@@ -75,6 +82,9 @@ Rails.application.routes.draw do
       end
     end
 
+    # artwork
+    resources :artworks, only:[:index, :show]
+
     # recruitment
     resources :recruitments, except:[:edit, :destroy] do
       resource :issue, only:[:create]
@@ -92,8 +102,8 @@ Rails.application.routes.draw do
     end
     get '/working_issues/:id' => 'issues#working_issues', as:'working_issues'
     get '/completed_issues/:id' => 'issues#completed_issues', as:'completed_issues'
-    
-    # message 
+
+    # message
     resource :message, only:[:create]
 
   end

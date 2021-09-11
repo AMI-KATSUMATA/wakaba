@@ -5,6 +5,7 @@ class RecruitUser::CreatorsController < ApplicationController
 
   def show
     @creator = Creator.find(params[:id])
-    # @artworks = @creator.artworks.page(params[:page]).reverse_order
+    @artworks = Artwork.where(creator_id: @creator.id, is_private: "false")
+                      .page(params[:page]).reverse_order
   end
 end

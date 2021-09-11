@@ -6,7 +6,8 @@ class ApplyUser::CreatorsController < ApplicationController
 
   def show
     @creator = Creator.find(params[:id])
-    # @artworks = @creator.artworks.page(params[:page]).reverse_order
+    @artworks = Artwork.where(creator_id: @creator.id, is_private: "false")
+                         .page(params[:page]).reverse_order
   end
 
   def edit
@@ -35,7 +36,7 @@ class ApplyUser::CreatorsController < ApplicationController
     flash[:alert] = "退会しました"
     redirect_to root_path
   end
-  
+
 
   private
 
