@@ -20,6 +20,13 @@
         <td>
            <%= issue.status %>
         </td>
+        
+        <td>
+          <!--DM-->
+          <%= link_to room_issue_path(issue) do %>
+           <i class="far fa-envelope"></i>
+          <% end %>
+        </td>
 
      </tr>
      <% end %>

@@ -48,5 +48,12 @@ class RecruitUser::IssuesController < ApplicationController
     @issues = Issue.where(musician_id: @musician.id)
                    .where(status: "作成完了")
   end
+  
+  def room
+    @issue = Issue.find(params[:id])
+    @message = Message.new
+    @messages = Message.where(issue_id: @issue.id)
+  end
+
 
 end
