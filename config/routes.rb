@@ -47,9 +47,16 @@ Rails.application.routes.draw do
     get '/favorite_musicians/:id' => 'favorites#favorite_musicians', as:'favorite_musicians'
 
     # issue
-    resources :issues, only:[:show]
+    resources :issues, only:[:show] do
+      member do
+        get :room
+      end
+    end
     get '/working_issues/:id' => 'issues#working_issues', as:'working_issues'
     get '/completed_issues/:id' => 'issues#completed_issues', as:'completed_issues'
+    
+    # message 
+    resource :message, only:[:create]
 
 
   end
@@ -78,9 +85,16 @@ Rails.application.routes.draw do
     end
 
     # issue
-    resources :issues, only:[:show, :update]
+    resources :issues, only:[:show, :update] do
+      member do
+        get :room
+      end
+    end
     get '/working_issues/:id' => 'issues#working_issues', as:'working_issues'
     get '/completed_issues/:id' => 'issues#completed_issues', as:'completed_issues'
+    
+    # message 
+    resource :message, only:[:create]
 
   end
 

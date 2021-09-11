@@ -3,3 +3,9 @@
 <div>依頼者<%= @issue.musician.nickname %></div>
 <div>依頼単価<%= @issue.recruitment.price %>円</div>
 <div>進行状況<%= @issue.status %></div>
+<div>
+  <!--DM-->
+  <%= link_to room_issue_path(@issue) do %>
+   <i class="far fa-envelope"></i>
+  <% end %>
+</div>
