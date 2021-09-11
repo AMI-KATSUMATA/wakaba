@@ -8,6 +8,7 @@ class Creator < ApplicationRecord
   has_many :issues,dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :messages, dependent: :destroy
+  has_many :artworks, dependent: :destroy
 
 
   # 退会済みユーザーを弾く

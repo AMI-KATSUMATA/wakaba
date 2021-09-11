@@ -20,16 +20,20 @@
   <%= @creator.introduction %>
 </div>
 
-<!--投稿ポートフォリオ一覧-->
-<!--% if @artworks.blank? %>-->
-<!--  <h4>まだポートフォリオの投稿はありません</h4>-->
-<!--% else %>-->
-<!--  % @artworks.each do |artwork| %>-->
-<!--    <div>-->
-<!--      %= link_to artwork_path(artwork.id) do %>-->
-<!--        %= image_tag artwork.image %>-->
-<!--      % end %>-->
-<!--    </div>-->
-<!--    % end %>-->
-<!--  %= paginate @arkworks %>-->
-<!--% end %>-->
+<h4>投稿ポートフォリオ一覧</h4>
+<% if @artworks.blank? %>
+  <h4>まだポートフォリオの投稿はありません</h4>
+<% else %>
+  <% @artworks.each do |artwork| %>
+    <div>
+      <%= link_to recruit_user_artwork_path(artwork.id) do %>
+        <% if artwork.artwork_image.attached? %>
+         <%= image_tag artwork.artwork_image %>
+        <% else %>
+         <%= image_tag 'no_image.jpg' %>
+        <% end %>
+      <% end %>
+    </div>
+    <% end %>
+ <!--%= paginate @arkworks %>-->
+<% end %>

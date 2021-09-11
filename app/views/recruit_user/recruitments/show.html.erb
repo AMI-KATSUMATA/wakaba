@@ -88,7 +88,7 @@
 <% end %>
 </div>
   　<% if @entry_creators.blank? %>
-        <%= link_to "削除", private_recruit_user_recruitment_path(@recruitment.musician_id), method: :patch, "data-confirm" => "本当に削除してよろしいですか？", class: "btn btn-outline-danger" %>
+        <%= link_to "削除", private_recruit_user_recruitment_path(@recruitment), method: :patch, "data-confirm" => "本当に削除してよろしいですか？", class: "btn btn-outline-danger" %>
         *つくりてのエントリー後は依頼の削除はできません
     <% else %>
      <h3>エントリーした依頼一覧</h3>

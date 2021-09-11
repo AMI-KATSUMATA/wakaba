@@ -1,0 +1,26 @@
+ <% if @artworks.blank? %>
+  <h4>まだポートフォリオの投稿はありません</h4>
+<% else %>
+   <table>
+     <% @artworks.each do |artwork| %>
+     <tr>
+        <td>
+         <%= link_to recruit_user_artwork_path(artwork) do %>
+          <% if artwork.artwork_image.attached? %>
+           <%= image_tag artwork.artwork_image %>
+          <% else %>
+           <%= image_tag 'no_image.jpg' %>
+          <% end %>
+         <% end %>
+        </td>
+
+        <td>
+          <%= link_to recruit_user_creator_path(artwork.creator_id) do %>
+           <%= artwork.creator.nickname %>
+          <% end %>
+        </td>
+
+     </tr>
+     <% end %>
+   </table>
+   <% end %>
