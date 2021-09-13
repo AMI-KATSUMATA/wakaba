@@ -13,6 +13,7 @@ class RecruitUser::IssuesController < ApplicationController
       end
       recruitment.update(is_closed: true)
       entries.destroy_all
+      @issue.create_notification_issue!(current_musician)
     rescue ActiveRecord::Rollback
     end
     flash[:success] = "マッチングが成立しました"

@@ -4,6 +4,7 @@ class ApplyUser::EntriesController < ApplicationController
     recruitment = Recruitment.find(params[:recruitment_id])
     entry = current_creator.entries.new(recruitment_id: recruitment.id)
     entry.save
+    entry.create_notification_entry!(current_creator)
     redirect_to recruitment_path(recruitment)
   end
   

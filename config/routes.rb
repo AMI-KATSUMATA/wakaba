@@ -64,6 +64,9 @@ Rails.application.routes.draw do
 
     # message
     resource :message, only:[:create]
+    
+    # notification
+    resources :notifications, only:[:index]
 
 
   end
@@ -105,6 +108,9 @@ Rails.application.routes.draw do
 
     # message
     resource :message, only:[:create]
+    
+    # notification
+    resources :notifications, only:[:index]
 
   end
 

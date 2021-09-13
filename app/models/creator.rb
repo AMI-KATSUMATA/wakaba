@@ -9,6 +9,10 @@ class Creator < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_many :artworks, dependent: :destroy
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
+  has_many :visitors, through: :active_notifications, source: :visitor
+  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
+  has_many :visiteds,through: :passive_notifications, source: :visited
 
 
   # 退会済みユーザーを弾く
