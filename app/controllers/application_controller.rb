@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     when Creator
       root_path
     when Musician
-      rectuit_user_path
+      recruit_user_path
     end
   end
   def after_sign_out_path_for(resource)
