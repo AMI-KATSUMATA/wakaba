@@ -1,0 +1,29 @@
+<% if @notifications.blank? %>
+<h3>通知はありません</h3>
+<% else %>
+<div>
+  <% @notifications.each do |notification| %>
+    <% if notification.action == 'entry' %>
+      <p>
+       <%= link_to recruit_user_creator_path(notification.visitor_creator_id) do %>
+
+              <%= notification.visitor_creator.nickname %>
+
+       <% end %>
+       さんがあなたの
+       <%= link_to "依頼",recruit_user_recruitment_path(notification.entry.recruitment_id) %>
+       にエントリーしました
+      </p>
+    <% else %>
+     <p>
+       <%= link_to recruit_user_creator_path(notification.visitor_creator_id) do %>
+         <%= notification.visitor_creator.nickname %>
+       <% end %>
+       さんが
+       <%= link_to "メッセージ", room_recruit_user_issue_path(notification.message.issue_id) %>
+       を送信しました
+     </p>
+    <% end %>
+  <% end %>
+</div>
+<% end %>

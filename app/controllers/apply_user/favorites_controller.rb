@@ -4,7 +4,7 @@ class ApplyUser::FavoritesController < ApplicationController
     recruitment = Recruitment.find(params[:recruitment_id])
     favorite = current_creator.favorites.new(recruitment_id: recruitment.id, subject: 'recruitment')
     favorite.save
-
+    
     redirect_to recruitment_path(recruitment)
   end
 
