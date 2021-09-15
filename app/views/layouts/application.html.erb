@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ワカバ</title>
+    <title>わかば</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -15,17 +15,17 @@
       <!--つのりてでログイン後-->
         <% if musician_signed_in? %>
          <a class="navbar-brand" href="/recruit_user/">
-          <%= image_tag 'logo.png', style: "height: 50px;" %>
+          <%= image_tag 'wakaba_logo.jpg', style: "height: 50px;" %>
          </a>
       <!--管理者ログイン後-->
         <% elsif admin_signed_in? %>
          <a class="navbar-brand" href="/admin/">
-          <%= image_tag 'logo.png', style: "height: 50px;" %>
+          <%= image_tag 'wakaba_logo.jpg', style: "height: 50px;" %>
          </a>
         <!--つくりてログイン後とログイン前-->
         <% else %>
          <a class="navbar-brand" href="/">
-          <%= image_tag 'logo.png', style: "height: 50px;" %>
+          <%= image_tag 'wakaba_logo.jpg', style: "height: 50px;" %>
          </a>
         <% end %>
 
@@ -110,6 +110,9 @@
      </nav>
     </header>
     <%= yield %>
+    <footer>
+      
+    </footer>
   </body>
 </html>
 
