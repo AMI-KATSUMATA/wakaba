@@ -36,7 +36,7 @@
      <% @recruitments.each do |recruitment| %>
      <tr>
         <td>
-         <%= link_to recruit_user_recruitment_path(recruitment) do %>
+         <%= link_to recruitment_path(recruitment) do %>
           <%= recruitment.title %>
          <% end %>
         </td>

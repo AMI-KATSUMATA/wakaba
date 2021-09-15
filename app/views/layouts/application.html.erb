@@ -40,6 +40,9 @@
               <%= link_to "依頼管理", working_issues_path(current_creator.id), class:"nav-link text-dark" %>
             </li>
             <li class="nav-item">
+              <%= link_to "通知", notifications_path, class:"nav-link text-dark" %>
+            </li>
+            <li class="nav-item">
               <%= link_to "ログアウト", destroy_creator_session_path, method: :delete, class: "nav-link text-dark" %>
             </li>
 
@@ -53,6 +56,9 @@
             </li>
             <li class="nav-item">
               <%= link_to "依頼投稿", new_recruit_user_recruitment_path, class:"nav-link text-dark" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "通知", recruit_user_notifications_path, class:"nav-link text-dark" %>
             </li>
             <li class="nav-item">
               <%= link_to "ログアウト", destroy_musician_session_path, method: :delete, class: "nav-link text-dark" %>

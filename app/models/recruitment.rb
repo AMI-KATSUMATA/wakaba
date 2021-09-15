@@ -5,6 +5,7 @@ class Recruitment < ApplicationRecord
   has_one :issue
   has_many :favorites, dependent: :destroy
   has_many :recruitment_postscripts, dependent: :destroy
+  has_many :notifications, dependent: :destroy
   
   # entryテーブルに引数creator_idが存在するか
   def entried_by?(creator)
@@ -14,4 +15,6 @@ class Recruitment < ApplicationRecord
   def favorited_by?(creator)
     favorites.where(creator_id: creator.id).exists?
   end
+  
+  
 end
