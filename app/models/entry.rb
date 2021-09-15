@@ -7,16 +7,16 @@ class Entry < ApplicationRecord
  #通知
   def create_notification_entry!(current_creator)
     # すでにエントリーされているか
-    temp = Notification.where(visitor_id: current_creator.id)
-                       .where(visited_id: recruitment.musician_id)
-                       .where(entry_id: id)
+    temp = Notification.where(visitor_creator_id: current_creator.id)
+                       .where(visited_musician_id: recruitment.musician_id)
+                       .where(entry_id: self.id)
                        .where(action: 'entry')
     # エントリーされていない場合
     if temp.blank?
       notification = current_creator.active_notifications.new(
-        visitor_id: current_creator.id,
-        entry_id: id,
-        visited_id: recruitment.musician_id,
+        visitor_creator_id: current_creator.id,
+        entry_id: self.id,
+        visited_musician_id: recruitment.musician_id,
         action: 'entry'
         )
         notification.save if notification.valid?

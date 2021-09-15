@@ -10,10 +10,10 @@ class RecruitUser::IssuesController < ApplicationController
                            creator_id: entry.creator_id,
                            musician_id: recruitment.musician_id)
          @issue.save
+         @issue.create_notification_issue!(current_musician)
       end
       recruitment.update(is_closed: true)
       entries.destroy_all
-      @issue.create_notification_issue!(current_musician)
     rescue ActiveRecord::Rollback
     end
     flash[:success] = "マッチングが成立しました"
@@ -42,14 +42,14 @@ class RecruitUser::IssuesController < ApplicationController
                    .where(status: "未着手")
                    .or(Issue.where(status: "作成中"))
   end
-  
+
   def completed_issues
     @musician = Musician.find(current_musician.id)
     # 作成完了後のissueを取得する
     @issues = Issue.where(musician_id: @musician.id)
                    .where(status: "作成完了")
   end
-  
+
   def room
     @issue = Issue.find(params[:id])
     @message = Message.new

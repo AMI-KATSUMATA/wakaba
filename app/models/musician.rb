@@ -10,10 +10,12 @@ class Musician < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :recruitment_postscripts, dependent: :destroy
   has_many :messages, dependent: :destroy
-  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
-  has_many :visiteds,through: :active_notifications, source: :visited
-  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
-  has_many :visitors, through: :passive_notifications, source: :visitor
+
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_musician_id', dependent: :destroy
+  has_many :visitor_musicians,through: :active_notifications, source: :visitor_musician
+  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_musician_id', dependent: :destroy
+  has_many :visited_musicians, through: :passive_notifications, source: :visited_musician
+
   # 退会ずみのユーザーを弾く
   def active_for_authentication?
     super && (self.is_deleted == false)

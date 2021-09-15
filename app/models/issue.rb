@@ -10,12 +10,19 @@ class Issue < ApplicationRecord
   
   # 通知
   def create_notification_issue!(current_musician)
-    notification = current_musician.active_notifications.new(
-      issue_id: id,
-      visited_id: creator_id,
-      action: 'issue'
-      )
+    entries = Entry.where(recruitment_id: recruitment.id)
+     # creator_idを取得する
+    entries.each do |entry|
+      notification = current_musician.active_notifications.new(
+        visitor_musician_id: current_musician.id,
+        issue_id: self.id,
+        visited_creator_id: entry.creator_id,
+        action: 'issue',
+        is_musician: 'true'
+        )
       notification.save if notification.valid?
+    end
   end
+
 
  end
