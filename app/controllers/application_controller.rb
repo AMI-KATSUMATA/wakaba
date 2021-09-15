@@ -1,5 +1,17 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
+  # ログイン後の遷移先
+  def after_sign_in_path_for(resource)
+    case resource
+    when Creator
+      root_path
+    when Musician
+      rectuit_user_path
+    end
+  end
+  def after_sign_out_path_for(resource)
+    root_path
+  end
 
   protected
 
