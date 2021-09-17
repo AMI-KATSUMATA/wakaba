@@ -1,15 +1,27 @@
-<h2>つくりてログイン</h2>
-
-<%= form_with model: @creator, url: creator_session_path, local: true do |f| %>
-  <div class="field">
-    <%= f.label :メールアドレス %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="container p-4"></div>
+<div class="container-fluid mx-0 p-0">
+  <div class="row d-flex justify-content-center">
+    <div class="col-auto">
+      <h4 class="text-center mt-5"><strong>つくりてログイン</strong></h4>
+    </div>
   </div>
+</div>
 
-  <div class="field">
-    <%= f.label :パスワード %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+<div class="container-fluid mt-5 mx-0 p-0">
+  <%= form_with model: @creator, url: creator_session_path, local: true do |f| %>
+    <div class="form-group row d-flex justify-content-center">
+      <%= f.label :メールアドレス, class: "col-5 col-form-label text-right" %>
+      <div class="col-7 mb-3">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", :size => "40*30" %>
+      </div>
+    </div>
+
+    <div class="form-group row d-flex justify-content-center">
+      <%= f.label :パスワード, class: "col-5 col-form-label text-right" %>
+      <div class="col-7 mb-3">
+        <%= f.password_field :password, autocomplete: "current-password", :size => "40*30" %>
+      </div>
+    </div>
 
   <!--　% if devise_mapping.rememberable? %>-->
   <!--  <div class="field">-->
@@ -18,32 +30,15 @@
   <!--  </div>-->
   <!--　% end %>-->
 
-  <div class="actions">
-    <%= f.submit "ログイン" %>
-  </div>
-<% end %>
+    <div class="actions row d-flex justify-content-center pt-3 mb-5">
+      <%= f.submit "ログイン", class: "btn btn-outline-secondary col-2" %>
+    </div>
+  <% end %>
 
- <div>
-   <p>つくりてでアカウントをつくる
+  <div class="row d-flex justify-content-center p-5">
     <%= link_to new_creator_registration_path, class:"text-secondary" do %>
-    <i class="far fa-hand-point-right"></i>
+       <p><i class="far fa-hand-point-right fa-2x"></i>つくりてでアカウントをつくる</p>
     <% end %>
-   </p>
- </div>
-
- <div>
-   <p>つのりてでアカウントをつくる
-    <%= link_to new_musician_registration_path, class:"text-secondary" do %>
-    <i class="far fa-hand-point-right"></i>
-    <% end %>
-   </p>
- </div>
-
-  <div>
-   <p>つのりてでログインする
-    <%= link_to new_musician_session_path, class:"text-secondary" do %>
-    <i class="far fa-hand-point-right"></i>
-    <% end %>
-   </p>
- </div>
+  </div>
 <!--%= render "creators/shared/links" %>-->
+</div>
