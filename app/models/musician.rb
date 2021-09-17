@@ -8,6 +8,7 @@ class Musician < ApplicationRecord
   has_many :recruitments, dependent: :destroy
   has_many :issues, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :favorited_creators, through: :favorites, source: :creator
   has_many :recruitment_postscripts, dependent: :destroy
   has_many :messages, dependent: :destroy
 

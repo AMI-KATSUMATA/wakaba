@@ -1,22 +1,138 @@
-<div class="main-visual">
-  <div class="text-white">
-    <p>
-      アートワークのデザイナーやカメラマンを探している方
-    </p>
-    <p class="h4">
-      <strong>つのりて</strong>
-    </p>
-    <p class="h2"><i class="fas fa-times"></i></p>
-    <p>
-      デザインやカメラマンを探している方
-    </p>
-    <p class="h4">
-      <strong>つくりて</strong>
-    </p>
-    <p>マッチングサイト</p>
-    <p class="h3"><strong>わかば</strong></p>
+<div class="container-fluid mx-0 p-0">
+  <div class="main-visual"> 
+  <!--    <div class="row">-->
+  <!--      <div class="col-md-5">-->
+  <!--    <p class="text-center">デザイナーやカメラマンを募集している</p>-->
+  <!--    <p class="h2 text-center"><strong>つのりて</strong></p>-->
+  <!--    </div>-->
+  <!--    <div class="col-md-1">-->
+  <!--    <p class="h2 text-center"><i class="fas fa-times"></i></p>-->
+  <!--    </div>-->
+  <!--    <div class="col-md-5 col-md-offset-1">-->
+  <!--    <p class="text-center">デザインやカメラマンの求人を探している</p>-->
+  <!--    <p class="h2 text-center">  <strong>つくりて</strong></p>-->
+  <!--   </div>-->
+  <!--   </div>-->
+  <!--   <div class="row">-->
+  <!--     <div class="col-md-9 mx-auto">-->
+  <!--    <p class="text-center">マッチングサイト</p>-->
+  <!--    <p class="h1 text-center"><strong>ワカバ</strong></p>-->
+  <!--  </div>-->
+  <!--</div>-->
+
   </div>
 </div>
-<div class="main">
 
+<div class="container-fluid">
+  <div class="row mt-5 mx-5">
+    <div class="col-auto m-0 p-0">
+      <p class="h4 pl-2"><strong>おすすめ依頼</strong></p>
+    </div>
+  </div>
+  
+  <div class="row mx-5 d-flex justify-content-end">
+    <div class="col-auto">
+      <%= link_to recruitments_path, class: "text-secondary" do %>
+        もっと見る<i class="fas fa-chevron-circle-right"></i>
+      <% end %>
+    </div>
+  </div>
+  <div class="slider row mt-2 mx-5">
+    <% @recruitments.each do |recruitment| %>
+      <div class="card" style="width: 18rem; height: 20rem;">
+        <div class="card-body">
+          <h4 class="card-title mb-5">
+            <%= link_to recruitment_path(recruitment), class: "text-secondary" do %>
+              <%= recruitment.title %>
+            <% end %>
+          </h4>
+          <p class="card-text">
+            <%= link_to musician_path(recruitment.musician_id), class: "text-secondary" do %>
+              <%= recruitment.musician.nickname %>
+            <% end %>
+          </p>
+          <p class="card-text"><strong>完成目安</strong></br><%= recruitment.deadline %></p>
+          <p class="card-text"><strong>依頼単価</strong></br>¥<%= recruitment.price %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  
+  <% if creator_signed_in? %>
+    <div class="row mt-5 mx-5">
+      <div class="col-auto m-0 p-0">
+        <p class="h4 pl-2"><strong>おすすめつのりて</strong></p>
+      </div>
+    </div>
+    <div class="row mx-5 d-flex justify-content-end">
+      <div class="col-auto">
+        <%= link_to musicians_path, class: "text-secondary" do %>
+          もっと見る<i class="fas fa-chevron-circle-right"></i>
+        <% end %>
+      </div>
+    </div>
+    <div class="slider row mt-2 mx-5">
+      <% @musicians.each do |musician| %>
+        <div class="card" style="width: 18rem; height: 20rem;">
+          <div class="bd-placeholder-img card-img-top">
+            <%= link_to musician_path(musician) do %>
+              <% if musician.profile_image.attached? %>
+                <%= image_tag musician.profile_image, style: "object-fit: cover; width: 100%; height: 225px;" %>
+              <% else %>
+                <%= image_tag 'no_image.jpg', style: "object-fit: bottom; width: 100%; height: 225px;" %>
+              <% end %>
+            <% end %>
+            <div class="card-body">
+              <h5 class="card-title">
+                <%= link_to musician_path(musician), class: "text-secondary" do %>
+                  <%= musician.nickname %>
+                <% end %>
+              </h5>
+              <p class="card-text"><%= musician.introduction %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    
+  <% else %>
+    <div class="row mt-5 mx-5">
+      <div class="col-auto m-0 p-0">
+        <p class="h4 pl-2"><strong>新着ポートフォリオ</strong></p>
+      </div>
+    </div>
+    <div class="row mx-5 d-flex justify-content-end">
+      <div class="col-auto">
+        <%= link_to artworks_path, class: "text-secondary" do %>
+          もっと見る<i class="fas fa-chevron-circle-right"></i>
+        <% end %>
+      </div>
+    </div>
+    <div class="slider row mt-2 mx-5">
+      <% @artworks.each do |artwork| %>
+        <div class="card" style="width: 18rem; height: 30rem;">
+          <div class="bd-placeholder-img card-img-top">
+            <%= link_to artwork_path(artwork) do %>
+              <% if artwork.artwork_image.attached? %>
+                <%= image_tag artwork.artwork_image, style: "object-fit: cover; width: 100%; height: 350px;" %>
+              <% else %>
+                <%= image_tag 'no_image.jpg', style: "object-fit: cover; width: 100%; height: 350px;" %>
+              <% end %>
+            <% end %>
+            <div class="card-body">
+              <p class="card-text">
+                <%= link_to creator_path(artwork.creator_id), class: "text-secondary" do %>
+                  <%= artwork.creator.nickname %>
+                <% end %>
+              </p>
+              <p class="card-text">
+                <%= artwork.description %>
+              </p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>
+<div class="container p-5"></div>
