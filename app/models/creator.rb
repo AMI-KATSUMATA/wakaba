@@ -7,6 +7,8 @@ class Creator < ApplicationRecord
   has_many :entries, dependent: :destroy
   has_many :issues,dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :favorited_recruitments, through: :favorites, source: :recruitment
+  has_many :favorited_musicians, through: :favorites, source: :musician
   has_many :messages, dependent: :destroy
   has_many :artworks, dependent: :destroy
 

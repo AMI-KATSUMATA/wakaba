@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>わかば</title>
+    <title>ワカバ</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   </head>
 
   <body>
@@ -15,17 +18,17 @@
       <!--つのりてでログイン後-->
         <% if musician_signed_in? %>
          <a class="navbar-brand" href="/recruit_user/">
-          <%= image_tag 'wakaba_logo.jpg', style: "height: 50px;" %>
+          <%= image_tag 'logo.png', style: "height: 50px;" %>
          </a>
       <!--管理者ログイン後-->
         <% elsif admin_signed_in? %>
          <a class="navbar-brand" href="/admin/">
-          <%= image_tag 'wakaba_logo.jpg', style: "height: 50px;" %>
+          <%= image_tag 'logo.png', style: "height: 50px;" %>
          </a>
         <!--つくりてログイン後とログイン前-->
         <% else %>
          <a class="navbar-brand" href="/">
-          <%= image_tag 'wakaba_logo.jpg', style: "height: 50px;" %>
+          <%= image_tag 'logo.png', style: "height: 50px;" %>
          </a>
         <% end %>
 
@@ -34,34 +37,34 @@
           <!--つくりてログイン後-->
           <% if creator_signed_in? %>
             <li class="nav-item">
-              <%= link_to "マイページ", creator_path(current_creator.id), class: "nav-link text-dark" %>
+              <%= link_to "マイページ", creator_path(current_creator.id), class: "nav-link text-secondary" %>
             </li>
             <li class="nav-item">
-              <%= link_to "依頼管理", working_issues_path(current_creator.id), class:"nav-link text-dark" %>
+              <%= link_to "依頼管理", working_issues_path(current_creator.id), class:"nav-link text-secondary" %>
             </li>
             <li class="nav-item">
-              <%= link_to "通知", notifications_path, class:"nav-link text-dark" %>
+              <%= link_to "通知", notifications_path, class:"nav-link text-secondary" %>
             </li>
             <li class="nav-item">
-              <%= link_to "ログアウト", destroy_creator_session_path, method: :delete, class: "nav-link text-dark" %>
+              <%= link_to "ログアウト", destroy_creator_session_path, method: :delete, class: "nav-link text-secondary" %>
             </li>
 
           <!--つのりてログイン後-->
           <% elsif musician_signed_in? %>
             <li class="nav-item">
-             <%= link_to "マイページ", recruit_user_musician_path(current_musician.id), class: "nav-link text-dark" %>
+             <%= link_to "マイページ", recruit_user_musician_path(current_musician.id), class: "nav-link text-secondary" %>
             </li>
             <li class="nav-item">
-              <%= link_to "依頼管理", recruit_user_working_issues_path(current_musician.id), class:"nav-link text-dark" %>
+              <%= link_to "依頼管理", recruit_user_working_issues_path(current_musician.id), class:"nav-link text-secondary" %>
             </li>
             <li class="nav-item">
-              <%= link_to "依頼投稿", new_recruit_user_recruitment_path, class:"nav-link text-dark" %>
+              <%= link_to "依頼投稿", new_recruit_user_recruitment_path, class:"nav-link text-secondary" %>
             </li>
             <li class="nav-item">
-              <%= link_to "通知", recruit_user_notifications_path, class:"nav-link text-dark" %>
+              <%= link_to "通知", recruit_user_notifications_path, class:"nav-link text-secondary" %>
             </li>
             <li class="nav-item">
-              <%= link_to "ログアウト", destroy_musician_session_path, method: :delete, class: "nav-link text-dark" %>
+              <%= link_to "ログアウト", destroy_musician_session_path, method: :delete, class: "nav-link text-secondary" %>
             </li>
 
             <!--adminsの定義 start-->
@@ -87,16 +90,16 @@
             <!--ログイン前-->
             <% else %>
               <li class="nav-item">
-                  <%= link_to "つくりて新規登録", new_creator_registration_path, class: "nav-link text-dark active" %>
+                  <%= link_to "つくりて新規登録", new_creator_registration_path, class: "nav-link text-secondary active" %>
               </li>
               <li class="nav-item">
-                <%= link_to "つくりてログイン", new_creator_session_path, class: "nav-link text-dark" %>
+                <%= link_to "つくりてログイン", new_creator_session_path, class: "nav-link text-secondary" %>
               </li>
               <li class="nav-item">
-                <%= link_to "つのりて新規登録", new_musician_registration_path, class: "nav-link text-dark" %>
+                <%= link_to "つのりて新規登録", new_musician_registration_path, class: "nav-link text-secondary" %>
               </li>
               <li class="nav-item">
-                <%= link_to "つのりてログイン", new_musician_session_path, class: "nav-link text-dark" %>
+                <%= link_to "つのりてログイン", new_musician_session_path, class: "nav-link text-secondary" %>
               </li>
             <% end %>
           </ul>
@@ -109,10 +112,13 @@
       </div>
      </nav>
     </header>
-    <%= yield %>
-    <footer>
-      
-    </footer>
+    <div class="text-secondary">
+     <%= yield %>
+    </div>
+    <footer class="bg-white shadow text-center text-lg-start">
+     <div class="text-center p-3 bg-light">
+       ワカバ
+     </div>
   </body>
 </html>
 
