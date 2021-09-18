@@ -16,7 +16,7 @@
   @import "bootstrap";
   @import 'font-awesome-sprockets';
   @import 'font-awesome';
-  @import "slick-theme"; 
+  @import "slick-theme";
   @import "slick";
 
 *{
@@ -24,3 +24,12 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+//ページネーション
+.pagination>li>a {
+  color: #6c757d;
+}
+.page-item.active .page-link {
+  background-color: #6c757d;
+}
+
