@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   root to: 'apply_user/homes#top'
   scope module: :apply_user do
     # creator
-    resources :creators, only: [:show, :index, :edit, :update] do
+    resources :creators, only: [:show, :edit, :update] do
       member do
        get :unsubscribe
        patch :withdraw

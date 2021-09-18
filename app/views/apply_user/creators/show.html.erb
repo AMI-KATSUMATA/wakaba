@@ -1,71 +1,105 @@
-<div>
+<div class="container-fluid mx-0 p-0">
+<div class="row pt-5">
+  <div class="col-4">
+   <div class="container-fluid mx-0 p-0">
+      <div class="row d-flex justify-content-center">
   <% if @creator.profile_image.attached? %>
-   <%= image_tag @creator.profile_image %>
+   <%= image_tag @creator.profile_image, class: "rounded-circle", size: "200x200" %>
   <% else %>
-   <%= image_tag 'no_image.jpg' %>
+   <%= image_tag 'no_image.jpg', class: "rounded-circle", size: "200x200" %>
   <% end %>
 </div>
-<div>
-  <h3><%= @creator.nickname %></h3>
-    <% if @creator.id == current_creator.id %>
-      <p>
+
+<div class="row pt-2 d-flex justify-content-center">
+  <div class="col-auto">
+    <h4><strong><%= @creator.nickname %></strong></h4>
+    </div>
+    <div class="col-auto">
         <%= link_to edit_creator_path, class:"text-secondary" do %>
-         <i class="fas fa-cog"></i>
+         <i class="fas fa-cog fa-lg"></i>
         <% end %>
-      </p>
-    <% end %>
 </div>
-<div>
-  <p>スケジュール
-   <%= @creator.schedule %>
-  </p>
-  <p>参考価格
-    <%= @creator.price %>
-  </p>
 </div>
 
-    <% if @creator.id == current_creator.id %>
-    <!--エントリーした依頼一覧-->
-      <p>
-        <%= link_to "エントリー中の依頼", entries_path(@creator), class:"text-secondary" %>
-      </p>
-      <!--お気に入り依頼一覧-->
-      <p>
-        <%= link_to "お気に入りした依頼", favorite_recruitments_path(@creator), class:"text-secondary" %>
-      </p>
-      <!--お気に入りしたつのりて-->
-      <p>
-        <%= link_to "お気に入りしたつのりて", favorite_musicians_path(@creator), class:"text-secondary" %>
-      </p>
-      <p>
-        <%= link_to "依頼管理", working_issues_path(@creator), class:"text-secondary" %>
-      </p>
-
-    <% end %>
-
-<div>
+<div class="row pt-2 d-flex justify-content-center">
   <%= @creator.introduction %>
 </div>
-<% if @creator.id == current_creator.id %>
-  <%= link_to new_artwork_path, class:"text-secondary" do %>
-  <i class="fas fa-plus"></i>
-  <% end %>
-<%end %>
 
-<h4>投稿ポートフォリオ一覧</h4>
+  <% if @creator.schedule.present? %>
+  <div class="row d-flex pt-2 justify-content-center">
+  <p class="col-auto text-center"><small><strong>スケジュール</strong></small></p>
+  <p clss="col-auto text-center"><small><%= @creator.schedule %></small>
+  </p>
+  </div>
+  <% end %>
+
+  <% if @creator.price.present? %>
+  <div class="row d-flex justify-content-center">
+  <p class="col-auto text-center"><small><strong>参考価格</strong></small></p>
+    <p class="col-auto text-center"><small><%= @creator.price %></small>
+  </p>
+  </div>
+  <% end %>
+  <div class="row d-flex justify-content-center">
+  <div class="border text-center"></div>
+</div>
+<div>
+      <p class="row pt-5 d-flex justify-content-center">
+        <%= link_to "依頼管理", working_issues_path(@creator), class:"text-secondary btn btn-outline-secondary" %>
+      </p>
+    <!--エントリーした依頼一覧-->
+      <p class="row d-flex justify-content-center">
+        <%= link_to "エントリー中の依頼", entries_path(@creator), class:"text-secondary btn btn-outline-secondary" %>
+      </p>
+      <!--お気に入り依頼一覧-->
+      <p class="row d-flex justify-content-center">
+        <%= link_to "お気に入りした依頼", favorite_recruitments_path(@creator), class:"text-secondary  btn btn-outline-secondary" %>
+      </p>
+      <!--お気に入りしたつのりて-->
+      <p class="row d-flex justify-content-center">
+        <%= link_to "お気に入りしたつのりて", favorite_musicians_path(@creator), class:"text-secondary  btn btn-outline-secondary" %>
+      </p>
+
+</div>
+</div>
+</div>
+<div class="col-8">
+  <div class="container">
+    <div class="row mb-4 pr-5 mr-5 d-flex justify-content-end">
+  <%= link_to new_artwork_path, class:"text-secondary" do %>
+  <i class="fas fa-plus fa-2x"></i>
+  <% end %>
+</div>
+
 <% if @artworks.blank? %>
-  <h4>まだポートフォリオの投稿はありません</h4>
+<div class="row">
+  <h5>ポートフォリオの投稿はありません</h5>
+  </div>
 <% else %>
+<div class="row">
+<div class="artwork">
   <% @artworks.each do |artwork| %>
-    <div>
+    <div class="card" style="width: 18rem; height: 20rem;">
+          <div class="bd-placeholder-img card-img-top">
       <%= link_to artwork_path(artwork.id) do %>
-        <% if artwork.artwork_image.attached? %>
-         <%= image_tag artwork.artwork_image %>
-        <% else %>
-         <%= image_tag 'no_image.jpg' %>
-        <% end %>
+         <%= image_tag artwork.artwork_image, style: "object-fit: cover; width: 100%; height: 350px;" %>
       <% end %>
     </div>
+    </div>
     <% end %>
- <!--%= paginate @arkworks %>-->
+    </div>
+     </div>
+     <div class="row p-5">
+      <%= paginate @artworks, class: "text-secondary" %>
+     </div>
+
+
+
+
 <% end %>
+</div>
+</div>
+</div>
+</div>
+<div class="container p-5"></div>
+</div>
