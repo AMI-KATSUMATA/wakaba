@@ -4,6 +4,11 @@ class Entry < ApplicationRecord
   belongs_to :recruitment
   has_one :notification, dependent: :destroy
 
+  # エントリー
+  def entried_by?(creator)
+    entries.where(creator_id: creator.id).exists?
+  end
+
  #通知
   def create_notification_entry!(current_creator)
     # すでにエントリーされているか

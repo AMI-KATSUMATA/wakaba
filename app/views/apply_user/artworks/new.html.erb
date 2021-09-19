@@ -1,25 +1,22 @@
-<h3>新規投稿</h3>
-<%= form_with model: @artwork, url: artworks_path, local:true do |f| %>
-  <table class="table table-borderless">
-    <tbody>
-      <tr>
-        <th scope="col"><strong><%= f.label :ポートフォリオ画像 %></strong></th>
-        <td scope="col"><%= f.file_field :artwork_image %></td>
-      </tr>
-    </tbody>
-    
-    <tbody>
-      <tr>
-        <th></th>
-        <td><%= f.text_area :description %></td>
-      </tr>
-    </tbody>
-    
-    <tbody>
-      <tr>
-        <th></th>
-        <td><%= f.submit '投稿' %></td>
-      </tr>
-    </tbody>
-　</table>
-<% end %>
+<div class="container-fluid mt-5 pt-5 mx-0 p-0">
+  <div class=" row d-flex justify-content-center">
+    <%= form_with model: @artwork, url: artworks_path, local:true do |f| %>
+      <table class="table table-borderless text-secondary p-0">
+        <tbody>
+          <tr>
+            <td><%= f.file_field :artwork_image %></td>
+          </tr>
+
+          <tr>
+            <td><%= f.text_area :description, size: "30x10" %></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="row d-flex justify-content-center ml-5 pl-5">
+        <%= f.submit '投稿', class: "btn btn-outline-secondary col-3" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="container p-5"></div>
+</div>

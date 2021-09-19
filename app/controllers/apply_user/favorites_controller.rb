@@ -4,7 +4,6 @@ class ApplyUser::FavoritesController < ApplicationController
     recruitment = Recruitment.find(params[:recruitment_id])
     favorite = current_creator.favorites.new(recruitment_id: recruitment.id, subject: 'recruitment')
     favorite.save
-    
     redirect_to recruitment_path(recruitment)
   end
 
@@ -32,13 +31,13 @@ class ApplyUser::FavoritesController < ApplicationController
   def favorite_recruitments
     @creator = Creator.find(params[:id])
     favorites = Favorite.where(creator_id: @creator.id, subject: 'recruitment').pluck(:recruitment_id)
-    @favorite_recruitments = Recruitment.find(favorites)
+    @favorite_recruitments = Recruitment.where(id: favorites).page(params[:page]).per(7)
   end
 
   def favorite_musicians
     @creator = Creator.find(params[:id])
     favorites = Favorite.where(creator_id: @creator.id, subject: 'musician').pluck(:musician_id)
-    @favorite_musicians = Musician.find(favorites)
+    @favorite_musicians = Musician.where(id: favorites).page(params[:page]).per(7)
   end
 
 

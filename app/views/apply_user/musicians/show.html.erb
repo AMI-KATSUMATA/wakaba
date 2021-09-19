@@ -1,51 +1,78 @@
-<div>
-  <% if @musician.profile_image.attached? %>
-   <%= image_tag @musician.profile_image %>
-  <% else %>
-   <%= image_tag 'no_image.jpg' %>
-  <% end %>
-</div>
-<div>
-  <h3><%= @musician.nickname %></h3>
-</div>
+<div class="container-fluid mx-0 p-0">
+  <div class="row pt-5">
+    <div class="col-4">
+      <div class="container-fluid mx-0 p-0">
+        <div class="row d-flex justify-content-center">
+          <% if @musician.profile_image.attached? %>
+            <%= image_tag @musician.profile_image, class: "rounded-circle", size: "200x200" %>
+          <% else %>
+            <%= image_tag 'no_image.jpg', class: "rounded-circle", size: "200x200" %>
+          <% end %>
+        </div>
+        <div class="row pt-2 d-flex justify-content-center">
+          <div class="col-auto">
+            <h4><strong><%= @musician.nickname %></strong></h4>
+          </div>
 
-<div>
-  <!--いいね-->
-    <% if @musician.favorited_by?(current_creator) %>
-    <p>
-      <%= link_to musician_favorites_path(@musician), method: :delete do %>
-       <i class="fas fa-heart"></i>
-      <% end %>
-    </p>
-    <% else %>
-    <p>
-      <%= link_to musician_favorites_path(@musician), method: :post do %>
-        <i class="far fa-heart"></i>
-      <% end %>
-    </p>
-  <% end %>
-</div>
-<div>
-  <%= @musician.introduction %>
-</div>
+          <div class="col-auto">
+            <!--いいね-->
+            <% if @musician.favorited_by?(current_creator) %>
+              <p>
+                <%= link_to musician_favorites_path(@musician), method: :delete, class:"text-danger" do %>
+                  <i class="fas fa-heart"></i>
+                <% end %>
+              </p>
+            <% else %>
+              <p>
+                <%= link_to musician_favorites_path(@musician), method: :post do %>
+                  <i class="far fa-heart"></i>
+                <% end %>
+              </p>
+            <% end %>
+          </div>
+          <div class="row pt-2 d-flex justify-content-center">
+            <%= @musician.introduction %>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<% if @recruitments.blank? %>
-  <h4>まだ依頼の投稿はありません</h4>
-<% else %>
-<table>
-     <% @recruitments.each do |recruitment| %>
-     <tr>
-        <td>
-         <%= link_to recruitment_path(recruitment) do %>
-          <%= recruitment.title %>
-         <% end %>
-        </td>
-        
-        <td>
-           <%= recruitment.detail %>
-        </td>
-     </tr>
-     <% end %>
-   </table>
-  <%= paginate @recruitments %>
-<% end %>
+    <div class="col-7">
+      <div class="container">
+        <div class="row d-flex justify-content-center m-5">
+          <% if @recruitments.blank? %>
+            <h5 class="text-center">まだ依頼の投稿はありません</h5>
+          <% else %>
+            <div class="col-9">
+              <table class="table table-borderless text-secondary p-0">
+                <% @recruitments.each do |recruitment| %>
+                  <tbody>
+                    <tr>
+                      <td class="text-center" style="width: 70%">
+                        <%= link_to recruitment_path(recruitment), class:"text-secondary" do %>
+                          <%= recruitment.title %>
+                        <% end %>
+                      </td>
+
+                      <td class="text-center" style="width: 30%">
+                        <% if recruitment.is_closed == false %>
+                          <p class="text-white bg-secondary"><%= recruitment.is_closed = "募集終了" %></p>
+                        <% else %>
+                          <p><%= recruitment.is_closed = "募集中" %></p>
+                        <% end %>
+                      </td>
+                    </tr>
+                  </tbody>
+                <% end %>
+              </table>
+            </div>
+
+            <div class="row d-flex justify-content-center p-5">
+              <%= paginate @recruitments %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -33,7 +33,7 @@ Rails.application.routes.draw do
     end
 
     # artwork
-    resources :artworks, except: [:destroy] do
+    resources :artworks, except: [:index, :destroy] do
       member do
         patch :private
       end

@@ -1,23 +1,49 @@
-<h3>エントリーした依頼一覧</h3>
-<% if @entry_recruitments.blank? %>
-  <h4>エントリー中の依頼はありません</h4>
-<% else %>
-   <table>
-     <% @entry_recruitments.each do |entry_recruitment| %>
-     <tr>
-        <td>
-         <%= link_to recruitment_path(entry_recruitment) do %>
-          <%= entry_recruitment.title %>
-         <% end %>
-        </td>
-  
-        <td>
-          <%= link_to musician_path(entry_recruitment.musician_id) do %>
-           <%= entry_recruitment.musician.nickname %>
-          <% end %>
-        </td>
-  
-     </tr>
-     <% end %>
-   </table>
-   <% end %>
+<div class="container-fluid mx-0 pt-3">
+  <div class=" row d-flex justify-content-center">
+    <div class="col-auto">
+      <h4 class="text-center mt-5 mb-3"><strong>エントリー中の依頼</strong></h4>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center mt-5">
+    <% if @entry_recruitments.blank? %>
+      <h5>エントリー中の依頼はありません</h5>
+    <% else %>
+      <div class="col-9">
+        <table class="table table-borderless text-secondary p-0">
+          <% @entry_recruitments.each do |entry_recruitment| %>
+            <tbody>
+              <tr>
+                <td class="text-center" style="width: 40%">
+                  <%= link_to recruitment_path(entry_recruitment), class:"text-secondary" do %>
+                    <%= entry_recruitment.title %>
+                  <% end %>
+                </td>
+
+                <td class="text-center" style="width: 30%">
+                  <%= link_to musician_path(entry_recruitment.musician_id), class:"text-secondary" do %>
+                    <%= entry_recruitment.musician.nickname %>
+                  <% end %>
+                </td>
+
+                <td class="text-center" style="width: 30%">
+                  <% if entry_recruitment.entried_by?(current_creator) %>
+                    <p>
+                      <%= link_to "エントリーを取り消す", recruitment_entries_path(entry_recruitment), method: :delete, class: "btn btn-outline-secondary" %>
+                    </p>
+                  <% else %>
+                    <p>
+                      <%= link_to "エントリーする", recruitment_entries_path(entry_recruitment), method: :post, class: "btn btn-outline-secondary" %>
+                    </p>
+                  <% end %>
+                </td>
+              </tr>
+              </tbody>
+            <% end %>
+          </table>
+        </div>
+      <% end %>
+    </div>
+    <div class="row d-flex justify-content-center p-4">
+      <%= paginate @entry_recruitments %>
+    </div>
+  </div>
