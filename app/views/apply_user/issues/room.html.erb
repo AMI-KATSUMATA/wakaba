@@ -51,7 +51,7 @@
   <div class="row d-flex justify-content-center mt-5 p-5 border-top">
     <% if @issue.status == "作成完了" %>
       <p>
-        *作成終了後はメッセージの送信はできません
+        作成終了後はメッセージの送信はできません
       </p>
     <% else %>
       <%= form_with model: @message, url: message_path, local: true do |f| %>

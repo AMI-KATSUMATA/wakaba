@@ -41,6 +41,7 @@ class RecruitUser::IssuesController < ApplicationController
     @issues = Issue.where(musician_id: @musician.id)
                    .where(status: "未着手")
                    .or(Issue.where(status: "作成中"))
+                   .page(params[:page]).reverse_order.per(7)
   end
 
   def completed_issues
@@ -48,6 +49,7 @@ class RecruitUser::IssuesController < ApplicationController
     # 作成完了後のissueを取得する
     @issues = Issue.where(musician_id: @musician.id)
                    .where(status: "作成完了")
+                   .page(params[:page]).reverse_order.per(7)
   end
 
   def room

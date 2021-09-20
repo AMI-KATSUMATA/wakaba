@@ -1,24 +1,30 @@
-<h3>つくりて一覧</h3>
- <table>
-   <% @creators.each do |creator| %>
-   <tr>
-      <td> 
-       <%= link_to recruit_user_creator_path(creator) do %>
-        <% if creator.profile_image.attached? %>
-         <%= image_tag creator.profile_image %>
-        <% else %>
-         <%= image_tag 'no_image.jpg' %>
-        <% end %>
-      <% end %>
-      </td> 
-      
-      <td>
-        <%= link_to recruit_user_creator_path(creator) do %>
-         <%= creator.nickname %>
-        <% end %>
-      </td>
+<div class="container-fluid mx-0 px-0 py-5">
+  <div class=" row d-flex justify-content-center">
+    <div class="col-6">
+      <% @creators.each do |creator| %>
+        <div class="row d-flex justify-content-center my-1">
+          <div class="col-auto">
+            <%= link_to recruit_user_creator_path(creator) do %>
+              <% if creator.profile_image.attached? %>
+                <%= image_tag creator.profile_image, class:"rounded-circle", size: "40x40" %>
+              <% else %>
+                <%= image_tag 'no_image.jpg', class:"rounded-circle", size: "40x40" %>
+              <% end %>
+            <% end %>
+          </div>
 
-   </tr>
-   <% end %>
- </table>
+          <div class="col-auto my-auto">
+            <%= link_to recruit_user_creator_path(creator), class:"text-secondary text-center align-middle" do %>
+              <%= creator.nickname %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+      <div class="row d-flex justify-content-center p-4">
+        <%= paginate @creators %>
+      </div>
+    </div>
+  </div>
+</div>
+
 

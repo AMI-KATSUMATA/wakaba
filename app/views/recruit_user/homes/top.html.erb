@@ -10,7 +10,7 @@
   <!--    <p class="h3"><strong>ワカバ</strong></p>-->
     </div>
   </div>
-  
+
 <div class="container-fluid">
   <div class="row mt-5 mx-5">
     <div class="col-auto m-0 p-0">
@@ -26,23 +26,27 @@
   </div>
   <div class="slider row mt-2 mx-5">
     <% @artworks.each do |artwork| %>
-      <div class="card" style="width: 18rem; height: 30rem;">
+      <div class="card mx-2" style="width: 18rem; height: 26rem;">
         <div class="bd-placeholder-img card-img-top">
-          <%= link_to recruit_user_artworks_path(artwork) do %>
-            <% if artwork.artwork_image.attached? %>
+          <%= link_to recruit_user_artwork_path(artwork) do %>
               <%= image_tag artwork.artwork_image, style: "object-fit: cover; width: 100%; height: 350px;" %>
-            <% else %>
-              <%= image_tag 'no_image.jpg', style: "object-fit: cover; width: 100%; height: 350px;" %>
-            <% end %>
           <% end %>
-          <div class="card-body">
+          <div class="card-body row">
             <p class="card-text">
-              <%= link_to recruit_user_creator_path(artwork.creator_id), class: "text-secondary" do %>
-                <%= artwork.creator.nickname %>
-              <% end %>
-            </p>
-            <p class="card-text">
-              <%= artwork.description %>
+              <div class="col-auto">
+                <%= link_to recruit_user_creator_path(artwork.creator) do %>
+                  <% if artwork.creator.profile_image.attached? %>
+                    <%= image_tag artwork.creator.profile_image, class:"rounded-circle", size: "40x40" %>
+                  <% else %>
+                   <%= image_tag 'no_image.jpg', class:"rounded-circle", size: "40x40" %>
+                  <% end %>
+                <% end %>
+              </div>
+              <div class="col-auto my-auto">
+                <%= link_to recruit_user_creator_path(artwork.creator_id), class: "text-secondary" do %>
+                  <%= artwork.creator.nickname %>
+                <% end %>
+              </div>
             </p>
           </div>
         </div>
@@ -51,7 +55,7 @@
   </div>
 </div>
 
-<div class="container-fluid">
+  <div class="container-fluid pt-5">
   <div class="row mt-5 mx-5">
     <div class="col-auto m-0 p-0">
       <p class="h5"><strong>新着つくりて</strong></p>
@@ -66,25 +70,28 @@
     </div>
     <div class="slider row mt-2 mx-5">
       <% @creators.each do |creator| %>
-        <div class="card" style="width: 18rem; height: 20rem;">
-          <div class="bd-placeholder-img card-img-top">
-            <%= link_to recruit_user_creator_path(creator) do %>
-              <% if creator.profile_image.attached? %>
-               <%= image_tag creator.profile_image, style: "object-fit: cover; width: 100%; height: 225px;" %>
-              <% else %>
-               <%= image_tag 'no_image.jpg', style: "object-fit: bottom; width: 100%; height: 225px;" %>
-              <% end %>
-            <% end %>
-          </div>
+        <div class="card mx-2" style="width: 18rem; height: 20rem;">
+
           <div class="card-body">
-            <h5 class="card-title">
-              <%= link_to recruit_user_creator_path(creator), class: "text-secondary" do %>
-                <%= creator.nickname %>
-              <% end %>
-            </h5>
-            <p class="card-text"><%= creator.introduction %></p>
+            <div class="card-title row p-3">
+              <div class="col-auto">
+                <%= link_to recruit_user_creator_path(creator) do %>
+                  <% if creator.profile_image.attached? %>
+                    <%= image_tag creator.profile_image, class:"rounded-circle", size: "100x100" %>
+                  <% else %>
+                   <%= image_tag 'no_image.jpg', class:"rounded-circle", size: "100x100" %>
+                  <% end %>
+                <% end %>
+              </div>
+              <h5 class="col-auto my-auto">
+                <%= link_to recruit_user_creator_path(creator), class: "text-secondary" do %>
+                  <%= creator.nickname %>
+                <% end %>
+              </h5>
+            </div>
+            <p class="card-text row p-3 my-3"><%= creator.introduction %></p>
           </div>
-          </div>
+        </div>
       <% end %>
     </div>
   <div class="container p-5"></div>

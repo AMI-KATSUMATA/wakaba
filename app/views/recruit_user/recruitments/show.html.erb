@@ -1,115 +1,146 @@
-<h3>依頼詳細</h3>
+<div class="container-fluid mt-5 mx-0 p-5">
+  <div class=" row d-flex justify-content-center">
+    <div class="col-8">
+      <div class=" row d-flex justify-content-center ml-5 pl-5">
+        <div class="col-auto d-flex justify-content-start">
+          <h5><%= @recruitment.title %></h5>
+        </div>
+      </div>
 
-<table class="table">
-  <tbody>
-    <tr>
-      <th>タイトル</th>
-      <td><%= @recruitment.title %></td>
-    </tr>
-  </tbody>
+      <div class=" row d-flex justify-content-center mt-2">
+        <div class="border text-center"></div>
+      </div>
 
-  <tbody>
-    <tr>
-      <th>投稿</th>
-      <td><%= l @recruitment.created_at %></td>
-    </tr>
-  </tbody>
+      <div class="row d-flex justify-content-center border bg-white rounded mt-5 mb-5 py-4 mx-auto">
+        <div class="container-fluid">
+          <div class="row d-flex justify-content-start mt-3">
+            <div class="col-auto align-middle pl-5" >
+              <% if @recruitment.musician.profile_image.attached? %>
+                <%= image_tag @recruitment.musician.profile_image, class: "rounded-circle", size: "40x40" %>
+              <% else %>
+                <%= image_tag 'no_image.jpg', class: "rounded-circle", size: "40x40" %>
+              <% end %>
+            </div>
+            <div class="col-auto align-middle ml-4">
+              <%= @recruitment.musician.nickname %>
+            </div>
+            <div class="col align-middle text-right mr-3">
+              <%= l @recruitment.created_at %>
+            </div>
+          </div>
+          <div class="row mt-4 mb-3 mx-5">
+            <%= @recruitment.detail %>
+          </div>
+          <div class="row mt-2 mx-5 border-bottom">
+            <p class="col-auto px-0 mx-0">依頼単価</p>
+            <p class="col-auto">¥<%= @recruitment.price %></p>
+          </div>
+          <div class="row mt-2 mx-5 border-bottom">
+            <p class="col-auto px-0 mx-0">完成目安</p>
+            <p class="col-auto"><%= @recruitment.deadline %></p>
+          </div>
+          <div class="row mt-2 mx-5 border-bottom">
+            <p class="col-auto px-0 mx-0">エントリー数</p>
+            <p class="col-auto"><%= @recruitment.entries.count %></p>
+          </div>
+          <div class="row mt-2 mx-5 border-bottom">
+            <p class="col-auto px-0 mx-0">募集状況</p>
+            <% if @recruitment.musician == current_musician %>
+              <%= form_with model: @recruitment, url: recruit_user_recruitment_path(@recruitment.id), method: :patch, local:true do |f| %>
+                <div class="col-auto ml-3">
+                  <%= f.radio_button :is_closed, "false", checked: true %>募集中<%= f.radio_button :is_closed, "true" %>募集終了
+                  <%= f.submit '更新', class: "btn btn-outline-secondary ml-5" %>
+                </div>
+              <% end %>
 
-  <tbody>
-    <tr>
-      <th>完成目安</th>
-      <td><%= @recruitment.deadline %></td>
-    </tr>
-  </tbody>
+            <% else %>
+              <div class="col-auto">
+                <% if @recruitment.is_closed == false %>
+                  <%= @recruitment.is_closed = "募集中" %>
+                <% else %>
+                  <%= @recruitment.is_closed = "募集終了" %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
 
-  <tbody>
-    <tr>
-      <th>依頼価格</th>
-      <td><%= @recruitment.price %>円</td>
-    </tr>
-  </tbody>
-
-  <tbody>
-    <tr>
-      <th>詳細</th>
-      <td><%= @recruitment.detail %></td>
-    </tr>
-  </tbody>
-
-　<tbody>
-    <!--追記一覧-->
-    <% @recruitment.recruitment_postscripts.each do |recruitment_postscript| %>
-    <tr>
-      <th>追記</th>
-      <td><%= recruitment_postscript.postscript %></td>
-    </tr>
-    <tr>
-      <th></th>
-      <td>投稿日時<%= l recruitment_postscript.created_at %></td>
-    </tr>
-    <% if recruitment_postscript.musician == current_musician %>
-      <tr>
-        <th></th>
-        <td><%= link_to "削除", recruit_user_recruitment_recruitment_postscript_path(recruitment_postscript.recruitment, recruitment_postscript), method: :delete %></td>
-      </tr>
+      <!--追記一覧-->
+      <% @recruitment.recruitment_postscripts.each do |recruitment_postscript| %>
+        <div class="row d-flex justify-content-center border bg-white rounded mt-5 mb-5 py-4 mx-auto">
+          <div class="container-fluid">
+            <div class="row d-flex justify-content-start mt-3">
+              <div class="col align-middle text-right mr-3">
+                <%= l recruitment_postscript.created_at %>
+              </div>
+            </div>
+            <div class="row mt-2 mx-5">
+              <%= recruitment_postscript.postscript %>
+            </div>
+            <% if recruitment_postscript.musician == current_musician %>
+              <div class="row d-flex justify-content-end mt-5 mr-5">
+                <%= link_to "削除", recruit_user_recruitment_recruitment_postscript_path(recruitment_postscript.recruitment, recruitment_postscript), method: :delete, class: "btn btn-outline-secondary" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
       <% end %>
-    <% end %>
-  </div>
-　</tbody>
 
-  <tbody>
-    <tr>
-      <th>募集状況</th>
-      <td>
-        <% if @recruitment.musician == current_musician %>
-          <%= form_with model: @recruitment, url: recruit_user_recruitment_path(@recruitment.id), method: :patch, local:true do |f| %>
-           <%= f.radio_button :is_closed, "false", checked: true %>募集中<%= f.radio_button :is_closed, "true" %>募集終了
-           <%= f.submit '更新' %>
-          <% end %>
-        <% else %>
-          <% if @recruitment.is_closed == false %>
-            <%= @recruitment.is_closed = "募集中" %>
-          <% else %>
-            <%= @recruitment.is_closed = "募集終了" %>
-          <% end %>
+      <% if @recruitment.musician == current_musician && @recruitment.is_closed == false %>
+        <!--追記入力欄-->
+        <%= form_with(model:[@recruitment, @postscript], url: recruit_user_recruitment_recruitment_postscripts_path(@recruitment.id), local: true) do |f| %>
+          <div class="row d-flex justify-content-center mt-2">
+            <%= f.text_area :postscript, :size=>"60x5", placeholder: "追記事項を入力してください" %>
+          </div>
+          <div class=" row d-flex justify-content-center mt-2">
+            <%= f.submit "送信する", class: "btn btn-outline-secondary" %>
+          </div>
         <% end %>
-      </td>
-    </tr>
-  </tbody>
-  </table>
 
-  <!--依頼削除ボタン/エントリーしたつくりて一覧-->
-  <% if @recruitment.musician == current_musician && @recruitment.is_closed == false %>
-<!--追記入力欄-->
-<div>
-<%= form_with(model:[@recruitment, @postscript], url: recruit_user_recruitment_recruitment_postscripts_path(@recruitment.id), local: true) do |f| %>
-  <%= f.text_area :postscript, rows:'5',placeholder: "追記事項を入力してください" %>
-  <%= f.submit "送信する" %>
-<% end %>
+　      <% if @entry_creators.blank? %>
+　        <div class="row d-flex justify-content-center mt-2">
+            <%= link_to "依頼を削除する", private_recruit_user_recruitment_path(@recruitment), method: :patch, "data-confirm" => "本当に削除してよろしいですか？", class: "btn btn-outline-secondary"  %>
+          </div> 
+          <div class="row d-flex justify-content-center">
+            <div class="text-danger"><small>*つくりてのエントリー後は依頼の削除はできません</small></div>
+          </div>
+        <% else %>
+          <div class="row d-flex justify-content-center mt-2">
+            <div class="col-7 text-center mt-5">
+              <h5 class="border-bottom"><strong>エントリーした依頼一覧</strong></h5>
+              <div class="col-9 mx-auto mt-4">
+                <table class="table table-borderless text-secondary p-0 mx-auto">
+                  <% @entry_creators.each do |entry_creator| %>
+                    <tbody>
+                      <tr>
+                        <td  class="text-center" style="width: 60%">
+                          <%= link_to recruit_user_creator_path(entry_creator), class:"text-secondary" do %>
+                            <%= entry_creator.nickname %>
+                          <% end %>
+                        </td>
+                        <td class="text-center" style="width: 40%">
+                          <%= link_to "依頼する", recruit_user_recruitment_issue_path(@recruitment), method: :post, class: "btn btn-outline-secondary" %>
+                        </td>
+                      </tr>
+                    </tbody>
+                  <% end %>
+                </table>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </div>
-  　<% if @entry_creators.blank? %>
-        <%= link_to "削除", private_recruit_user_recruitment_path(@recruitment), method: :patch, "data-confirm" => "本当に削除してよろしいですか？", class: "btn btn-outline-danger" %>
-        *つくりてのエントリー後は依頼の削除はできません
-    <% else %>
-     <h3>エントリーした依頼一覧</h3>
-      <table>
-       <% @entry_creators.each do |entry_creator| %>
-     <tr>
-        <td>
-         <%= link_to recruit_user_creator_path(entry_creator) do %>
-          <%= entry_creator.nickname %>
-         <% end %>
-        </td>
-        <td>
-          <p>
-           <%= link_to "依頼する", recruit_user_recruitment_issue_path(@recruitment), method: :post %>
-         </p>
-         </td>
-     </tr>
-     <% end %>
-   </table>
-   <% end %>
 
- <% end %>
+
+
+
+
+
+
+
 
 

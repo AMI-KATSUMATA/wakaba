@@ -1,7 +1,7 @@
 class RecruitUser::ArtworksController < ApplicationController
   
   def index
-    @artworks = Artwork.where(is_private: "false")
+    @artworks = Artwork.where(is_private: "false").page(params[:page]).reverse_order.per(12)
   end
 
   def show

@@ -22,14 +22,18 @@
         <div class="container-fluid">
           <div class="row d-flex justify-content-start mt-3">
             <div class="col-auto align-middle pl-5" >
-              <% if @issue.musician.profile_image.attached? %>
-                <%= image_tag @issue.musician.profile_image, class: "rounded-circle", size: "40x40" %>
-              <% else %>
-                <%= image_tag 'no_image.jpg', class: "rounded-circle", size: "40x40" %>
+              <%= link_to musician_path(@issue.musician), class:"text-secondary" do %>
+                <% if @issue.musician.profile_image.attached? %>
+                  <%= image_tag @issue.musician.profile_image, class: "rounded-circle", size: "40x40" %>
+                <% else %>
+                  <%= image_tag 'no_image.jpg', class: "rounded-circle", size: "40x40" %>
+                <% end %>
               <% end %>
             </div>
             <div class="col-auto align-middle ml-4">
-              <%= @issue.musician.nickname %>
+              <%= link_to musician_path(@issue.musician), class:"text-secondary" do %>
+                <%= @issue.musician.nickname %>
+              <% end %>
             </div>
           </div>
           <div class="row mt-2 mx-5">

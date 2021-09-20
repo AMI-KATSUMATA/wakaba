@@ -6,9 +6,9 @@
           <div class="col-auto">
             <%= link_to musician_path(musician) do %>
               <% if musician.profile_image.attached? %>
-                <%= image_tag creator.profile_image, class:"rounded-circle", size: "60x60" %>
+                <%= image_tag creator.profile_image, class:"rounded-circle", size: "40x40" %>
               <% else %>
-                <%= image_tag 'no_image.jpg', class: "rounded-circle", size: "60x60" %>
+                <%= image_tag 'no_image.jpg', class: "rounded-circle", size: "40x40" %>
               <% end %>
             <% end %>
            </div>

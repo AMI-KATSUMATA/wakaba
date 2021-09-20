@@ -1,19 +1,66 @@
-<h4><%= @issue.recruitment.title %></h4>
-<div>詳細<%= @issue.recruitment.detail %></div>
-<div>依頼したつくりて<%= @issue.creator.nickname %></div>
-<div>依頼単価<%= @issue.recruitment.price %>円</div>
-<% if @issue.status == "作成完了" %>
-<% else %>
-<div>進捗状況*作成完了後は進捗状況の変更とメッセージの送信はできません
- <%= form_with model: @issue, url: recruit_user_issue_path(@issue), method: :patch, local:true do |f| %>
-  <%= f.select :status, Issue.statuses.keys %>
-  <%= f.submit "更新" , class: "btn btn-outline-success" %>
-<% end %>
-</div>
-<% end %>
-<div>
-  <!--DM-->
-  <%= link_to room_recruit_user_issue_path(@issue) do %>
-   <i class="far fa-envelope"></i>
-  <% end %>
+<div class="container-fluid mt-5 mx-0 p-5">
+  <div class=" row d-flex justify-content-center">
+    <div class="col-8">
+      <div class=" row d-flex justify-content-center border-bottom ml-5 pl-5">
+        <div class="col-auto d-flex justify-content-start">
+          <h5><%= @issue.recruitment.title %></h5>
+        </div>
+        <div class="col mr-5">
+          <!--DM-->
+          <%= link_to room_recruit_user_issue_path(@issue), class:"text-secondary d-flex justify-content-end" do %>
+            <i class="far fa-envelope fa-lg"></i>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="row d-flex justify-content-center border bg-white rounded mt-5 mb-5 py-4 mx-auto">
+        <div class="container-fluid">
+          <div class="row d-flex justify-content-start mt-3">
+            <div class="col-auto align-middle pl-5" >
+              <%= link_to recruit_user_creator_path(@issue.creator), class:"text-secondary" do %>
+                <% if @issue.creator.profile_image.attached? %>
+                  <%= image_tag @issue.creator.profile_image, class: "rounded-circle", size: "40x40" %>
+                <% else %>
+                  <%= image_tag 'no_image.jpg', class: "rounded-circle", size: "40x40" %>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="col-auto align-middle ml-4">
+              <%= link_to recruit_user_creator_path(@issue.creator), class:"text-secondary" do %>
+                <%= @issue.creator.nickname %>
+              <% end %>
+            </div>
+          </div>
+          <div class="row mt-2 mx-5"><%= @issue.recruitment.detail %></div>
+          <div class="row mt-2 mx-5 border-bottom">
+            <p class="col-auto px-0 mx-0">依頼単価</p>
+            <p class="col-auto">¥<%= @issue.recruitment.price %></p>
+          </div>
+
+          <div class="row mt-2 mx-5 border-bottom">
+            <p class="col-auto px-0 mx-0">完成目安</p>
+            <p class="col-auto"><%= @issue.recruitment.deadline %></p>
+          </div>
+
+          <% if @issue.status == "作成完了" %>
+            <div class="row mt-2 mx-5 border-bottom">
+              <p class="col-auto px-0 mx-0">ステータス</p>
+              <p class="col-auto"><%= @issue.status %></p>
+            </div>
+          <% else %>
+            <div class="row mt-2 mx-5">
+              <p class="col-auto px-0 mx-0">ステータス</p>
+              <p class="col-auto px-0 mx-0 text-danger"><small>*作成完了後は進捗状況の変更とメッセージの送信はできません</small></p>
+            </div>
+            <div class="row mt-2 mx-5">
+              <%= form_with model: @issue, url: recruit_user_issue_path(@issue), method: :patch, local:true do |f| %>
+                <%= f.select :status, Issue.statuses.keys %>
+                <%= f.submit "更新" , class: "btn btn-outline-secondary btn-sm" %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
