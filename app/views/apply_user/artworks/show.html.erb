@@ -1,29 +1,41 @@
-<div>
-  <% if @artwork.artwork_image.attached? %>
-   <%= image_tag @artwork.artwork_image %>
-  <% else %>
-   <%= image_tag 'no_image.jpg' %>
-  <% end %>
+<div class="container-fluid mt-5 mx-0 p-5">
+  <div class=" row d-flex justify-content-center">
+    <div class="col-8">
+      <div class=" row d-flex justify-content-start ml-5 pl-5">
+        <div class=col-auto>
+          <% if @artwork.creator.profile_image.attached? %>
+            <%= image_tag @artwork.creator.profile_image, class: "rounded-circle", size: "40x40" %>
+          <% else %>
+            <%= image_tag 'no_image.jpg', class: "rounded-circle", size: "40x40" %>
+          <% end %>
+        </div>
+        <div class="col-auto align-middle">
+          <%= @artwork.creator.nickname %>
+        </div>
+        <div class="col-auto align-middle  text-right">
+          <small><%= l @artwork.created_at %></small>
+        </div>
+      </div>
+      
+
+      <div class=" row d-flex justify-content-center mt-2">
+        <div class="border text-center"></div>
+      </div>
+
+      <div class=" row d-flex justify-content-center mt-5">
+        <%= image_tag @artwork.artwork_image, class: "rounded", size: "400x400" %>
+      </div>
+
+      <div class=" row d-flex justify-content-center">
+        <div class="col-5 d-flex justify-content-center mt-3">
+          <%= @artwork.description %>
+        </div>
+      </div>
+
+      <div class=" row d-flex justify-content-center m-4">
+        <%= link_to "編集", edit_artwork_path(@artwork), class: "btn btn-outline-secondary col-2 mr-3" %>
+        <%= link_to "削除", private_artwork_path(@artwork), method: :patch, "data-confirm" => "本当に削除してよろしいですか？", class: "btn btn-outline-secondary col-2" %>
+      </div>
+    </div>
+  </div>
 </div>
-
-<table class="table">
-
-  <tbody>
-    <tr>
-      <th>投稿</th>
-      <td><%= l @artwork.created_at %></td>
-    </tr>
-  </tbody>
-
-  <tbody>
-    <tr>
-      <th>詳細</th>
-      <td><%= @artwork.description %></td>
-    </tr>
-  </tbody>
-</table>
-  <!--削除ボタン/エントリーしたつくりて一覧-->
-  <% if @artwork.creator == current_creator %>
-    <%= link_to "削除", private_artwork_path(@artwork), method: :patch, "data-confirm" => "本当に削除してよろしいですか？", class: "btn btn-outline-danger" %>
-    <%= link_to "編集", edit_artwork_path(@artwork) %>
- <% end %>

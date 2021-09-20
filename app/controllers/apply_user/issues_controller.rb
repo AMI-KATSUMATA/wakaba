@@ -10,6 +10,7 @@ class ApplyUser::IssuesController < ApplicationController
     @issues = Issue.where(creator_id: @creator.id)
                    .where(status: "未着手")
                    .or(Issue.where(status: "作成中"))
+                   .page(params[:page]).reverse_order.per(7)
   end
 
   def completed_issues
@@ -17,6 +18,7 @@ class ApplyUser::IssuesController < ApplicationController
     # 作成完了後のissueを取得する
     @issues = Issue.where(creator_id: @creator.id)
                    .where(status: "作成完了")
+                   .page(params[:page]).reverse_order.per(7)
   end
 
   def room

@@ -18,7 +18,7 @@ class ApplyUser::EntriesController < ApplicationController
   def entries
     @creator = Creator.find(params[:id])
     entries = Entry.where(creator_id: @creator.id).pluck(:recruitment_id)
-    @entry_recruitments = Recruitment.find(entries)
+    @entry_recruitments = Recruitment.where(id: entries).page(params[:page]).per(7)
   end
 
 end

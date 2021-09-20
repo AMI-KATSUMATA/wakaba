@@ -1,27 +1,57 @@
-<h3>お気に入りつのりて</h3>
-<% if @favorite_musicians.blank? %>
-  <h4>お気に入りつのりてはありません</h4>
-<% else %>
-   <table>
-     <% @favorite_musicians.each do |favorite_musician| %>
-     <tr>
-        <td>
-         <%= link_to musician_path(favorite_musician) do %>
-            <% if favorite_musician.profile_image.attached? %>
-             <%= image_tag favorite_musician.profile_image %>
-            <% else %>
-             <%= image_tag 'no_image.jpg' %>
-            <% end %>
-         <% end %>
-        </td>
+<div class="container-fluid mx-0 p-0">
+  <div class=" row d-flex justify-content-center">
+    <div class="col-auto">
+      <h4 class="text-center mt-5 mb-3"><strong>お気に入りつのりて</strong></h4>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center m-5">
+    <% if @favorite_musicians.blank? %>
+      <h5 class="text-center">お気に入りつのりてはありません</h5>
+    <% else %>
+      <div class="col-6">
+        <table class="table table-borderless text-secondary p-0">
+          <% @favorite_musicians.each do |favorite_musician| %>
+            <tdoby>
+              <tr>
+                <td class="text-center my-auto" style="width: 35%">
+                  <%= link_to musician_path(favorite_musician) do %>
+                    <% if favorite_musician.profile_image.attached? %>
+                      <%= image_tag favorite_musician.profile_image, class: "rounded-circle", size: "80x80" %>
+                    <% else %>
+                      <%= image_tag 'no_image.jpg', class: "rounded-circle", size: "80x80" %>
+                    <% end %>
+                  <% end %>
+                </td>
 
-        <td>
-          <%= link_to musician_path(favorite_musician) do %>
-           <%= favorite_musician.nickname %>
+                <td class="text-center align-middle" style="width: 40%">
+                  <%= link_to musician_path(favorite_musician), class:"text-secondary" do %>
+                    <%= favorite_musician.nickname %>
+                  <% end %>
+                </td>
+
+                <td class="text-center align-middle" style="width: 25%">
+                  <% if favorite_musician.favorited_by?(current_creator) %>
+                    <p>
+                      <%= link_to musician_favorites_path(favorite_musician), class:"text-danger", method: :delete do %>
+                        <i class="fas fa-heart"></i>
+                      <% end %>
+                    </p>
+                  <% else %>
+                    <p>
+                      <%= link_to musician_favorites_path(favorite_musician), class:"text-secondary", method: :post do %>
+                        <i class="far fa-heart"></i>
+                      <% end %>
+                    </p>
+                  <% end %>
+                </td>
+              </tr>
+            </tbody>
           <% end %>
-        </td>
-
-     </tr>
-     <% end %>
-   </table>
-   <% end %>
+        </table>
+        <div class="row d-flex justify-content-center p-4">
+          <%= paginate @favorite_musicians %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   root to: 'apply_user/homes#top'
   scope module: :apply_user do
     # creator
-    resources :creators, only: [:show, :index, :edit, :update] do
+    resources :creators, only: [:show, :edit, :update] do
       member do
        get :unsubscribe
        patch :withdraw
@@ -33,7 +33,7 @@ Rails.application.routes.draw do
     end
 
     # artwork
-    resources :artworks, except: [:destroy] do
+    resources :artworks, except: [:index, :destroy] do
       member do
         patch :private
       end
@@ -64,7 +64,7 @@ Rails.application.routes.draw do
 
     # message
     resource :message, only:[:create]
-    
+
     # notification
     resources :notifications, only:[:index]
 
@@ -78,7 +78,7 @@ Rails.application.routes.draw do
     resources :creators, only: [:index, :show]
 
     # musician
-    resources :musicians, only: [:show, :index, :edit, :update] do
+    resources :musicians, only: [:show, :edit, :update] do
       member do
        get :unsubscribe
        patch :withdraw
@@ -89,7 +89,7 @@ Rails.application.routes.draw do
     resources :artworks, only:[:index, :show]
 
     # recruitment
-    resources :recruitments, except:[:edit, :destroy] do
+    resources :recruitments, except:[:edit, :index, :destroy] do
       resource :issue, only:[:create]
       resources :recruitment_postscripts, only: [:create, :destroy]
       member do
@@ -108,7 +108,7 @@ Rails.application.routes.draw do
 
     # message
     resource :message, only:[:create]
-    
+
     # notification
     resources :notifications, only:[:index]
 

@@ -1,50 +1,83 @@
-<div>
-  <% if @musician.profile_image.attached? %>
-   <%= image_tag @musician.profile_image %>
-  <% else %>
-   <%= image_tag 'no_image.jpg' %>
-  <% end %>
-</div>
-<div>
-  <h3><%= @musician.nickname %></h3>
-    <% if @musician.id == current_musician.id %>
-      <p>
-        <%= link_to edit_recruit_user_musician_path(@musician), class:"text-secondary" do %>
-         <i class="fas fa-cog"></i>
-        <% end %>
-      </p>
-    <% end %>
-</div>
-<div>
-  <%= @musician.introduction %>
-</div>
+<div class="container-fluid mx-0 p-0">
+  <div class="row pt-5">
+    <div class="col-4">
+      <div class="container-fluid mx-0 p-0">
+        <div class="row d-flex justify-content-center">
+          <% if @musician.profile_image.attached? %>
+            <%= image_tag @musician.profile_image, class: "rounded-circle", size: "200x200" %>
+          <% else %>
+            <%= image_tag 'no_image.jpg', class: "rounded-circle", size: "200x200" %>
+          <% end %>
+        </div>
+        <div class="row pt-2 d-flex justify-content-center">
+          <div class="col-auto">
+            <h4><strong><%= @musician.nickname %></strong></h4>
+          </div>
+          <div class="col-auto">
+            <%= link_to edit_recruit_user_musician_path(@musician), class:"text-secondary" do %>
+              <i class="fas fa-cog fa-lg"></i>
+            <% end %>
+          </div>
+        </div>
 
-<% if @musician.id == current_musician.id %>
-  <p>
-    <%= link_to "依頼管理", recruit_user_working_issues_path(@musician), class:"text-secondary" %>
-  </p>
-  <%= link_to new_recruit_user_recruitment_path, class:"text-secondary" do %>
-  <i class="fas fa-plus"></i>
-  <% end %>
-<%end %>
+        <div class="row pt-2 d-flex justify-content-center">
+          <%= @musician.introduction %>
+        </div>
 
-<% if @recruitments.blank? %>
-  <h4>まだ依頼の投稿はありません</h4>
-<% else %>
-<table>
-     <% @recruitments.each do |recruitment| %>
-     <tr>
-        <td>
-         <%= link_to recruit_user_recruitment_path(recruitment) do %>
-          <%= recruitment.title %>
-         <% end %>
-        </td>
+        <div class="row d-flex justify-content-center">
+          <div class="border text-center"></div>
+        </div>
 
-        <td>
-           <%= recruitment.detail %>
-        </td>
-     </tr>
-     <% end %>
-   </table>
-  <%= paginate @recruitments %>
-<% end %>
+        <div>
+          <p class="row pt-5 d-flex justify-content-center">
+            <%= link_to "依頼管理", recruit_user_working_issues_path(@musician), class:"text-secondary btn btn-outline-secondary" %>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-8">
+      <div class="container">
+        <div class="row mb-4 pr-5 mr-5 d-flex justify-content-end">
+          <p class="row d-flex justify-content-center">
+            <%= link_to new_recruit_user_recruitment_path, class:"text-secondary" do %>
+              <i class="fas fa-plus fa-2x"></i>
+            <% end %>
+          </p>
+        </div>
+        <div class="row d-flex justify-content-center m-5">
+          <% if @recruitments.blank? %>
+            <h5 class="text-center">まだ依頼の投稿はありません</h5>
+          <% else %>
+            <div class="col-9">
+              <table class="table table-borderless text-secondary p-0">
+                <% @recruitments.each do |recruitment| %>
+                  <tbody>
+                    <tr>
+                      <td class="text-center" style="width: 70%">
+                        <%= link_to recruit_user_recruitment_path(recruitment), class:"text-secondary" do %>
+                          <%= recruitment.title %>
+                        <% end %>
+                      </td>
+
+                      <td class="text-center" style="width: 30%">
+                        <% if recruitment.is_closed == false %>
+                          <p class="text-white bg-secondary"><%= recruitment.is_closed = "募集終了" %></p>
+                        <% else %>
+                          <p><%= recruitment.is_closed = "募集中" %></p>
+                        <% end %>
+                      </td>
+                    </tr>
+                  </tbody>
+                <% end %>
+              </table>
+            </div>
+            <div class="row d-flex justify-content-center p-5">
+              <%= paginate @recruitments %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

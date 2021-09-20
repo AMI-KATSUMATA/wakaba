@@ -1,5 +1,14 @@
-<h3>退会処理を行います</h3>
-<div>
-  <%= link_to "続行", withdraw_creator_path(@creator), method: :patch, "data-confirm" => "本当に退会しますか？", class: "btn btn-outline-danger" %>
-  <%= link_to "キャンセル", creator_path(@creator), class: "btn btn-outline-danger" %>
+<div class="container-fluid mt-5 pt-5 mb-5 pb-5 mx-0 p-0">
+  <div class="container p-5"></div>
+  <div class="row d-flex justify-content-center pb-5 mb-5">
+    <h4>退会処理を実行しますか？</h4>
+  </div>
+  <div class="row d-flex justify-content-center">
+    <%= link_to "続行", withdraw_creator_path(@creator), method: :patch, "data-confirm" => "本当に退会しますか？", class: "btn btn-outline-danger col-2 mr-4" %>
+    <%= link_to "キャンセル", creator_path(@creator), class: "btn btn-outline-secondary col-2" %>
+  </div>
+  <div class="row d-flex justify-content-center">
+    <small class="text-danger">*退会済みのアカウントではログインできません</small>
+  </div>
+    <div class="container p-5 m-4"></div>
 </div>

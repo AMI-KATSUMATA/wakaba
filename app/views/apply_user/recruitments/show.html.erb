@@ -1,104 +1,99 @@
-<h3>依頼詳細</h3>
+<div class="container-fluid mt-5 mx-0 p-5">
+  <div class=" row d-flex justify-content-center">
+    <div class="col-8">
+      <div class=" row d-flex justify-content-center ml-5 pl-5">
+        <div class="col-auto d-flex justify-content-start">
+          <h5><%= @recruitment.title %></h5>
+        </div>
 
-<table class="table">
-  <tbody>
-    <tr>
-      <th>タイトル</th>
-      <td><%= @recruitment.title %></td>
-    </tr>
-  </tbody>
-  
-  <!--いいね-->
-    <% if @recruitment.favorited_by?(current_creator) %>
-    <p>
-      <%= link_to recruitment_favorites_path(@recruitment), method: :delete do %>
-       ♥
+        <div class="col mr-5">
+        <!--いいね-->
+          <% if @recruitment.favorited_by?(current_creator) %>
+            <p>
+              <%= link_to recruitment_favorites_path(@recruitment), method: :delete, class:"text-danger d-flex justify-content-end h5" do %>
+                ♥
+              <% end %>
+            </p>
+          <% else %>
+            <p>
+              <%= link_to recruitment_favorites_path(@recruitment), method: :post, class:"text-secondary d-flex justify-content-end h5" do %>
+                ♡
+              <% end %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+
+      <div class=" row d-flex justify-content-center mt-2">
+        <div class="border text-center"></div>
+      </div>
+
+      <div class="row d-flex justify-content-center border bg-white rounded mt-5 mb-5 py-4">
+        <div class="container-fluid">
+          <div class="row d-flex justify-content-start mt-3">
+            <div class="col-auto align-middle pl-5" >
+              <% if @recruitment.musician.profile_image.attached? %>
+                <%= image_tag @recruitment.musician.profile_image, class: "rounded-circle", size: "40x40" %>
+              <% else %>
+                <%= image_tag 'no_image.jpg', class: "rounded-circle", size: "40x40" %>
+              <% end %>
+            </div>
+            <div class="col-auto align-middle ml-4">
+              <%= @recruitment.musician.nickname %>
+            </div>
+            <div class="col align-middle text-right mr-3">
+              <%= l @recruitment.created_at %>
+            </div>
+          </div>
+
+          <div class="row mt-4 mb-3 mx-5">
+            <%= @recruitment.detail %>
+          </div>
+          <div class="row mt-2 mx-5 border-bottom">
+            <p class="col-auto px-0 mx-0">依頼単価</p>
+            <p class="col-auto">¥<%= @recruitment.price %></p>
+          </div>
+          <div class="row mt-2 mx-5 border-bottom">
+            <p class="col-auto px-0 mx-0">完成目安</p>
+            <p class="col-auto"><%= @recruitment.deadline %></p>
+          </div>
+          <div class="row mt-2 mx-5 border-bottom">
+            <p class="col-auto px-0 mx-0">エントリー数</p>
+            <p class="col-auto"><%= @recruitment.entries.count %></p>
+          </div>
+        </div>
+      </div>
+
+      <% @recruitment.recruitment_postscripts.each do |recruitment_postscript| %>
+        <div class="row d-flex justify-content-center border bg-white rounded mt-5 mb-5 py-4">
+          <div class="container-fluid">
+            <div class="row d-flex justify-content-start mt-3">
+              <div class="col align-middle text-right mr-3">
+                <%= l recruitment_postscript.created_at %>
+              </div>
+            </div>
+            <div class="row mt-2 mx-5">
+              <%= recruitment_postscript.postscript %>
+            </div>
+          </div>
+        </div>
       <% end %>
-    </p>
-    <% else %>
-    <p>
-      <%= link_to recruitment_favorites_path(@recruitment), method: :post do %>
-        ♡
-      <% end %>
-    </p>
-  <% end %>
-  
-  <tbody>
-    <tr>
-      <th>投稿</th>
-      <td><%= l @recruitment.created_at %></td>
-    </tr>
-  </tbody>
 
-  <tbody>
-    <tr>
-      <th>完成目安</th>
-      <td><%= @recruitment.deadline %></td>
-    </tr>
-  </tbody>
-
-  <tbody>
-    <tr>
-      <th>依頼価格</th>
-      <td><%= @recruitment.price %>円</td>
-    </tr>
-  </tbody>
-
-  <tbody>
-    <tr>
-      <th>詳細</th>
-      <td><%= @recruitment.detail %></td>
-    </tr>
-  </tbody>
-  <tbody>
-    <% @recruitment.recruitment_postscripts.each do |recruitment_postscript| %>
-    <tr>
-      <th>追記</th>
-      <td><%= recruitment_postscript.postscript %></td>
-    </tr>
-    <tr>
-      <th>追記日時</th>
-      <td><%= l recruitment_postscript.created_at %></td>
-    </tr>
-    <% end %>
-  <tbody>
-    <tr>
-      <th>募集状況</th>
-      <td>
-        <% if @recruitment.is_closed == false %>
-          <%= @recruitment.is_closed = "募集中" %>
-        <% else %>
-          <%= @recruitment.is_closed = "募集終了" %>
-        <% end %>
-      </td>
-    </tr>
-  </tbody>
-
- <tbody>
-    <tr>
-      <th>エントリー数</th>
-      <td><%= @recruitment.entries.count %></td>
-    </tr>
-  </tbody>
-
-  <!--依頼へのエントリー-->
- <tbody>
-    <tr>
-      <th></th>
-        <td>
-         <% if @recruitment.entried_by?(current_creator) %>
+      <div class=" row d-flex justify-content-center mt-2">
+      <!--依頼へのエントリー-->
+        <% if @recruitment.entried_by?(current_creator) %>
           <p>
-            <%= link_to "エントリーを取り消す", recruitment_entries_path(@recruitment), method: :delete %>
+            <%= link_to "エントリーを取り消す", recruitment_entries_path(@recruitment), method: :delete, class: "btn btn-outline-secondary" %>
           </p>
         <% else %>
-         <p>
-           <%= link_to "エントリーする", recruitment_entries_path(@recruitment), method: :post %>
-         </p>
+          <p>
+            <%= link_to "エントリーする", recruitment_entries_path(@recruitment), method: :post, class: "btn btn-outline-secondary" %>
+          </p>
         <% end %>
-      </td>
-    </tr>
-  </tbody>
-</table>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
