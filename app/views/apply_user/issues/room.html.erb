@@ -1,25 +1,64 @@
-<% if @messages.blank? %>
-  <p>メッセージはありません</p>
-<% else%>
-  <% @messages.each do |message| %>
-    <div>
-      <% if message.creator %>
-        <span><%= message.creator.nickname %>:</span>
+<div class="container-fluid mx-0 p-0">
+  <div class="row d-flex justify-content-center m-5 p-5">
+    <div class="col-8 d-flex justify-content-center">
+      <% if @messages.blank? %>
+        <h5 class="text-center">メッセージはありません</h5>
+
       <% else %>
-        <span><%= message.musician.nickname %>:</span>
+        <div class="container-fluid mx-0 p-0">
+          <% @messages.each do |message| %>
+            <% if message.creator %>
+              <div class="row d-flex justify-content-end">
+                <div class="col-6 d-flex justify-content-end">
+                  <div class="container-fluid mx-0 p-0">
+                    <div class="row d-flex justify-content-end">
+                      <span class="py-auto"><%= message.content %></span>
+                    </div>
+                    <div class="row d-flex justify-content-end mb-2">
+                      <small><%= l message.created_at %></small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            <% else %>
+              <div class="row d-flex justify-content-start">
+                <div class="col-6 d-flex justify-content-start">
+                  <div class="container-fluid mx-0 p-0">
+                    <div class="row d-flex justify-content-start">
+                      <span>
+                        <% if message.musician.profile_image.attached? %>
+                          <%= image_tag message.musician.profile_image, class: "rounded-circle", size: "40x40" %>
+                        <% else %>
+                          <%= image_tag 'no_image.jpg', class: "rounded-circle", size: "40x40" %>
+                        <% end %>
+                      </span>
+                      <span class="my-auto ml-2"><%= message.content %></span>
+                    </div>
+                    <div class="row d-flex justify-content-start mb-2">
+                      <small><%= l message.created_at %></small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
       <% end %>
-      <span><%= message.content %></span>
     </div>
-  <% end %>
-<% end %>
-<% if @issue.status == "作成完了" %>
-<p>
-  *作成終了後はメッセージの送信はできません
-</p>
-<% else %>
-<%= form_with model: @message, url: message_path, local: true do |f| %>
-  <%= f.text_field :content, class:"address-new-form" %>
-  <%= f.hidden_field :issue_id, value: @issue.id %>
-  <%= f.submit "送信", class:"register-green-btn" %>
-<% end %>
-<% end %>
+  </div>
+
+  <div class="row d-flex justify-content-center mt-5 p-5 border-top">
+    <% if @issue.status == "作成完了" %>
+      <p>
+        *作成終了後はメッセージの送信はできません
+      </p>
+    <% else %>
+      <%= form_with model: @message, url: message_path, local: true do |f| %>
+        <%= f.text_field :content, class:"address-new-form" %>
+        <%= f.hidden_field :issue_id, value: @issue.id %>
+        <%= f.submit "送信", class:"btn btn-outline-secondary btn-sm" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

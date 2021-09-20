@@ -1,28 +1,44 @@
-<% if @notifications.blank? %>
-<h3>通知はありません</h3>
-<% else %>
-<div>
-  <% @notifications.each do |notification| %>
-    <% if notification.action == 'issue' %>
-      <p>
-       <%= link_to musician_path(notification.visitor_musician_id) do %>
-
-              <%= notification.visitor_musician.nickname %>
-
-       <% end %>
-       さんがあなたに
-       <%= link_to "依頼しました", issue_path(notification.issue_id) %>
-      </p>
+<div class="container-fluid mx-0 p-5">
+  <div class="row d-flex justify-content-center m-5">
+    <% if @notifications.blank? %>
+      <h5 class="text-center">通知はありません</h5>
     <% else %>
-     <p>
-       <%= link_to musician_path(notification.visitor_musician_id) do %>
-         <%= notification.visitor_musician.nickname %>
-       <% end %>
-       さんが
-       <%= link_to "メッセージ", room_issue_path(notification.message.issue_id) %>
-       を送信しました
-     </p>
+      <div class="col-9">
+        <table class="table table-borderless text-secondary p-0">
+          <% @notifications.each do |notification| %>
+            <tbody>
+              <tr>
+                <td class="text-center">
+                  <% if notification.action == 'issue' %>
+                    <u>
+                      <%= link_to musician_path(notification.visitor_musician_id), class:"text-secondary" do %>
+                        <%= notification.visitor_musician.nickname %>
+                      <% end %>
+                    </u>
+                    さんがあなたに
+                    <u>
+                      <%= link_to "依頼しました", issue_path(notification.issue_id), class:"text-secondary" %>
+                    </u>
+
+                  <% else %>
+                    <u>
+                      <%= link_to musician_path(notification.visitor_musician_id), class:"text-secondary" do %>
+                        <%= notification.visitor_musician.nickname %>
+                      <% end %>
+                    </u>
+                    さんが
+                    <u>
+                      <%= link_to "メッセージ", room_issue_path(notification.message.issue_id), class:"text-secondary" %>
+                    </u>
+                    を送信しました
+                  <% end %>
+                </td>
+              </tr>
+            </tbody>
+          <% end %>
+        </table>
+      </div>
     <% end %>
-  <% end %>
+  </div>
+  <div class="container p-3"></div>
 </div>
-<% end %>
