@@ -37,7 +37,7 @@ class Musicians::SessionsController < Devise::SessionsController
         redirect_to new_musician_session_path
       end
     else
-      flash[:error] = "項目を入力してください。"
+      flash[:alert] = "項目を入力してください。"
     end
   end
 end

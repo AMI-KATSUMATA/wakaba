@@ -1,4 +1,6 @@
 class RecruitUser::NotificationsController < ApplicationController
+  before_action :authenticate_musician!
+  
   def index
     #@notifications = current_musician.entry_notifications
     @notifications = current_musician.passive_notifications

@@ -1,4 +1,5 @@
 class ApplyUser::MessagesController < ApplicationController
+  before_action :authenticate_creator!
 
   def create
     message = Message.new(message_params)

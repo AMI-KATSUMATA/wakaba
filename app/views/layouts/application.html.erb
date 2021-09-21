@@ -37,34 +37,72 @@
           <!--つくりてログイン後-->
           <% if creator_signed_in? %>
             <li class="nav-item">
-              <%= link_to "マイページ", creator_path(current_creator.id), class: "nav-link text-secondary" %>
+              <%= link_to creator_path(current_creator.id), class: "nav-link text-secondary ml-3" do %>
+              <i class="far fa-user ml-1"></i>マイページ
+              <% end %>
             </li>
             <li class="nav-item">
-              <%= link_to "依頼管理", working_issues_path(current_creator.id), class:"nav-link text-secondary" %>
+              <%= link_to working_issues_path(current_creator.id), class:"nav-link text-secondary ml-3" do %>
+                <i class="far fa-clipboard"></i>依頼管理
+              <% end %>
             </li>
             <li class="nav-item">
-              <%= link_to "通知", notifications_path, class:"nav-link text-secondary" %>
+              <% if creator_unchecked_notifications.any? %>
+                <%= link_to notifications_path, class:"nav-link text-secondary" do %>
+                　<span class="fa-stack">
+                　 <i class="far fa-bell fa-stack-2x" style="font-size: 1em;"></i>
+                　 <i class="fas fa-circle fa-stack-1x n-circle" style="font-size: 0.5em;"></i>
+                  </span>
+                  通知
+                <% end %>
+              <% else %>
+                <%= link_to notifications_path, class:"nav-link text-secondary" do %>
+                　 <i class="far fa-bell"></i>通知
+                <% end %>
+              <% end %>
             </li>
             <li class="nav-item">
-              <%= link_to "ログアウト", destroy_creator_session_path, method: :delete, class: "nav-link text-secondary" %>
+              <%= link_to destroy_creator_session_path, method: :delete, class: "nav-link text-secondary ml-3" do %>
+              　<i class="fas fa-sign-out-alt"></i>ログアウト
+              <% end %>
             </li>
 
           <!--つのりてログイン後-->
           <% elsif musician_signed_in? %>
             <li class="nav-item">
-             <%= link_to "マイページ", recruit_user_musician_path(current_musician.id), class: "nav-link text-secondary" %>
+             <%= link_to recruit_user_musician_path(current_musician.id), class: "nav-link text-secondary ml-3" do %>
+              <i class="far fa-user"></i>マイページ
+            <% end %>
             </li>
             <li class="nav-item">
-              <%= link_to "依頼管理", recruit_user_working_issues_path(current_musician.id), class:"nav-link text-secondary" %>
+              <%= link_to recruit_user_working_issues_path(current_musician.id), class:"nav-link text-secondary ml-3" do %>
+                <i class="far fa-clipboard"></i>依頼管理
+              <% end %>
             </li>
             <li class="nav-item">
-              <%= link_to "依頼投稿", new_recruit_user_recruitment_path, class:"nav-link text-secondary" %>
+              <%= link_to new_recruit_user_recruitment_path, class:"nav-link text-secondary ml-3" do %>
+                <i class="far fa-file-alt"></i>依頼投稿
+              <% end %>
             </li>
             <li class="nav-item">
-              <%= link_to "通知", recruit_user_notifications_path, class:"nav-link text-secondary" %>
+              <% if musician_unchecked_notifications.any? %>
+                <%= link_to recruit_user_notifications_path, class:"nav-link text-secondary ml-0 pl-0" do %>
+                　<span class="fa-stack">
+                　 <i class="far fa-bell fa-stack-2x" style="font-size: 1em;"></i>
+                　 <i class="fas fa-circle fa-stack-1x n-circle" style="font-size: 0.5em;"></i>
+                  </span>
+                  通知
+                <% end %>
+              <% else %>
+                <%= link_to recruit_user_notifications_path, class:"nav-link text-secondary" do %>
+                　 <i class="far fa-bell"></i>通知
+                <% end %>
+              <% end %>
             </li>
             <li class="nav-item">
-              <%= link_to "ログアウト", destroy_musician_session_path, method: :delete, class: "nav-link text-secondary" %>
+              <%= link_to destroy_musician_session_path, method: :delete, class: "nav-link text-secondary ml-3" do %>
+                <i class="fas fa-sign-out-alt"></i>ログアウト
+              <% end %>
             </li>
 
             <!--adminsの定義 start-->
@@ -112,6 +150,19 @@
       </div>
      </nav>
     </header>
+    <!--フラッシュメッセージ-->
+    <div class="text-center">
+      <% if flash[:alert] %>
+        <div class="text-danger">
+          <%= flash[:alert] %>
+        </div>
+     <% elsif flash[:success] %>
+     　  <div class="text-secondary">
+     　    <%= flash[:success] %>
+     　 </div>
+   　<% else %>
+  　 <% end %>
+  　 </div>
     <div class="text-secondary">
      <%= yield %>
     </div>

@@ -1,4 +1,14 @@
 class ApplyUser::CreatorsController < ApplicationController
+  before_action :authenticate_creator!
+  before_action :ensure_current_creator
+  # 閲覧権限
+  def ensure_current_creator
+    if current_creator.id != params[:id].to_i
+      flash[:alert]="閲覧権限がありません"
+      redirect_to root_path
+    end
+  end
+
 
   def show
     @creator = Creator.find(params[:id])

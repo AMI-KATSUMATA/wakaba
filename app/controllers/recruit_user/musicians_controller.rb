@@ -1,7 +1,12 @@
 class RecruitUser::MusiciansController < ApplicationController
-
-  def index
-     @musicians = Musician.where(is_deleted: "false")
+  before_action :authenticate_musician!
+  before_action :ensure_current_musician
+  # 閲覧権限
+  def ensure_current_musician
+    if current_musician.id != params[:id].to_i
+      flash[:alert]="閲覧権限がありません"
+      redirect_to recruit_user_path
+    end
   end
 
   def show

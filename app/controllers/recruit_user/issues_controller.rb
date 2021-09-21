@@ -1,4 +1,14 @@
 class RecruitUser::IssuesController < ApplicationController
+  before_action :authenticate_musician!
+  before_action :ensure_current_musician
+  # 閲覧権限
+  def ensure_current_musician
+     issue =Issue.find(params[:id])
+    if current_musician.id != issue.musician_id
+      flash[:alert]="閲覧権限がありません"
+      redirect_to recruit_user_path
+    end
+  end
 
   def create
     recruitment = Recruitment.find(params[:recruitment_id])
@@ -35,6 +45,7 @@ class RecruitUser::IssuesController < ApplicationController
     end
   end
 
+  # 作成中の依頼
   def working_issues
     @musician = Musician.find(current_musician.id)
     # 作成中のissueを取得する
@@ -44,6 +55,7 @@ class RecruitUser::IssuesController < ApplicationController
                    .page(params[:page]).reverse_order.per(7)
   end
 
+  # 作成完了後の依頼
   def completed_issues
     @musician = Musician.find(current_musician.id)
     # 作成完了後のissueを取得する

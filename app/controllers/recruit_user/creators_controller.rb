@@ -1,4 +1,5 @@
 class RecruitUser::CreatorsController < ApplicationController
+  before_action :authenticate_musician!
   def index
     @creators = Creator.where(is_deleted: "false").page(params[:page]).reverse_order.per(7)
   end
