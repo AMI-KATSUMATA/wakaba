@@ -1,0 +1,9 @@
+<% if recruitment.entried_by?(current_creator) %>
+  <p>
+    <%= link_to "エントリーを取り消す", recruitment_entries_path(recruitment), method: :delete, remote: true, class: "btn btn-outline-secondary" %>
+  </p>
+<% else %>
+  <p>
+    <%= link_to "エントリーする", recruitment_entries_path(recruitment), method: :post, remote: true, class: "btn btn-outline-secondary" %>
+  </p>
+<% end %>

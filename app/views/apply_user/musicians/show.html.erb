@@ -15,20 +15,10 @@
           </div>
 
           <div class="col-auto">
-            <!--いいね-->
-            <% if @musician.favorited_by?(current_creator) %>
-              <p>
-                <%= link_to musician_favorites_path(@musician), method: :delete, class:"text-danger" do %>
-                  <i class="fas fa-heart"></i>
-                <% end %>
-              </p>
-            <% else %>
-              <p>
-                <%= link_to musician_favorites_path(@musician), method: :post do %>
-                  <i class="far fa-heart"></i>
-                <% end %>
-              </p>
-            <% end %>
+            <div id="favorite_musicians_buttoms_<%= @musician.id %>">
+              <!--いいね-->
+              <%= render partial: 'apply_user/favorites/favorite_musician', locals: { musician: @musician } %>
+            </div>
           </div>
         </div>
         <div class="row pt-2 d-flex justify-content-center">

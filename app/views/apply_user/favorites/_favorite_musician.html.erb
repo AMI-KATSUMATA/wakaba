@@ -1,0 +1,13 @@
+<% if musician.favorited_by?(current_creator) %>
+  <p>
+    <%= link_to musician_favorites_path(musician), method: :delete, remote: true, class:"text-danger d-flex justify-content-end h5" do %>
+      <i class="fas fa-heart"></i>
+    <% end %>
+  </p>
+<% else %>
+  <p>
+    <%= link_to musician_favorites_path(musician), method: :post, remote: true, class:"text-secondary d-flex justify-content-end h5" do %>
+      <i class="far fa-heart"></i>
+    <% end %>
+  </p>
+<% end %>

@@ -1,0 +1,1 @@
+$('#favorite_musicians_buttoms_<%= @musician.id %>').html("<%= j(render partial: 'apply_user/favorites/favorite_musician', locals: {musician: @musician}) %>");
