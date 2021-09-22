@@ -30,7 +30,7 @@
 
         <div>
           <p class="row pt-5 d-flex justify-content-center">
-            <%= link_to "依頼管理", recruit_user_working_issues_path(@musician), class:"text-secondary btn btn-outline-secondary" %>
+            <%= link_to "依頼管理", recruit_user_working_issues_path, class:"text-secondary btn btn-outline-secondary" %>
           </p>
         </div>
       </div>
@@ -61,7 +61,7 @@
                       </td>
 
                       <td class="text-center" style="width: 30%">
-                        <% if recruitment.is_closed == false %>
+                        <% if recruitment.is_closed == true %>
                           <p class="text-white bg-secondary"><%= recruitment.is_closed = "募集終了" %></p>
                         <% else %>
                           <p><%= recruitment.is_closed = "募集中" %></p>

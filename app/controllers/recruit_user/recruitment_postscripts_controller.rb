@@ -7,7 +7,7 @@ class RecruitUser::RecruitmentPostscriptsController < ApplicationController
     postscript.recruitment_id = recruitment.id
     if postscript.save
       flash[:success] = "追記を登録しました"
-    　redirect_to recruit_user_recruitment_path(recruitment)
+      redirect_to recruit_user_recruitment_path(recruitment)
     else
       flash[:alert] = "追記の登録に失敗しました"
       @recruitment = Recruitment.find(params[:id])

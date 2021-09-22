@@ -1,14 +1,6 @@
 class ApplyUser::IssuesController < ApplicationController
   before_action :authenticate_creator!
-  before_action :ensure_current_creator
-  # 閲覧権限
-  def ensure_current_creator
-     issue =Issue.find(params[:id])
-    if current_creator.id != issue.creator_id
-      flash[:alert]="閲覧権限がありません"
-      redirect_to root_path
-    end
-  end
+
 
   def show
    @issue = Issue.find(params[:id])

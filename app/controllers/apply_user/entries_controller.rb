@@ -1,13 +1,5 @@
 class ApplyUser::EntriesController < ApplicationController
   before_action :authenticate_creator!
-    before_action :ensure_current_creator
-    # 閲覧権限
-  def ensure_current_creator
-    if current_creator.id != params[:id].to_i
-      flash[:alert]="閲覧権限がありません"
-      redirect_to root_path
-    end
-  end
 
   def create
     recruitment = Recruitment.find(params[:recruitment_id])
@@ -27,7 +19,7 @@ class ApplyUser::EntriesController < ApplicationController
   end
 
   def entries
-    @creator = Creator.find(params[:id])
+    @creator = Creator.find(current_creator.id)
     entries = Entry.where(creator_id: @creator.id).pluck(:recruitment_id)
     @entry_recruitments = Recruitment.where(id: entries).page(params[:page]).per(7)
   end

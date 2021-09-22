@@ -1,6 +1,6 @@
 class RecruitUser::RecruitmentsController < ApplicationController
   before_action :authenticate_musician!
-  before_action :ensure_current_musician
+  before_action :ensure_current_musician, {except: [:new, :create]}
   # 閲覧権限
   def ensure_current_musician
     recruitment = Recruitment.find(params[:id])
@@ -43,7 +43,7 @@ class RecruitUser::RecruitmentsController < ApplicationController
       render :edit
     end
   end
-  
+
   def private
     @recruitment = Recruitment.find(params[:id])
     @recruitment.update(is_private: true)

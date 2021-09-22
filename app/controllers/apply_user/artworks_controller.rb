@@ -1,6 +1,6 @@
 class ApplyUser::ArtworksController < ApplicationController
   before_action :authenticate_creator!
-  before_action :ensure_current_creator
+  before_action :ensure_current_creator, {except: [:new, :create]}
   # 閲覧権限
   def ensure_current_creator
     artwork = Artwork.find(params[:id])

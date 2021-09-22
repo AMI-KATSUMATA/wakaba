@@ -1,14 +1,5 @@
 class RecruitUser::IssuesController < ApplicationController
   before_action :authenticate_musician!
-  before_action :ensure_current_musician
-  # 閲覧権限
-  def ensure_current_musician
-     issue =Issue.find(params[:id])
-    if current_musician.id != issue.musician_id
-      flash[:alert]="閲覧権限がありません"
-      redirect_to recruit_user_path
-    end
-  end
 
   def create
     recruitment = Recruitment.find(params[:recruitment_id])

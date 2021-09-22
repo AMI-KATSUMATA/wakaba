@@ -1,13 +1,4 @@
 class ApplyUser::FavoritesController < ApplicationController
-  before_action :authenticate_creator!
-    before_action :ensure_current_creator
-    # 閲覧権限
-  def ensure_current_creator
-    if current_creator.id != params[:id].to_i
-      flash[:alert]="閲覧権限がありません"
-      redirect_to root_path
-    end
-  end
 
   def create_recruitments
     recruitment = Recruitment.find(params[:recruitment_id])
@@ -42,13 +33,13 @@ class ApplyUser::FavoritesController < ApplicationController
   end
 
   def favorite_recruitments
-    @creator = Creator.find(params[:id])
+    @creator = Creator.find(current_creator.id)
     favorites = Favorite.where(creator_id: @creator.id, subject: 'recruitment').pluck(:recruitment_id)
     @favorite_recruitments = Recruitment.where(id: favorites).page(params[:page]).per(7)
   end
 
   def favorite_musicians
-    @creator = Creator.find(params[:id])
+    @creator = Creator.find(current_creator.id)
     favorites = Favorite.where(creator_id: @creator.id, subject: 'musician').pluck(:musician_id)
     @favorite_musicians = Musician.where(id: favorites).page(params[:page]).per(7)
   end

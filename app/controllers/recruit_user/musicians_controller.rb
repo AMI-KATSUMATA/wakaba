@@ -23,7 +23,7 @@ class RecruitUser::MusiciansController < ApplicationController
     @musician = Musician.find(params[:id])
     if @musician.update(musician_params)
       flash[:notice] = "登録情報を更新しました"
-    redirect_to recruit_user_musician_path(@musician.id)
+      redirect_to recruit_user_musician_path(@musician.id)
     else
       flash[:alert] = "登録情報の更新に失敗しました"
       render :edit

@@ -8,5 +8,9 @@ class Notification < ApplicationRecord
 
   belongs_to :visitor_musician, class_name: 'Musician', optional: true
   belongs_to :visited_musician, class_name: 'Musician', optional: true
+  
+  validates :checked, inclusion: { in: [true, false] }
+  validates :action, presence: true
+  validates :is_musician, inclusion: { in: [true, false] }
 
 end

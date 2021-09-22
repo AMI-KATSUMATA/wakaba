@@ -16,6 +16,14 @@ class Musician < ApplicationRecord
   has_many :visitor_musicians,through: :active_notifications, source: :visitor_musician
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_musician_id', dependent: :destroy
   has_many :visited_musicians, through: :passive_notifications, source: :visited_musician
+  
+  validates :last_name, :first_name, :last_name_kana, :first_name_kana, :nickname, :email, :phone_number, presence: true
+  validates :last_name, :first_name, :last_name_kana, :first_name_kana, length:{ maximum: 15 }
+  validates :nickname, length:{ maximum: 20 }
+  validates :phone_number, numericality: {only_integer: true},
+                           length: { minimum: 10, maximum: 11 }
+  validates :introduction, length: { maximum: 1000 }
+  validates :is_deleted, inclusion: { in: [true, false] }
 
   # 退会ずみのユーザーを弾く
   def active_for_authentication?

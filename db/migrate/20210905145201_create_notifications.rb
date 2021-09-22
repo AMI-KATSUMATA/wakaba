@@ -9,10 +9,15 @@ class CreateNotifications < ActiveRecord::Migration[5.2]
       t.integer :issue_id
       t.integer :entry_id
       t.boolean :checked, null: false, default: "false"
-      t.string :action
+      t.string :action, null: false
       t.boolean :is_musician, null: false, default: "false"
 
       t.timestamps
     end
+    add_foreign_key :notifications, :creators
+    add_foreign_key :notifications, :musicians
+    add_foreign_key :notifications, :messages
+    add_foreign_key :notifications, :issues
+    add_foreign_key :notifications, :entries
   end
 end
