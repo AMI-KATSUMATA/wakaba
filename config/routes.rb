@@ -47,11 +47,11 @@ Rails.application.routes.draw do
     end
 
     # entry
-    get '/entries/:id' => 'entries#entries', as:'entries'
+    get '/entries' => 'entries#entries', as:'entries'
 
     # favorite
-    get '/favorite_recruitments/:id' => 'favorites#favorite_recruitments', as:'favorite_recruitments'
-    get '/favorite_musicians/:id' => 'favorites#favorite_musicians', as:'favorite_musicians'
+    get '/favorite_recruitments' => 'favorites#favorite_recruitments', as:'favorite_recruitments'
+    get '/favorite_musicians' => 'favorites#favorite_musicians', as:'favorite_musicians'
 
     # issue
     resources :issues, only:[:show] do
@@ -59,8 +59,8 @@ Rails.application.routes.draw do
         get :room
       end
     end
-    get '/working_issues/:id' => 'issues#working_issues', as:'working_issues'
-    get '/completed_issues/:id' => 'issues#completed_issues', as:'completed_issues'
+    get '/working_issues' => 'issues#working_issues', as:'working_issues'
+    get '/completed_issues' => 'issues#completed_issues', as:'completed_issues'
 
     # message
     resource :message, only:[:create]
@@ -103,8 +103,8 @@ Rails.application.routes.draw do
         get :room
       end
     end
-    get '/working_issues/:id' => 'issues#working_issues', as:'working_issues'
-    get '/completed_issues/:id' => 'issues#completed_issues', as:'completed_issues'
+    get '/working_issues' => 'issues#working_issues', as:'working_issues'
+    get '/completed_issues' => 'issues#completed_issues', as:'completed_issues'
 
     # message
     resource :message, only:[:create]

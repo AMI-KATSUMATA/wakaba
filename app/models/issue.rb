@@ -5,6 +5,10 @@ class Issue < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_one :notification, dependent: :destroy
   
+  validates :musician_id, presence: true
+  validates :recruitment_id, presence: true
+  validates :creator_id, presence: true
+  
   # status
   enum status: { 未着手: 0, 作成中: 1, 作成完了: 2}
   

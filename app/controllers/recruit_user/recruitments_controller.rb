@@ -1,4 +1,14 @@
 class RecruitUser::RecruitmentsController < ApplicationController
+  before_action :authenticate_musician!
+  before_action :ensure_current_musician, {except: [:new, :create]}
+  # 閲覧権限
+  def ensure_current_musician
+    recruitment = Recruitment.find(params[:id])
+    if current_musician.id != recruitment.musician_id
+      flash[:alert]="閲覧権限がありません"
+      redirect_to recruit_user_path
+    end
+  end
 
   def new
     @recruitment = Recruitment.new
@@ -14,10 +24,6 @@ class RecruitUser::RecruitmentsController < ApplicationController
       flash[:alert] = "依頼の投稿に失敗しました"
       render :new
     end
-  end
-
-  def index
-    @recruitments = Recruitment.where(is_closed: "false", is_private: "false")
   end
 
   def show
@@ -37,7 +43,7 @@ class RecruitUser::RecruitmentsController < ApplicationController
       render :edit
     end
   end
-  
+
   def private
     @recruitment = Recruitment.find(params[:id])
     @recruitment.update(is_private: true)

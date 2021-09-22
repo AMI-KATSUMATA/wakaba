@@ -30,9 +30,9 @@
               </p>
             <% end %>
           </div>
-          <div class="row pt-2 d-flex justify-content-center">
-            <%= @musician.introduction %>
-          </div>
+        </div>
+        <div class="row pt-2 d-flex justify-content-center">
+          <%= @musician.introduction %>
         </div>
       </div>
     </div>
@@ -55,7 +55,7 @@
                       </td>
 
                       <td class="text-center" style="width: 30%">
-                        <% if recruitment.is_closed == false %>
+                        <% if recruitment.is_closed ==  %>
                           <p class="text-white bg-secondary"><%= recruitment.is_closed = "募集終了" %></p>
                         <% else %>
                           <p><%= recruitment.is_closed = "募集中" %></p>

@@ -4,6 +4,7 @@ class ApplyUser::FavoritesController < ApplicationController
     recruitment = Recruitment.find(params[:recruitment_id])
     favorite = current_creator.favorites.new(recruitment_id: recruitment.id, subject: 'recruitment')
     favorite.save
+    flash[:success] = "依頼をお気に入りしました"
     redirect_to recruitment_path(recruitment)
   end
 
@@ -11,6 +12,7 @@ class ApplyUser::FavoritesController < ApplicationController
     recruitment = Recruitment.find(params[:recruitment_id])
     favorite = current_creator.favorites.find_by(recruitment_id: recruitment.id, subject: 'recruitment')
     favorite.destroy
+    flash[:success] = "依頼のお気に入りを取り消しました"
     redirect_to recruitment_path(recruitment)
   end
 
@@ -18,24 +20,26 @@ class ApplyUser::FavoritesController < ApplicationController
     musician = Musician.find(params[:musician_id])
     favorite = current_creator.favorites.new(musician_id: musician.id, subject: 'musician')
     favorite.save
+    flash[:success] = "つのりてをお気に入りしました"
     redirect_to musician_path(musician)
   end
 
   def destroy_musicians
     musician = Musician.find(params[:musician_id])
     favorite = current_creator.favorites.find_by(musician_id: musician.id, subject: 'musician')
+    flash[:success] = "つのりてのお気に入りを取り消しました"
     favorite.destroy
     redirect_to musician_path(musician)
   end
 
   def favorite_recruitments
-    @creator = Creator.find(params[:id])
+    @creator = Creator.find(current_creator.id)
     favorites = Favorite.where(creator_id: @creator.id, subject: 'recruitment').pluck(:recruitment_id)
     @favorite_recruitments = Recruitment.where(id: favorites).page(params[:page]).per(7)
   end
 
   def favorite_musicians
-    @creator = Creator.find(params[:id])
+    @creator = Creator.find(current_creator.id)
     favorites = Favorite.where(creator_id: @creator.id, subject: 'musician').pluck(:musician_id)
     @favorite_musicians = Musician.where(id: favorites).page(params[:page]).per(7)
   end

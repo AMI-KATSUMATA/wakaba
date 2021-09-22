@@ -1,4 +1,5 @@
 class RecruitUser::HomesController < ApplicationController
+  before_action :authenticate_musician!
   def top
     @artworks = Artwork.where(is_private: "false")
                        .order(id: "DESC").limit(5)

@@ -3,6 +3,9 @@ class Entry < ApplicationRecord
   belongs_to :creator
   belongs_to :recruitment
   has_one :notification, dependent: :destroy
+  
+  validates :recruitment_id, presence: true
+  validates :creator_id, presence: true
 
   # エントリー
   def entried_by?(creator)

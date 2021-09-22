@@ -45,16 +45,16 @@
         
         <div>
           <p class="row pt-5 d-flex justify-content-center">
-            <%= link_to "依頼管理", working_issues_path(@creator), class:"text-secondary btn btn-outline-secondary" %>
+            <%= link_to "依頼管理", working_issues_path, class:"text-secondary btn btn-outline-secondary" %>
           </p>
           <p class="row d-flex justify-content-center">
-            <%= link_to "エントリー中の依頼", entries_path(@creator), class:"text-secondary btn btn-outline-secondary" %>
+            <%= link_to "エントリー中の依頼", entries_path, class:"text-secondary btn btn-outline-secondary" %>
           </p>
           <p class="row d-flex justify-content-center">
-            <%= link_to "お気に入りした依頼", favorite_recruitments_path(@creator), class:"text-secondary  btn btn-outline-secondary" %>
+            <%= link_to "お気に入りした依頼", favorite_recruitments_path, class:"text-secondary  btn btn-outline-secondary" %>
           </p>
           <p class="row d-flex justify-content-center">
-            <%= link_to "お気に入りしたつのりて", favorite_musicians_path(@creator), class:"text-secondary  btn btn-outline-secondary" %>
+            <%= link_to "お気に入りしたつのりて", favorite_musicians_path, class:"text-secondary  btn btn-outline-secondary" %>
           </p>
         </div>
       </div>
@@ -67,7 +67,7 @@
           <% end %>
         </div>
         <% if @artworks.blank? %>
-        <div class="row">
+        <div class="row d-flex justify-content-center">
           <h5 class="text-center">ポートフォリオの投稿はありません</h5>
         </div>
         <% else %>

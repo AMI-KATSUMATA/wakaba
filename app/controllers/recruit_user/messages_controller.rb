@@ -1,4 +1,5 @@
 class RecruitUser::MessagesController < ApplicationController
+  before_action :authenticate_musician!
 
   def create
     message = Message.new(message_params)

@@ -1,4 +1,5 @@
 class ApplyUser::NotificationsController < ApplicationController
+  before_action :authenticate_creator!
   def index
     #@notifications = current_musician.entry_notifications
     @notifications = current_creator.passive_notifications

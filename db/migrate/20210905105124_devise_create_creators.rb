@@ -6,15 +6,15 @@ class DeviseCreateCreators < ActiveRecord::Migration[5.2]
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
-      t.string :last_name
-      t.string :first_name
-      t.string :last_name_kana
-      t.string :first_name_kana
-      t.string :nickname
-      t.string :phone_number
-      t.text :schedule
-      t.text :price
-      t.text :introduction
+      t.string :last_name, null: false, limit: 15
+      t.string :first_name, null: false, limit: 15
+      t.string :last_name_kana, null: false, limit: 15
+      t.string :first_name_kana, null: false, limit: 15
+      t.string :nickname, null: false, limit: 20
+      t.string :phone_number, null: false
+      t.text :schedule, limit: 200
+      t.text :price, limit: 200
+      t.text :introduction, limit: 1000
       t.boolean :is_deleted, null:false, default: "false"
       ## Recoverable
       t.string   :reset_password_token
@@ -47,6 +47,7 @@ class DeviseCreateCreators < ActiveRecord::Migration[5.2]
 
     add_index :creators, :email,                unique: true
     add_index :creators, :reset_password_token, unique: true
+    add_index :creators, :nickname,             unique: true
     # add_index :creators, :confirmation_token,   unique: true
     # add_index :creators, :unlock_token,         unique: true
   end
