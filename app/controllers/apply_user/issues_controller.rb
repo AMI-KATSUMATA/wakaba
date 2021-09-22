@@ -1,7 +1,6 @@
 class ApplyUser::IssuesController < ApplicationController
   before_action :authenticate_creator!
 
-
   def show
    @issue = Issue.find(params[:id])
   end

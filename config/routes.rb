@@ -67,6 +67,9 @@ Rails.application.routes.draw do
 
     # notification
     resources :notifications, only:[:index]
+    
+    # search
+    get '/search' => 'searches#search'
 
 
   end
@@ -111,6 +114,9 @@ Rails.application.routes.draw do
 
     # notification
     resources :notifications, only:[:index]
+    
+    # search
+    get '/search' => 'searches#search'
 
   end
 

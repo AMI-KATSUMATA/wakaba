@@ -5,7 +5,7 @@ class Message < ApplicationRecord
   has_one :notification, dependent: :destroy
   
   validates :issue_id, presence: true
-  validates :cotent, length: { maximum: 5000 }
+  validates :content, length: { maximum: 5000 }
 
    #通知
   def create_notification_creator_message!(current_creator)
