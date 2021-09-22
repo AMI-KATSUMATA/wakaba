@@ -16,7 +16,7 @@ class Musician < ApplicationRecord
   has_many :visitor_musicians,through: :active_notifications, source: :visitor_musician
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_musician_id', dependent: :destroy
   has_many :visited_musicians, through: :passive_notifications, source: :visited_musician
-  
+
   validates :last_name, :first_name, :last_name_kana, :first_name_kana, :nickname, :email, :phone_number, presence: true
   validates :last_name, :first_name, :last_name_kana, :first_name_kana, length:{ maximum: 15 }
   validates :nickname, length:{ maximum: 20 }
@@ -32,5 +32,14 @@ class Musician < ApplicationRecord
   # favoriteテーブルにcreator_idが存在するか
   def favorited_by?(creator)
     favorites.where(creator_id: creator.id).exists?
+  end
+
+    # 検索
+  def self.looks(word)
+    if word
+    @musician = Musician.where("nickname LIKE?","%#{word}%")
+    else
+      Musician.all
+    end
   end
 end

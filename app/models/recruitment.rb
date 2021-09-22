@@ -7,7 +7,7 @@ class Recruitment < ApplicationRecord
   has_many :favorited_creators, through: :favorites, source: :creator
   has_many :recruitment_postscripts, dependent: :destroy
   has_many :notifications, dependent: :destroy
-  
+
   validates :musician_id, presence: true
   validates :title, presence: true, length: { maximum: 200 }
   validates :detail, presence: true, length: { maximum: 2000 }
@@ -22,6 +22,15 @@ class Recruitment < ApplicationRecord
   # favoriteテーブルにcreator_idが存在するか
   def favorited_by?(creator)
     favorites.where(creator_id: creator.id).exists?
+  end
+
+    # 検索
+  def self.looks(word)
+    if word
+      @recruitment = Recruitment.where("title LIKE?","%#{word}%")
+    else
+      Recruitment.all
+    end
   end
 
 

@@ -31,4 +31,13 @@ class Creator < ApplicationRecord
   def active_for_authentication?
     super && (self.is_deleted == false)
   end
+  
+  # 検索
+  def self.looks(word)
+    if word
+      @creator = Creator.where("nickname LIKE?","%#{word}%")
+    else
+      Creator.all
+    end
+  end
 end

@@ -1,0 +1,42 @@
+<div class="container-fluid mx-0 p-0">
+  <div class=" row d-flex justify-content-center">
+    <div class="col-auto">
+      <h4 class="text-center mt-5 mb-3"><strong>検索結果</strong></h4>
+    </div>
+  </div>
+<div class=" row d-flex justify-content-center mt-5">
+        <% if @creators.blank? %>
+        <div class="col-8">
+          <h5 class="text-center">該当するつくりては見つかりませんでした</h5>
+        </div>
+        
+      <% else %>
+    <div class="col-6">
+      <% @creators.each do |creator| %>
+        <div class="row d-flex justify-content-center my-1">
+          <div class="col-auto">
+            <%= link_to recruit_user_creator_path(creator) do %>
+              <% if creator.profile_image.attached? %>
+                <%= image_tag creator.profile_image, class:"rounded-circle", size: "40x40" %>
+              <% else %>
+                <%= image_tag 'no_image.jpg', class:"rounded-circle", size: "40x40" %>
+              <% end %>
+            <% end %>
+          </div>
+
+          <div class="col-auto my-auto">
+            <%= link_to recruit_user_creator_path(creator), class:"text-secondary text-center align-middle" do %>
+              <%= creator.nickname %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+      <div class="row d-flex justify-content-center p-4">
+        <%= paginate @creators %>
+      </div>
+    </div>
+      <% end %>
+  </div>
+</div>
+
+
