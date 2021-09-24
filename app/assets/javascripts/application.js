@@ -21,7 +21,7 @@
 //= require_tree .
 /*global $*/
 
-
+// スライダー
 $(document).ready(function(){
   $('.slider').slick({
   autoplay: true,
@@ -64,3 +64,11 @@ $(document).ready(function(){
   });
 });
 
+// ハンバーガーアイコン
+$(function() {
+  $('.menu-trigger').on('click', function(event) {
+    $(this).toggleClass('active');
+    $('#sp-menu').fadeToggle();
+    event.preventDefault();
+  });
+});
