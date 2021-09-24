@@ -5,36 +5,30 @@
     </div>
   </div>
   <div class="row d-flex justify-content-center mt-5">
-    <% if @entry_recruitments.blank? %>
+    <% if @recruitments.blank? %>
       <h5>エントリー中の依頼はありません</h5>
     <% else %>
       <div class="col-9">
         <table class="table table-borderless text-secondary p-0">
-          <% @entry_recruitments.each do |entry_recruitment| %>
+          <% @recruitments.each do |recruitment| %>
             <tbody>
               <tr>
                 <td class="text-center" style="width: 40%">
-                  <%= link_to recruitment_path(entry_recruitment), class:"text-secondary" do %>
-                    <%= entry_recruitment.title %>
+                  <%= link_to recruitment_path(recruitment), class:"text-secondary" do %>
+                    <%= recruitment.title %>
                   <% end %>
                 </td>
 
                 <td class="text-center" style="width: 30%">
-                  <%= link_to musician_path(entry_recruitment.musician_id), class:"text-secondary" do %>
-                    <%= entry_recruitment.musician.nickname %>
+                  <%= link_to musician_path(recruitment.musician_id), class:"text-secondary" do %>
+                    <%= recruitment.musician.nickname %>
                   <% end %>
                 </td>
 
                 <td class="text-center" style="width: 30%">
-                  <% if entry_recruitment.entried_by?(current_creator) %>
-                    <p>
-                      <%= link_to "エントリーを取り消す", recruitment_entries_path(entry_recruitment), method: :delete, class: "btn btn-outline-secondary" %>
-                    </p>
-                  <% else %>
-                    <p>
-                      <%= link_to "エントリーする", recruitment_entries_path(entry_recruitment), method: :post, class: "btn btn-outline-secondary" %>
-                    </p>
-                  <% end %>
+                  <div id="entries_buttoms_<%= recruitment.id %>">
+                    <%= render partial: 'apply_user/entries/entry', locals: { recruitment: recruitment } %>
+                  </div>
                 </td>
               </tr>
               </tbody>
@@ -44,6 +38,6 @@
       <% end %>
     </div>
     <div class="row d-flex justify-content-center p-4">
-      <%= paginate @entry_recruitments %>
+      <%= paginate @recruitments %>
     </div>
   </div>

@@ -26,7 +26,7 @@ class ApplyUser::CreatorsController < ApplicationController
       flash[:notice] = "登録情報を更新しました"
     redirect_to creator_path(@creator.id)
     else
-      flash[:alert] = "登録情報の更新に失敗しました"
+      flash.now[:alert] = "登録情報の更新に失敗しました"
       render :edit
     end
   end

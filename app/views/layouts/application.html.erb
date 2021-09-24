@@ -173,9 +173,17 @@
         <div class="text-danger">
           <%= flash[:alert] %>
         </div>
+      <% elsif flash.now[:alert] %>
+        <div class="text-danger">
+          <%= flash.now[:alert] %>
+        </div>
      <% elsif flash[:success] %>
      　  <div class="text-secondary">
      　    <%= flash[:success] %>
+     　 </div>
+       <% elsif flash.now[:success] %>
+     　  <div class="text-secondary">
+     　    <%= flas.now[:success] %>
      　 </div>
    　<% else %>
   　 <% end %>
@@ -185,7 +193,7 @@
     </div>
     <footer class="bg-white shadow text-center text-lg-start">
      <div class="text-center fixed-bottom p-3 bg-light">
-       ワカバ
+       sprout
      </div>
   </body>
 </html>

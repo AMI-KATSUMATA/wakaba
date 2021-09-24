@@ -3,6 +3,7 @@ class Message < ApplicationRecord
   belongs_to :musician, optional: true
   belongs_to :issue
   has_one :notification, dependent: :destroy
+
   
   validates :issue_id, presence: true
   validates :content, length: { maximum: 5000 }

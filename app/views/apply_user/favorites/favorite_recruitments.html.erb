@@ -5,55 +5,45 @@
     </div>
   </div>
   <div class="row d-flex justify-content-center m-5">
-    <% if @favorite_recruitments.blank? %>
+    <% if @recruitments.blank? %>
       <h5 class="text-center">お気に入り依頼はありません</h5>
     <% else %>
       <div class="col-9">
         <table class="table table-borderless text-secondary p-0">
-          <% @favorite_recruitments.each do |favorite_recruitment| %>
+          <% @recruitments.each do |recruitment| %>
             <tdoby>
               <tr>
                 <td class="text-center" style="width: 35%">
-                  <%= link_to recruitment_path(favorite_recruitment), class:"text-secondary" do %>
-                    <%= favorite_recruitment.title %>
+                  <%= link_to recruitment_path(recruitment), class:"text-secondary" do %>
+                    <%= recruitment.title %>
                   <% end %>
                 </td>
 
                 <td class="text-center" style="width: 35%">
-                  <%= link_to musician_path(favorite_recruitment.musician_id), class:"text-secondary" do %>
-                    <%= favorite_recruitment.musician.nickname %>
+                  <%= link_to musician_path(recruitment.musician_id), class:"text-secondary" do %>
+                    <%= recruitment.musician.nickname %>
                   <% end %>
                 </td>
 
                 <td class="text-center" style="width: 15%">
-                  <% if favorite_recruitment.is_closed == true %>
-                    <%= favorite_recruitment.is_closed = "募集終了" %>
+                  <% if recruitment.is_closed == true %>
+                    <%= recruitment.is_closed = "募集終了" %>
                   <% else %>
-                    <%= favorite_recruitment.is_closed = "募集中" %>
+                    <%= recruitment.is_closed = "募集中" %>
                   <% end %>
                 </td>
                 
                 <td class="text-center" style="width: 15%">
-                  <% if favorite_recruitment.favorited_by?(current_creator) %>
-                    <p>
-                      <%= link_to recruitment_favorites_path(favorite_recruitment), class:"text-danger", method: :delete do %>
-                        ♥
-                      <% end %>
-                    </p>
-                  <% else %>
-                    <p>
-                      <%= link_to recruitment_favorites_path(favorite_recruitment), class:"text-secondary", method: :post do %>
-                        ♡
-                      <% end %>
-                    </p>
-                  <% end %>
+                  <div id="favorite_recruitments_buttoms_<%= recruitment.id %>">
+                    <%= render partial: 'apply_user/favorites/favorite_recruitment', locals: { recruitment: recruitment } %>
+                  </div>
                 </td>
               </tr>
             </tdoby>
           <% end %>
         </table>
         <div class="row d-flex justify-content-center p-4">
-          <%= paginate @favorite_recruitments %>
+          <%= paginate @recruitments %>
         </div>
       </div>
     <% end %>

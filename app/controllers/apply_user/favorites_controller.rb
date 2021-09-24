@@ -1,47 +1,43 @@
 class ApplyUser::FavoritesController < ApplicationController
 
   def create_recruitments
-    recruitment = Recruitment.find(params[:recruitment_id])
-    favorite = current_creator.favorites.new(recruitment_id: recruitment.id, subject: 'recruitment')
+    @recruitment = Recruitment.find(params[:recruitment_id])
+    favorite = current_creator.favorites.new(recruitment_id: @recruitment.id, subject: 'recruitment')
     favorite.save
-    flash[:success] = "依頼をお気に入りしました"
-    redirect_to recruitment_path(recruitment)
+    flash.now[:success] = "依頼をお気に入りしました"
   end
 
   def destroy_recruitments
-    recruitment = Recruitment.find(params[:recruitment_id])
-    favorite = current_creator.favorites.find_by(recruitment_id: recruitment.id, subject: 'recruitment')
+    @recruitment = Recruitment.find(params[:recruitment_id])
+    favorite = current_creator.favorites.find_by(recruitment_id: @recruitment.id, subject: 'recruitment')
     favorite.destroy
-    flash[:success] = "依頼のお気に入りを取り消しました"
-    redirect_to recruitment_path(recruitment)
+    flash.now[:success] = "依頼のお気に入りを取り消しました"
   end
 
   def create_musicians
-    musician = Musician.find(params[:musician_id])
-    favorite = current_creator.favorites.new(musician_id: musician.id, subject: 'musician')
+    @musician = Musician.find(params[:musician_id])
+    favorite = current_creator.favorites.new(musician_id: @musician.id, subject: 'musician')
     favorite.save
-    flash[:success] = "つのりてをお気に入りしました"
-    redirect_to musician_path(musician)
+    flash.now[:success] = "つのりてをお気に入りしました"
   end
 
   def destroy_musicians
-    musician = Musician.find(params[:musician_id])
-    favorite = current_creator.favorites.find_by(musician_id: musician.id, subject: 'musician')
-    flash[:success] = "つのりてのお気に入りを取り消しました"
+    @musician = Musician.find(params[:musician_id])
+    favorite = current_creator.favorites.find_by(musician_id: @musician.id, subject: 'musician')
     favorite.destroy
-    redirect_to musician_path(musician)
+    flash.now[:success] = "つのりてのお気に入りを取り消しました"
   end
 
   def favorite_recruitments
     @creator = Creator.find(current_creator.id)
     favorites = Favorite.where(creator_id: @creator.id, subject: 'recruitment').pluck(:recruitment_id)
-    @favorite_recruitments = Recruitment.where(id: favorites).page(params[:page]).per(7)
+    @recruitments = Recruitment.where(id: favorites).page(params[:page]).per(7)
   end
 
   def favorite_musicians
     @creator = Creator.find(current_creator.id)
     favorites = Favorite.where(creator_id: @creator.id, subject: 'musician').pluck(:musician_id)
-    @favorite_musicians = Musician.where(id: favorites).page(params[:page]).per(7)
+    @musicians = Musician.where(id: favorites).page(params[:page]).per(7)
   end
 
 

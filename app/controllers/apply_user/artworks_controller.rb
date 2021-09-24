@@ -22,7 +22,7 @@ class ApplyUser::ArtworksController < ApplicationController
       flash[:success] = "ポートフォリオの投稿に成功しました"
       redirect_to artwork_path(@artwork)
     else
-      flash[:alert] = "依頼の投稿に失敗しました"
+      flash.now[:alert] = "依頼の投稿に失敗しました"
       render :new
     end
   end

@@ -5,18 +5,18 @@
     </div>
   </div>
   <div class="row d-flex justify-content-center m-5">
-    <% if @favorite_musicians.blank? %>
+    <% if @musicians.blank? %>
       <h5 class="text-center">お気に入りつのりてはありません</h5>
     <% else %>
       <div class="col-6">
         <table class="table table-borderless text-secondary p-0">
-          <% @favorite_musicians.each do |favorite_musician| %>
+          <% @musicians.each do |musician| %>
             <tdoby>
               <tr>
                 <td class="text-center my-auto" style="width: 35%">
-                  <%= link_to musician_path(favorite_musician) do %>
-                    <% if favorite_musician.profile_image.attached? %>
-                      <%= image_tag favorite_musician.profile_image, class: "rounded-circle", size: "80x80" %>
+                  <%= link_to musician_path(musician) do %>
+                    <% if musician.profile_image.attached? %>
+                      <%= image_tag musician.profile_image, class: "rounded-circle", size: "80x80" %>
                     <% else %>
                       <%= image_tag 'no_image.jpg', class: "rounded-circle", size: "80x80" %>
                     <% end %>
@@ -24,32 +24,22 @@
                 </td>
 
                 <td class="text-center align-middle" style="width: 40%">
-                  <%= link_to musician_path(favorite_musician), class:"text-secondary" do %>
-                    <%= favorite_musician.nickname %>
+                  <%= link_to musician_path(musician), class:"text-secondary" do %>
+                    <%= musician.nickname %>
                   <% end %>
                 </td>
 
                 <td class="text-center align-middle" style="width: 25%">
-                  <% if favorite_musician.favorited_by?(current_creator) %>
-                    <p>
-                      <%= link_to musician_favorites_path(favorite_musician), class:"text-danger", method: :delete do %>
-                        <i class="fas fa-heart"></i>
-                      <% end %>
-                    </p>
-                  <% else %>
-                    <p>
-                      <%= link_to musician_favorites_path(favorite_musician), class:"text-secondary", method: :post do %>
-                        <i class="far fa-heart"></i>
-                      <% end %>
-                    </p>
-                  <% end %>
+                  <div id="favorite_musicians_buttoms_<%= musician.id %>">
+                    <%= render partial: 'apply_user/favorites/favorite_musician', locals: { musician: musician } %>
+                  </div>
                 </td>
               </tr>
             </tbody>
           <% end %>
         </table>
         <div class="row d-flex justify-content-center p-4">
-          <%= paginate @favorite_musicians %>
+          <%= paginate @musicians %>
         </div>
       </div>
     <% end %>

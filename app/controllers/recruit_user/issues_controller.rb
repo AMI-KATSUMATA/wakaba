@@ -31,7 +31,7 @@ class RecruitUser::IssuesController < ApplicationController
       flash[:success] = "進捗状況を更新しました"
       redirect_to recruit_user_issue_path(@issue)
     else
-      flash[:alert] = "進捗状況の更新に失敗しました"
+      flash.now[:alert] = "進捗状況の更新に失敗しました"
       render :show
     end
   end

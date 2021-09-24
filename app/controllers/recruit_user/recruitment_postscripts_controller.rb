@@ -2,12 +2,12 @@ class RecruitUser::RecruitmentPostscriptsController < ApplicationController
   before_action :authenticate_musician!
 
   def create
-    recruitment = Recruitment.find(params[:recruitment_id])
-    postscript = current_musician.recruitment_postscripts.new(recruitment_postscript_params)
-    postscript.recruitment_id = recruitment.id
-    if postscript.save
-      flash[:success] = "追記を登録しました"
-      redirect_to recruit_user_recruitment_path(recruitment)
+    @recruitment = Recruitment.find(params[:recruitment_id])
+    @postscript = current_musician.recruitment_postscripts.new(recruitment_postscript_params)
+    @postscript.recruitment_id = @recruitment.id
+    if @postscript.save
+      flash.now[:success] = "追記を登録しました"
+      render :index
     else
       flash[:alert] = "追記の登録に失敗しました"
       @recruitment = Recruitment.find(params[:id])
@@ -20,8 +20,9 @@ class RecruitUser::RecruitmentPostscriptsController < ApplicationController
 
   def destroy
     RecruitmentPostscript.find_by(id: params[:id], recruitment_id: params[:recruitment_id]).destroy
+    @recruitment = Recruitment.find(params[:recruitment_id])
     flash[:success] = "追記を削除しました"
-    redirect_to recruit_user_recruitment_path(params[:recruitment_id])
+    render :index
   end
 
   private
