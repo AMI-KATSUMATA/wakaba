@@ -6,14 +6,14 @@ class ApplyUser::EntriesController < ApplicationController
     entry = current_creator.entries.new(recruitment_id: @recruitment.id)
     entry.save
     entry.create_notification_entry!(current_creator)
-    flash[:success] = "依頼にエントリーしました"
+    flash.now[:success] = "依頼にエントリーしました"
   end
 
   def destroy
     @recruitment = Recruitment.find(params[:recruitment_id])
     entry = current_creator.entries.find_by(recruitment_id: @recruitment.id)
     entry.destroy
-    flash[:success] = "依頼のエントリーを取り消しました"
+    flash.now[:success] = "依頼のエントリーを取り消しました"
   end
 
   def entries

@@ -21,7 +21,7 @@ class RecruitUser::RecruitmentsController < ApplicationController
       flash[:success] = "依頼の投稿に成功しました"
       redirect_to recruit_user_recruitment_path(@recruitment)
     else
-      flash[:alert] = "依頼の投稿に失敗しました"
+      flash.now[:alert] = "依頼の投稿に失敗しました"
       render :new
     end
   end
@@ -39,7 +39,7 @@ class RecruitUser::RecruitmentsController < ApplicationController
       flash[:success] = "依頼情報を更新しました"
       redirect_to recruit_user_recruitment_path(@recruitment)
     else
-      flash[:alert] = "依頼の更新に失敗しました"
+      flash.now[:alert] = "依頼の更新に失敗しました"
       render :edit
     end
   end
