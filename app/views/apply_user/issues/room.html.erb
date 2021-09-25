@@ -11,9 +11,16 @@
                 <div class="row d-flex justify-content-end">
                   <div class="col-4 d-flex justify-content-end">
                     <div class="container-fluid mx-0 p-0">
-                      <div class="row d-flex justify-content-center bg-light rounded">
-                        <span class="py-auto"><%= message.content %></span>
-                      </div>
+                      <% if message.content.present? %>
+                        <div class="row d-flex justify-content-end">
+                          <span class="p-2 text-left bg-light rounded"><%= message.content %></span>
+                        </div>
+                      <% end %>
+                      <% if message.image.attached? %>
+                        <div class="row d-flex justify-content-end">
+                          <span class="p-2 text-center bg-light rounded"><%= image_tag message.image, size: "200x200", class: 'message-image rounded' %></span>
+                        </div>
+                      <% end %>
                       <div class="row d-flex justify-content-end mb-2">
                         <small><%= l message.created_at %></small>
                       </div>
@@ -33,7 +40,16 @@
                           <%= image_tag 'no_image.jpg', class: "rounded-circle", size: "40x40" %>
                         <% end %>
                       </span>
-                      <span class="my-auto ml-2 col-8 text-center bg-light rounded"><%= message.content %></span>
+                      <% if message.content.present? %>
+                        <div class="row d-flex justify-content-end ml-2">
+                          <span class="my-auto p-2 text-left bg-light rounded"><%= message.content %></span>
+                        </div>
+                      <% end %>
+                      <% if message.image.attached? %>
+                        <div class="row d-flex justify-content-end ml-2">
+                          <span class="p-2 text-center bg-light rounded"><%= image_tag message.image, size: "200x200", class: 'message-image rounded' %></span>
+                        </div>
+                      <% end %>
                     </div>
                     <div class="row d-flex justify-content-start mb-2">
                       <small><%= l message.created_at %></small>
@@ -47,22 +63,26 @@
       <% end %>
     </div>
   </div>
-  <div class="container p-5"></div>
+  <div class="container p-5 m-5"></div>
 </div>
 
 <div class="container-fluid mx-0 px-0">
-  <div class="row d-flex justify-content-center mt-5 mb-5 p-5 border-top fixed-bottom bg-white">
-    <% if @issue.status == "作成完了" %>
-      <p>
+  <% if @issue.status == "作成完了" %>
+    <div class="row d-flex justify-content-center mt-5 mb-5 p-5 border-top fixed-bottom bg-white">
+      <p class="text-center">
         作成終了後はメッセージの送信はできません
       </p>
-    <% else %>
+    </div>
+  <% else %>
+    <div class="row d-flex justify-content-center mt-5 mb-5 p-5 border-top fixed-bottom bg-white">
       <%= form_with model: @message, url: message_path, remote: true do |f| %>
-        <%= f.text_field :content, class:"address-new-form" %>
+        <%= f.text_field :content, class:"form-control mb-3" %>
+        <%= f.file_field :image %>
         <%= f.hidden_field :issue_id, value: @issue.id %>
         <%= f.submit "送信", class:"btn btn-outline-secondary btn-sm" %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>
+
 

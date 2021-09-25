@@ -3,10 +3,16 @@ class Message < ApplicationRecord
   belongs_to :musician, optional: true
   belongs_to :issue
   has_one :notification, dependent: :destroy
+  has_one_attached :image
 
-  
+
   validates :issue_id, presence: true
-  validates :content, length: { maximum: 5000 }
+  validates :content, length: { maximum: 5000 }, presence: true, unless: :was_attached?
+
+  def was_attached?
+    self.image.attached?
+  end
+
 
    #通知
   def create_notification_creator_message!(current_creator)
