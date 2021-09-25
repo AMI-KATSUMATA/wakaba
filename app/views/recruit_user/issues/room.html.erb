@@ -1,51 +1,10 @@
 <div class="container-fluid mx-0 p-0">
   <div class="row d-flex justify-content-center m-5 p-5">
-    <div class="col-8 d-flex justify-content-center">
-      <% if @messages.blank? %>
-        <h5 class="text-center">メッセージはありません</h5>
-      <% else %>
-        <div class="container-fluid mx-0 p-0 content">
-          <% @messages.each do |message| %>
-            <% if message.creator %>
-              <div class="row d-flex justify-content-start">
-                <div class="col-6 d-flex justify-content-start">
-                  <div class="container-fluid mx-0 p-0">
-                    <div class="row d-flex justify-content-start">
-                      <span>
-                        <% if message.creator.profile_image.attached? %>
-                          <%= image_tag message.creator.profile_image, class: "rounded-circle", size: "40x40" %>
-                        <% else %>
-                          <%= image_tag 'no_image.jpg', class: "rounded-circle", size: "40x40" %>
-                        <% end %>
-                      </span>
-                      <span class="my-auto ml-2 col-8 text-center bg-light rounded"><%= message.content %></span>
-                    </div>
-                    <div class="row d-flex justify-content-start mb-2">
-                      <small><%= l message.created_at %></small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            <% else %>
-              <div class="row d-flex justify-content-end">
-                <div class="col-4 d-flex justify-content-end">
-                  <div class="container-fluid mx-0 p-0">
-                    <div class="row d-flex justify-content-center bg-light rounded">
-                      <span class="py-auto"><%= message.content %></span>
-                    </div>
-                    <div class="row d-flex justify-content-end mb-2">
-                      <small><%= l message.created_at %></small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            <% end %>
-          <% end %>
-        </div>
-      <% end %>
+    <div class="col-8 d-flex justify-content-center" id="messages">
+      <%= render "recruit_user/issues/messages", messages: @messages %>
     </div>
   </div>
-  <div class="container p-5"></div>
+  <div class="container p-5 m-5"></div>
 </div>
 
 <div class="container-fluid mx-0 px-0">
@@ -56,7 +15,8 @@
       </p>
     <% else %>
       <%= form_with model: @message, url: recruit_user_message_path, remote: true do |f| %>
-        <%= f.text_field :content, class:"address-new-form" %>
+        <%= f.text_field :content, class:"form-control mb-3", id: "message-text-form" %>
+        <%= f.file_field :image, id: "message-image-form" %>
         <%= f.hidden_field :issue_id, value: @issue.id %>
         <%= f.submit "送信", class:"btn btn-outline-secondary btn-sm" %>
       <% end %>

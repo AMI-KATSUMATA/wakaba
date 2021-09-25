@@ -4,6 +4,8 @@ class ApplyUser::MessagesController < ApplicationController
     @message = Message.new(message_params)
     if @message.save
       @message.create_notification_creator_message!(current_creator)
+      @issue = @message.issue
+      @messages = @issue.messages
     else
       @issue = Issue.find(params[:id])
       @message = Message.new
@@ -17,7 +19,7 @@ class ApplyUser::MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:content, :issue_id).merge(creator_id: current_creator.id)
+    params.require(:message).permit(:content, :issue_id, :image).merge(creator_id: current_creator.id)
   end
-  
+
 end
