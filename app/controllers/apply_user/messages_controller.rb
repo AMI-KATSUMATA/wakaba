@@ -1,6 +1,5 @@
 class ApplyUser::MessagesController < ApplicationController
   before_action :authenticate_creator!
-
   def create
     @message = Message.new(message_params)
     if @message.save
@@ -20,5 +19,5 @@ class ApplyUser::MessagesController < ApplicationController
   def message_params
     params.require(:message).permit(:content, :issue_id).merge(creator_id: current_creator.id)
   end
-
+  
 end

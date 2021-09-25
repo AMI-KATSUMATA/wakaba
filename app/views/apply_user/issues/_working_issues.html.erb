@@ -1,0 +1,54 @@
+<div class="container-fluid mx-0 p-0">
+  <div class=" row d-flex justify-content-center">
+    <div class="col-auto">
+      <h4 class="text-center mt-5 mb-3"><strong>進行中の依頼</strong></h4>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center m-5">
+    <% if working_issues.blank? %>
+      <h5 class="text-center">進行中の依頼はありません</h5>
+    <% else %>
+      <div class="col-12">
+        <table class="table table-borderless text-secondary p-0">
+          <% working_issues.each do |working_issue| %>
+            <tbody>
+              <tr>
+                <td class="text-center" style="width: 30%">
+                  <%= link_to issue_path(working_issue), class:"text-secondary" do %>
+                    <%= working_issue.recruitment.title %>
+                   <% end %>
+                </td>
+
+                <td class="text-center" style="width: 30%">
+                  <%= link_to musician_path(working_issue.musician_id), class:"text-secondary" do %>
+                    <%= working_issue.musician.nickname %>
+                  <% end %>
+                </td>
+
+                <td class="text-center" style="width: 15%">
+                  <%= working_issue.status %>
+                </td>
+
+                <td class="text-center" style="width: 10%">
+                <!--DM-->
+                  <%= link_to room_issue_path(working_issue), class:"text-secondary" do %>
+                    <i class="far fa-envelope fa-lg"></i>
+                  <% end %>
+                </td>
+
+                <td class="text-center" style="width: 15%">
+                  <%= link_to "詳細", issue_path(working_issue), class:"btn btn-outline-secondary" %>
+                </td>
+
+              </tr>
+            </tbody>
+          <% end %>
+        </table>
+      </div>
+      <div class="row d-flex justify-content-center p-5">
+        <%= paginate working_issues %>
+      </div>
+    <% end %>
+  </div>
+  <div class="container p-3"></div>
+</div>

@@ -1,5 +1,5 @@
 class RecruitUser::NotificationsController < ApplicationController
-  before_action :authenticate_musician!
+ before_action :authenticate_musician!
   
   def index
     #@notifications = current_musician.entry_notifications
@@ -11,4 +11,7 @@ class RecruitUser::NotificationsController < ApplicationController
       notification.update_attributes(checked: true)
     end
   end
+  
+
+  
 end

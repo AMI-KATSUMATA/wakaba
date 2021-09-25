@@ -1,13 +1,13 @@
 <% if recruitment.favorited_by?(current_creator) %>
   <p>
-    <%= link_to recruitment_favorites_path(recruitment), method: :delete, remote: true, class:"text-danger d-flex justify-content-end h5" do %>
-      <i class="fas fa-heart"></i>
+    <%= link_to recruitment_favorites_path(recruitment), method: :delete, remote: true, class:"text-warning d-flex justify-content-end h5" do %>
+      <i class="fas fa-star"></i>
     <% end %>
   </p>
 <% else %>
   <p>
     <%= link_to recruitment_favorites_path(recruitment), method: :post, remote: true, class:"text-secondary d-flex justify-content-end h5" do %>
-      <i class="far fa-heart"></i>
+      <i class="far fa-star"></i>
     <% end %>
   </p>
 <% end %>

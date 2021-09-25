@@ -1,0 +1,16 @@
+ <div class="wrap">
+    <ul id="tab-menu">
+      <li><a href="#tab1" class="active">進行中</a></li>
+      <li><a href="#tab2" class="">作成完了</a></li>
+    </ul>
+
+    <div id="tab-contents">
+      <div id="tab1" class="tab">
+        <p><%= render partial: 'recruit_user/issues/working_issues', locals: { working_issues: @working_issues } %></p>
+      </div>
+
+      <div id="tab2" class="tab">
+        <p><%= render partial: 'recruit_user/issues/completed_issues', locals: { completed_issues: @completed_issues } %></p>
+      </div>
+    </div>
+  </div>

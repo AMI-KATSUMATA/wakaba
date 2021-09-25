@@ -5,19 +5,16 @@ class ApplyUser::IssuesController < ApplicationController
    @issue = Issue.find(params[:id])
   end
 
-  def working_issues
+  def index
     @creator = Creator.find(current_creator.id)
     # 作成中のissueを取得する
-    @issues = Issue.where(creator_id: @creator.id)
+    @working_issues = Issue.where(creator_id: @creator.id)
                    .where(status: "未着手")
                    .or(Issue.where(status: "作成中"))
                    .page(params[:page]).reverse_order.per(7)
-  end
-
-  def completed_issues
-    @creator = Creator.find(current_creator.id)
+  
     # 作成完了後のissueを取得する
-    @issues = Issue.where(creator_id: @creator.id)
+    @completedissues = Issue.where(creator_id: @creator.id)
                    .where(status: "作成完了")
                    .page(params[:page]).reverse_order.per(7)
   end
@@ -27,5 +24,5 @@ class ApplyUser::IssuesController < ApplicationController
     @message = Message.new
     @messages = Message.where(issue_id: @issue.id)
   end
-
+  
 end

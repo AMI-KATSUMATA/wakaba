@@ -33,7 +33,7 @@ class Creators::SessionsController < Devise::SessionsController
     if @creator
       if (@creator.valid_password?(params[:creator][:password]) && (@creator.active_for_authentication? == false))
         flash[:alert] = "退会済みです。"
-        redirect_to new_creator_session_path
+        redirect_to sign_in_path
       end
     else
       flash[:alert] = "項目を入力してください。"

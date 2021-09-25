@@ -25,6 +25,17 @@
   box-sizing: border-box;
 }
 
+
+body {
+  font-family: "游ゴシック体", YuGothic, "ヒラギノ角ゴ ProN W3", "HiraKakuProN-W3";
+  font-weight:500
+}
+
+.h4 {
+  font-family: '游ゴシック体', YuGothic, 'ヒラギノ角ゴ Pro W6', 'HiraKakuPro-W6', 'ヒラギノ角ゴ StdN W8', 'Hiragino Kaku Gothic StdN';
+  font-weight: bold;
+}
+
 //ページネーション
 .pagination>li>a {
   color: #6c757d;

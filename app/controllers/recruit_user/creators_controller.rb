@@ -9,4 +9,5 @@ class RecruitUser::CreatorsController < ApplicationController
     @artworks = Artwork.where(creator_id: @creator.id, is_private: "false")
                       .page(params[:page]).reverse_order.per(12)
   end
+  
 end
