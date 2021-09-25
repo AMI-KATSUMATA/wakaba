@@ -3,11 +3,9 @@ class ApplyUser::MessagesController < ApplicationController
   def create
     @message = Message.new(message_params)
     if @message.save
-      respond_to do |format|
-        format.html { redirect_to "issue_path(params[:issue_id])" }
-        format.json
-      end
       @message.create_notification_creator_message!(current_creator)
+      @issue = @message.issue
+      @messages = @issue.messages
     else
       @issue = Issue.find(params[:id])
       @message = Message.new
