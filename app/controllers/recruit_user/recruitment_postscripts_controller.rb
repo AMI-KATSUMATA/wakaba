@@ -1,5 +1,5 @@
 class RecruitUser::RecruitmentPostscriptsController < ApplicationController
-  before_action :authenticate_musician!
+ before_action :authenticate_musician!
 
   def create
     @recruitment = Recruitment.find(params[:recruitment_id])
@@ -30,5 +30,5 @@ class RecruitUser::RecruitmentPostscriptsController < ApplicationController
   def recruitment_postscript_params
     params.require(:recruitment_postscript).permit(:postscript)
   end
-
+  
 end

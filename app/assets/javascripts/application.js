@@ -21,7 +21,7 @@
 //= require_tree .
 /*global $*/
 
-
+// スライダー
 $(document).ready(function(){
   $('.slider').slick({
   autoplay: true,
@@ -64,3 +64,24 @@ $(document).ready(function(){
   });
 });
 
+// ハンバーガーアイコン
+$(function() {
+  $('.menu-trigger').on('click', function(event) {
+    $(this).toggleClass('active');
+    $('#sp-menu').fadeToggle();
+    event.preventDefault();
+  });
+});
+
+// タブメニュー
+$(document).ready(function(){
+  $('#tab-contents .tab[id != "tab1"]').hide();
+
+  $('#tab-menu a').on('click', function(event) {
+    $("#tab-contents .tab").hide();
+    $("#tab-menu .active").removeClass("active");
+    $(this).addClass("active");
+    $($(this).attr("href")).show();
+    event.preventDefault();
+  });
+});

@@ -1,5 +1,5 @@
 class RecruitUser::MusiciansController < ApplicationController
-  before_action :authenticate_musician!
+  before_action :authenticate_musician! 
   before_action :ensure_current_musician
   # 閲覧権限
   def ensure_current_musician

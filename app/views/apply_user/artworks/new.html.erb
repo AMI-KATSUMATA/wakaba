@@ -8,12 +8,12 @@
           </tr>
 
           <tr>
-            <td><%= f.text_area :description, size: "30x10" %></td>
+            <td><%= f.text_area :description, size: "30x10", class:"form-control" %></td>
           </tr>
         </tbody>
       </table>
 
-      <div class="row d-flex justify-content-center ml-5 pl-5">
+      <div class="row d-flex justify-content-center">
         <%= f.submit '投稿', class: "btn btn-outline-secondary col-3" %>
       </div>
     <% end %>

@@ -21,5 +21,6 @@ class ApplyUser::EntriesController < ApplicationController
     entries = Entry.where(creator_id: @creator.id).pluck(:recruitment_id)
     @recruitments = Recruitment.where(id: entries).page(params[:page]).per(7)
   end
+  
 
 end

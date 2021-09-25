@@ -25,6 +25,17 @@
   box-sizing: border-box;
 }
 
+
+body {
+  font-family: "游ゴシック体", YuGothic, "ヒラギノ角ゴ ProN W3", "HiraKakuProN-W3";
+  font-weight:500
+}
+
+.h4 {
+  font-family: '游ゴシック体', YuGothic, 'ヒラギノ角ゴ Pro W6', 'HiraKakuPro-W6', 'ヒラギノ角ゴ StdN W8', 'Hiragino Kaku Gothic StdN';
+  font-weight: bold;
+}
+
 //ページネーション
 .pagination>li>a {
   color: #6c757d;
@@ -39,4 +50,76 @@
   padding-left: 1rem;
   padding-top: 0rem;
   color: #efa04c;
+}
+
+// ハンバーガーアイコン
+#hm-icon {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  z-index: 10;
+}
+.menu-trigger,
+.menu-trigger span {
+  display: inline-block;
+  transition: all .4s;
+  box-sizing: border-box;
+}
+.menu-trigger {
+  position: relative;
+  width: 50px;
+  height: 44px;
+}
+.menu-trigger span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: #000;
+  border-radius: 4px;
+}
+.menu-trigger span:nth-child(1) {
+  top: 0;
+}
+.menu-trigger span:nth-child(2) {
+  top: 20px;
+}
+.menu-trigger span:nth-child(3) {
+  bottom: 0;
+}
+.menu-trigger.active span:nth-child(1) {
+  -webkit-transform: translateY(20px) rotate(-45deg);
+  transform: translateY(20px) rotate(-45deg);
+  background-color: #fff;
+}
+.menu-trigger.active span:nth-child(2) {
+  opacity: 0;
+}
+.menu-trigger.active span:nth-child(3) {
+  -webkit-transform: translateY(-20px) rotate(45deg);
+  transform: translateY(-20px) rotate(45deg);
+  background-color: #fff;
+}
+
+#sp-menu {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: #000;
+  color: #fff;
+  width: 20%;
+  opacity: 0.8;
+  min-height: 40%;
+  display: none;
+  z-index: 9;
+}
+#sp-menu li {
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+#sp-menu a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
 }

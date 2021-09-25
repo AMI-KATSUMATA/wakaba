@@ -7,65 +7,74 @@
 </div>
 
 <div class="container-fluid mt-5 mx-0 p-0">
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <div class=" row d-flex justify-content-center">
+  <%= form_with model:@musician, url: musician_registration_path, local: true do |f| %>
     <%= render "musicians/shared/error_messages", resource: resource %>
+      <table class="table table-borderless form-inline text-secondary p-0">
+        <tbody>
+          <tr>
+            <th class="mb-2 p-0"><%= f.label :"氏名" %></th>
+      <td  class="p-0" colspan="2">
+  　     <%= f.text_field :last_name, autofocus: true, placeholder: "姓", class: "form-control col mb-2" %>
+  　     <%= f.text_field :first_name, autofocus: true, placeholder: "名", class: "form-control col mb-2" %>
+  　 </td>
+    </tr>
 
-    <div class="form-group row d-flex justify-content-center">
-      <%= f.label :氏名, class: "col-5 col-form-label text-right" %>
-      <div class="col-7">
-  　     <%= f.text_field :last_name, autofocus: true, placeholder: "姓" %>
-  　     <%= f.text_field :first_name, autofocus: true, placeholder: "名" %>
-  　   </div>
+   <tr>
+      <th class="p-0 mb-2"><%= f.label :"フリガナ" %></th>
+      <td class="p-0" colspan="2">
+  　     <%= f.text_field :last_name_kana, autofocus: true, autofocus: true, placeholder: "セイ", class: "form-control mb-2" %>
+  　     <%= f.text_field :first_name_kana, autofocus: true, autofocus: true, placeholder: "メイ", class: "form-control mb-2" %>
+      </td>
+    </tr>
+
+    <tr>
+      <th class="p-0 mb-2"><%= f.label :"バンド名" %></th>
+     <td class="p-0">
+  　     <%= f.text_field :nickname, autofocus: true, placeholder: "20字以内で入力してください", :size => "30*30", class: "form-control" %>
+        <p class="text-danger ml-4 mb-2"><small>*アカウント表示名として使用します</small></p>
+      </td>
+    </tr>
+
+    <tr>
+      <th class="p-0 mb-2"><%= f.label :"電話番号" %></th>
+      <td class="p-0">
+    　   <%= f.text_field :phone_number, autofocus: true, class: "form-control mb-2" %></td>
+    </tr>
+
+    <tr>
+      <th class="mb-2">
+      <%= f.label :"メールアドレス" %></th>
+      <td class="pt-0 pb-0 pr-0 pl-3">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control mb-2" %>
+      </td>
+    </tr>
+
+    <tr>
+      <th class="p-0 ml-2 mb-2">
+      <%= f.label :"パスワード" %>
+      </th>
+      <td class="pt-0 pb-0 pr-0 pl-3">
+        <%= f.password_field :password, :size => "40*30", autocomplete: "new-password", placeholder: "6〜16文字で入力してください", class: "form-control mb-2" %>
+      </td>
+    </tr>
+
+    <tr>
+      <th class="p-0 mb-2">
+      <%= f.label :"パスワード確認" %></th>
+      <td class="pt-0 pb-0 pr-0 pl-3">
+        <%= f.password_field :password_confirmation, :size => "40*30", autocomplete: "new-password", placeholder: "もう一度パスワードを入力してください", class: "form-control mb-2" %>
+      </td>
+    </tr>
+        </tbody>
+    </table>
+
+  <div class="row d-flex justify-content-center">
+<%= f.submit "新規登録", class: "btn btn-outline-secondary col-3" %>
     </div>
 
-    <div class="form-group row d-flex justify-content-center">
-      <%= f.label :フリガナ, class: "col-5 col-form-label text-right" %>
-      <div class="col-7">
-  　     <%= f.text_field :last_name_kana, autofocus: true, autofocus: true, placeholder: "セイ" %>
-  　     <%= f.text_field :first_name_kana, autofocus: true, autofocus: true, placeholder: "メイ" %>
-      </div>
-    </div>
-
-    <div class="form-group row d-flex justify-content-center">
-      <%= f.label :バンド名, class: "col-5 col-form-label text-right" %>
-      <div class="col-7">
-  　     <%= f.text_field :nickname, autofocus: true, placeholder: "20字以内で入力してください", :size => "30*30" %>
-        <p class="text-danger ml-4 mb-0">*アカウント表示名として使用します</p>
-      </div>
-    </div>
-
-    <div class="form-group row d-flex justify-content-center">
-      <%= f.label :電話番号, class: "col-5 col-form-label text-right" %>
-      <div class="col-7">
-    　   <%= f.text_field :phone_number, autofocus: true %>
-      </div>
-    </div>
-
-    <div class="form-group row d-flex justify-content-center">
-      <%= f.label :メールアドレス, class: "col-5 col-form-label text-right" %>
-      <div class="col-7 pl-4">
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-      </div>
-    </div>
-
-    <div class="form-group row d-flex justify-content-center">
-      <%= f.label :パスワード, class: "col-5 col-form-label text-right" %>
-      <div class="col-7 pl-4">
-        <%= f.password_field :password, :size => "40*30", autocomplete: "new-password", placeholder: "6〜16文字で入力してください" %>
-      </div>
-    </div>
-
-    <div class="form-group row d-flex justify-content-center">
-      <%= f.label :パスワード確認, class: "col-5 col-form-label text-right" %>
-      <div class="col-7 pl-4">
-        <%= f.password_field :password_confirmation, :size => "40*30", autocomplete: "new-password", placeholder: "もう一度パスワードを入力してください" %>
-      </div>
-    </div>
-
-    <div class="actions row d-flex justify-content-center pt-3">
-      <%= f.submit "新規登録", class: "btn btn-outline-secondary col-2" %>
-    </div>
   <% end %>
+  </div>
 
   <div class="row d-flex justify-content-center pt-4">
     <%= link_to new_musician_session_path, class:"text-secondary" do %>
@@ -73,7 +82,7 @@
     <% end %>
   </div>
 
-  <div class="container p-4"></div>
+
 
 <!--%= render "musicians/shared/links" %>-->
 </div>

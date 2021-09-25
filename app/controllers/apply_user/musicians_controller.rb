@@ -10,4 +10,6 @@ class ApplyUser::MusiciansController < ApplicationController
      @recruitments = Recruitment.where(musician_id: @musician.id, is_private: "false")
                                 .page(params[:page]).reverse_order.per(8)
   end
+  
+
 end

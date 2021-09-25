@@ -1,5 +1,5 @@
 class RecruitUser::RecruitmentsController < ApplicationController
-  before_action :authenticate_musician!
+ before_action :authenticate_musician!
   before_action :ensure_current_musician, {except: [:new, :create]}
   # 閲覧権限
   def ensure_current_musician
@@ -56,4 +56,6 @@ class RecruitUser::RecruitmentsController < ApplicationController
   def recruitment_params
     params.require(:recruitment).permit(:title, :detail, :deadline, :price, :is_closed, :is_private)
   end
+
+  
 end

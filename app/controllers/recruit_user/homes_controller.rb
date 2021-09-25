@@ -6,4 +6,5 @@ class RecruitUser::HomesController < ApplicationController
     @creators = Creator.where(is_deleted: "false")
                        .order(id: "DESC").limit(5)
   end
+  
 end

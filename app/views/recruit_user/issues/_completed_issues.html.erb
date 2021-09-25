@@ -5,46 +5,46 @@
     </div>
   </div>
   <div class="row d-flex justify-content-center m-5">
-    <% if @issues.blank? %>
+    <% if completed_issues.blank? %>
       <h5 class="text-center">作成が完了した依頼はありません</h5>
     <% else %>
-      <div class="col-9">
+      <div class="col-12">
         <table class="table table-borderless text-secondary p-0">
-          <% @issues.each do |issue| %>
+          <% completed_issues.each do |completed_issue| %>
             <tbody>
               <tr>
-                <td class="text-center" style="width: 35%">
-                  <%= link_to recruit_user_issue_path(issue), class:"text-secondary" do %>
-                    <%= issue.recruitment.title %>
+                <td class="text-center" style="width: 30%">
+                  <%= link_to recruit_user_issue_path(completed_issue), class:"text-secondary" do %>
+                    <%= completed_issue.recruitment.title %>
                   <% end %>
                 </td>
 
-                <td class="text-center" style="width: 35%">
-                  <%= link_to recruit_user_creator_path(issue.creator_id), class:"text-secondary" do %>
-                    <%= issue.creator.nickname %>
+                <td class="text-center" style="width: 30%">
+                  <%= link_to recruit_user_creator_path(completed_issue.creator_id), class:"text-secondary" do %>
+                    <%= completed_issue.creator.nickname %>
                   <% end %>
                 </td>
 
-                <td class="text-center" style="width: 10%">
-                  <%= issue.status %>
+                <td class="text-center" style="width: 15%">
+                  <%= completed_issue.status %>
                 </td>
 
                 <td class="text-center" style="width: 10%">
                 <!--DM-->
-                  <%= link_to room_recruit_user_issue_path(issue), class:"text-secondary" do %>
+                  <%= link_to room_recruit_user_issue_path(completed_issue), class:"text-secondary" do %>
                     <i class="far fa-envelope"></i>
                   <% end %>
                 </td>
 
-                <td class="text-center" style="width: 10%">
-                  <%= link_to "詳細", recruit_user_issue_path(issue), class:"btn btn-outline-secondary" %>
+                <td class="text-center" style="width: 15%">
+                  <%= link_to "詳細", recruit_user_issue_path(completed_issue), class:"btn btn-outline-secondary" %>
                 </td>
               </tr>
             </tbody>
           <% end %>
         </table>
         <div class="row d-flex justify-content-center p-5">
-          <%= paginate @issues %>
+          <%= paginate completed_issues %>
         </div>
       </div>
     <% end %>

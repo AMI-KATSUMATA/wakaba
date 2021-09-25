@@ -5,32 +5,35 @@
         <tbody>
           <tr>
             <th><%= f.label :title, "タイトル" %></th>
-            <td class="pl-3"><%= f.text_field :title %></td>
+            <td class="pl-3"><%= f.text_field :title, class:"form-control" %></td>
           </tr>
 
           <tr>
             <th><%= f.label :deadline, "完成目安" %></th>
-            <td class="pl-3"><%= f.date_field :deadline %></td>
+            <td class="pl-3"><%= f.date_field :deadline, class:"form-control" %></td>
           </tr>
 
           <tr>
             <th><%= f.label :price, "依頼単価" %></th>
-            <td>¥<%= f.number_field :price, min: 1 %></td>
+            <td class="form-inline"><strong>¥</strong><%= f.number_field :price, min: 1, class:"form-control form-inline ml-2" %></td>
           </tr>
 
           <tr>
             <th><%= f.label :detail, "詳細" %></th>
-            <td class="pl-3"><%= f.text_area :detail %></td>
+            <td class="pl-3"><%= f.text_area :detail, class:"form-control" %></td>
           </tr>
 
           <tr>
             <th><%= f.label :is_closed, "募集状況" %></th>
-            <td class="pl-3"><%= f.radio_button :is_closed, "false", checked: true %>募集中<%= f.radio_button :is_closed, "true" %>募集終了</td>
+            <td class="pl-3 text-center">
+              <%= f.radio_button :is_closed, "false", checked: true %> 募集中
+              <%= f.radio_button :is_closed, "true", class:"pl-3" %> 募集終了
+            </td>
           </tr>
         </tbody>
 　    </table>
 
-      <div class="row d-flex justify-content-end">
+      <div class="row d-flex justify-content-center">
         <%= f.submit '投稿', class: "btn btn-outline-secondary col-3" %>
       </div>
     <% end %>

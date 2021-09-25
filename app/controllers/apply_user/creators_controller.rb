@@ -49,5 +49,4 @@ class ApplyUser::CreatorsController < ApplicationController
     def creator_params
       params.require(:creator).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :nickname, :email, :phone_number, :schedule, :price, :introduction, :is_deleted, :profile_image)
     end
-
 end

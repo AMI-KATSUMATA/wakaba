@@ -1,5 +1,6 @@
 class ApplyUser::FavoritesController < ApplicationController
-
+  before_action :authenticate_creator!
+  
   def create_recruitments
     @recruitment = Recruitment.find(params[:recruitment_id])
     favorite = current_creator.favorites.new(recruitment_id: @recruitment.id, subject: 'recruitment')
@@ -39,7 +40,6 @@ class ApplyUser::FavoritesController < ApplicationController
     favorites = Favorite.where(creator_id: @creator.id, subject: 'musician').pluck(:musician_id)
     @musicians = Musician.where(id: favorites).page(params[:page]).per(7)
   end
-
 
 
 end

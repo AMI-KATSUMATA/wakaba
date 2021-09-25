@@ -6,3 +6,57 @@
   width: 100%;
   border-bottom: 1px solid #6C757D;
 }
+
+// タブメニュー
+
+.wrap {
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+#tab-menu {
+  display: flex;
+  margin-bottom: 0;
+}
+
+#tab-menu li {
+  list-style-type: none;
+  width: 50%;
+}
+
+#tab-menu li a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: 20px;
+  text-align: center;
+  background: #6c757d;
+  color: #fff;
+  border: 1px solid #6c757d;
+  border-bottom: none;
+  opacity: 0.9;
+}
+
+#tab-menu .active {
+  background: #fff;
+  color: #6c757d;
+}
+
+#tab-contents {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#tab-contents .tab {
+  width: 100%;
+  padding: 30px;
+  background: #fff;
+  border: 1px solid #6c757d;
+  border-top: none;
+}
+
+#tab-contents p {
+  color: #000;
+  line-height: 2.5;
+}

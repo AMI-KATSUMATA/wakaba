@@ -8,37 +8,43 @@
 </div>
 
 <div class="container-fluid mt-5 mx-0 p-0">
-  <%= form_with model: @creator, url: creator_session_path, local: true do |f| %>
-    <div class="form-group row d-flex justify-content-center">
-      <%= f.label :メールアドレス, class: "col-5 col-form-label text-right" %>
-      <div class="col-7 mb-3">
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", :size => "40*30" %>
+  <div class=" row d-flex justify-content-center">
+    <%= form_with model: @creator, url: creator_session_path, local: true do |f| %>
+      <table class="table table-borderless form-inline text-secondary p-0">
+        <tbody>
+          <tr>
+            <th class="mb-2 pr-5 pb-5 p-0"><%= f.label :メールアドレス %></th>
+            <td class="p-0">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control pb-4" %>
+            </td>
+          </tr>
+
+          <tr>
+            <th class="mb-2 pr-5 pb-5 p-0"><%= f.label :パスワード %></th>
+            <td class="p-0">
+              <%= f.password_field :password, autocomplete: "current-password", class:"form-control pb-4" %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!--　% if devise_mapping.rememberable? %>-->
+      <!--  <div class="field">-->
+      <!--    %= f.check_box :remember_me %>-->
+      <!--    %= f.label :remember_me %>-->
+      <!--  </div>-->
+      <!--　% end %>-->
+
+      <div class="row d-flex justify-content-center">
+        <%= f.submit "ログイン", class: "btn btn-outline-secondary col-3" %>
       </div>
-    </div>
-
-    <div class="form-group row d-flex justify-content-center">
-      <%= f.label :パスワード, class: "col-5 col-form-label text-right" %>
-      <div class="col-7 mb-3">
-        <%= f.password_field :password, autocomplete: "current-password", :size => "40*30" %>
-      </div>
-    </div>
-
-  <!--　% if devise_mapping.rememberable? %>-->
-  <!--  <div class="field">-->
-  <!--    %= f.check_box :remember_me %>-->
-  <!--    %= f.label :remember_me %>-->
-  <!--  </div>-->
-  <!--　% end %>-->
-
-    <div class="actions row d-flex justify-content-center pt-3 mb-5">
-      <%= f.submit "ログイン", class: "btn btn-outline-secondary col-2" %>
-    </div>
-  <% end %>
-
+    <% end %>
+  </div>
+  
   <div class="row d-flex justify-content-center p-5">
     <%= link_to new_creator_registration_path, class:"text-secondary" do %>
        <p><i class="far fa-hand-point-right fa-2x"></i>つくりてでアカウントをつくる</p>
     <% end %>
   </div>
-<!--%= render "creators/shared/links" %>-->
+  <!--%= render "creators/shared/links" %>-->
 </div>

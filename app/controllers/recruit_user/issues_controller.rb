@@ -37,20 +37,15 @@ class RecruitUser::IssuesController < ApplicationController
   end
 
   # 作成中の依頼
-  def working_issues
+  def index
     @musician = Musician.find(current_musician.id)
     # 作成中のissueを取得する
-    @issues = Issue.where(musician_id: @musician.id)
+    @working_issues = Issue.where(musician_id: @musician.id)
                    .where(status: "未着手")
                    .or(Issue.where(status: "作成中"))
                    .page(params[:page]).reverse_order.per(7)
-  end
-
-  # 作成完了後の依頼
-  def completed_issues
-    @musician = Musician.find(current_musician.id)
     # 作成完了後のissueを取得する
-    @issues = Issue.where(musician_id: @musician.id)
+    @completed_issues = Issue.where(musician_id: @musician.id)
                    .where(status: "作成完了")
                    .page(params[:page]).reverse_order.per(7)
   end
@@ -60,6 +55,7 @@ class RecruitUser::IssuesController < ApplicationController
     @message = Message.new
     @messages = Message.where(issue_id: @issue.id)
   end
+
 
 
 end

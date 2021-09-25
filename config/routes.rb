@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   sessions:      'admins/sessions',
   passwords:     'admins/passwords',
 }
+
   # apply_user
   root to: 'apply_user/homes#top'
   scope module: :apply_user do
@@ -54,20 +55,19 @@ Rails.application.routes.draw do
     get '/favorite_musicians' => 'favorites#favorite_musicians', as:'favorite_musicians'
 
     # issue
-    resources :issues, only:[:show] do
+    resources :issues, only:[:show, :index] do
       member do
         get :room
       end
     end
-    get '/working_issues' => 'issues#working_issues', as:'working_issues'
-    get '/completed_issues' => 'issues#completed_issues', as:'completed_issues'
+
 
     # message
     resource :message, only:[:create]
 
     # notification
     resources :notifications, only:[:index]
-    
+
     # search
     get '/search' => 'searches#search'
 
@@ -101,20 +101,18 @@ Rails.application.routes.draw do
     end
 
     # issue
-    resources :issues, only:[:show, :update] do
+    resources :issues, only:[:show, :update, :index] do
       member do
         get :room
       end
     end
-    get '/working_issues' => 'issues#working_issues', as:'working_issues'
-    get '/completed_issues' => 'issues#completed_issues', as:'completed_issues'
 
     # message
     resource :message, only:[:create]
 
     # notification
     resources :notifications, only:[:index]
-    
+
     # search
     get '/search' => 'searches#search'
 
