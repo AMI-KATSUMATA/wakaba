@@ -1,11 +1,11 @@
-<div class="container-fluid mx-0 p-0 message-details messageDetails" id="scroll-inner">
+<div class="container-fluid mx-0 p-0">
   <div class="row d-flex justify-content-center m-5 p-5">
     <div class="col-8 d-flex justify-content-center">
       <% if @messages.blank? %>
         <h5 class="text-center">メッセージはありません</h5>
 
       <% else %>
-        <div class="container-fluid mx-0 p-0 content">
+        <div class="container-fluid mx-0 p-0" id="messages" >
             <% @messages.each do |message| %>
               <% if message.creator %>
                 <div class="row d-flex justify-content-end">
@@ -74,7 +74,7 @@
       </p>
     </div>
   <% else %>
-    <div class="row d-flex justify-content-center mt-5 mb-5 p-5 border-top fixed-bottom bg-white">
+    <div class="row d-flex justify-content-center mt-5 mb-5 p-5 border-top fixed-bottom bg-white" id="new_message">
       <%= form_with model: @message, url: message_path, remote: true do |f| %>
         <%= f.text_field :content, class:"form-control mb-3" %>
         <%= f.file_field :image %>
