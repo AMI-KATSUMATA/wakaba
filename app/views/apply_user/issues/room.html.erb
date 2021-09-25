@@ -15,7 +15,7 @@
       </p>
     </div>
   <% else %>
-    <div class="row d-flex justify-content-center mt-5 mb-5 p-5 border-top fixed-bottom bg-white" id="new_message">
+    <div class="row d-flex justify-content-center mt-5 mb-5 p-5 border-top fixed-bottom bg-white" >
       <%= form_with model: @message, url: message_path, remote: true do |f| %>
         <%= f.text_field :content, class:"form-control mb-3", id: "message-text-form" %>
         <%= f.file_field :image, id: "message-image-form" %>

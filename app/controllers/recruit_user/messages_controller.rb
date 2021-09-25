@@ -5,6 +5,8 @@ class RecruitUser::MessagesController < ApplicationController
     @message = Message.new(message_params)
     if @message.save
        @message.create_notification_musician_message!(current_musician)
+       @issue = @message.issue
+       @messages = @issue.messages
     else
       @issue = Issue.find(params[:id])
       @message = Message.new
@@ -18,7 +20,7 @@ class RecruitUser::MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:content, :issue_id).merge(musician_id: current_musician.id)
+    params.require(:message).permit(:content, :issue_id, :image).merge(musician_id: current_musician.id)
   end
 
 end
