@@ -1,35 +1,40 @@
 <div class="container-fluid mx-0 p-0">
   <div class="main-visual row mx-auto">
     <div class="top-title col-3 pt-5 ml-3">
-      <div class="title text-center pb-3">ビジネスマッチングサービス</div>
+      <div class="title text-center pb-3">
+        <p>つくりて<i class="fas fa-times"></i>つのりて</p>
+        <p>ビジネスマッチングサービス</p>
+      </div>
       <h1 class="sprout text-center">sprout</h1>
     </div>
     <div class="top-img col-9"></div>
   </div>
 </div>
-
-<div class="container-fluid mx-0 p-0 mt-4">
-  <div class="about_creator row mx-auto">
-    <div class="creator-img col-4 py-3 mx-3"></div>
-      <div class="creator-text text-center col-6 mx-auto my-auto">
-      <p>デザインや写真撮影が得意な方</p>
-      <p>デザインや撮影の仕事を探している方</p>
-      <p class="creator">つくりて</p>
-      <p><%= link_to "新規登録", new_creator_registration_path, class: "btn btn-outline-light" %></p>
+<% unless creator_signed_in? %>
+  <div class="container-fluid mx-0 p-0 mt-4">
+    <div class="about_creator row mx-auto">
+      <div class="creator-img col-4 py-3 mx-3"></div>
+        <div class="creator-text text-center col-6 mx-auto my-auto">
+        <p>デザインや写真撮影が得意な方</p>
+        <p>条件や興味のあるデザインや撮影の仕事を探したい方</p>
+        <p class="creator">つくりて</p>
+        <p><%= link_to "新規登録", new_creator_registration_path, class: "btn btn-outline-light" %></p>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="container-fluid mx-0 p-0 mt-3">
-  <div class="about_musician row mx-auto">
-    <div class="musician-text text-center col-6 mx-auto my-auto">
-      <p>デザイナーやカメラマンを探している方</p>
-      <p class="musician">つのりて</p>
-      <p><%= link_to "新規登録", new_musician_registration_path, class: "btn btn-outline-secondary" %></p>
+  <div class="container-fluid mx-0 p-0 mt-3">
+    <div class="about_musician row mx-auto">
+      <div class="musician-text text-center col-6 mx-auto my-auto">
+        <p>デザイナーやカメラマンを探している方</p>
+        <p>上質なデザインや写真を予算内で作成したい方</p>
+        <p class="musician">つのりて</p>
+        <p><%= link_to "新規登録", new_musician_registration_path, class: "btn btn-outline-secondary" %></p>
+      </div>
+      <div class="musician-img col-4 ml-auto mr-3"></div>
     </div>
-    <div class="musician-img col-4 ml-auto mr-3"></div>
   </div>
-</div>
+<% end %>
 
 
 
