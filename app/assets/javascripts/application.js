@@ -22,7 +22,7 @@
 /*global $*/
 
 // スライダー
-$(document).ready(function(){
+$(document).on('turbolinks:load', function () {
   $('.slider').slick({
   autoplay: true,
   infinite: true,
@@ -65,7 +65,7 @@ $(document).ready(function(){
 });
 
 // ハンバーガーアイコン
-$(function() {
+$(document).on('turbolinks:load', function () {
   $('.menu-trigger').on('click', function(event) {
     $(this).toggleClass('active');
     $('#sp-menu').fadeToggle();
@@ -74,7 +74,7 @@ $(function() {
 });
 
 // タブメニュー
-$(document).ready(function(){
+$(document).on('turbolinks:load', function () {
   $('#tab-contents .tab[id != "tab1"]').hide();
 
   $('#tab-menu a').on('click', function(event) {
