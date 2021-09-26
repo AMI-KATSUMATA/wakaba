@@ -5,6 +5,66 @@
   width: 100%;
   height: 500px;
   background-image: image-url('top.jpg');
+  background-position: left center;
+}
+
+.top-title {
+  width: 100%;
+  height: 500px;
+  background-color: #444444;
+  color: #FF4F02;
+  opacity: 0.8;
+}
+
+.title {
+  font-family: '游ゴシック体', YuGothic, 'ヒラギノ角ゴ StdN W8', 'Hiragino Kaku Gothic StdN';
+  font-weight: bold;
+}
+
+.sprout {
+  font-family: 'ヒラギノ角ゴ StdN W8', 'Hiragino Kaku Gothic StdN';
+  font-size: 50px;
+}
+
+.about_creator {
+  width: 100%;
+  height: 400px;
+  background-color: #333333;
+}
+
+.creator-img {
+  width: 100%;
+  height: 400px;
+  background-image: image-url('creator.jpg');
+  background-size: cover;
+  background-position: bottom;
+}
+
+.creator-text {
+  color: #EEEEEE;
+}
+
+.creator {
+  color: #EEEEEE;
+  font-family: 'ヒラギノ角ゴ StdN W8', 'Hiragino Kaku Gothic StdN';
+  font-size: 30px
+}
+
+.about_musician {
+  width: 100%;
+  height: 400px;
+  background-color: #F5F4F4;
+}
+
+.musician-img {
+  width: 100%;
+  height: 400px;
+  background-image: image-url('musician.jpg');
   background-size: cover;
   background-position: center;
+}
+
+.musician {
+  font-family: 'ヒラギノ角ゴ StdN W8', 'Hiragino Kaku Gothic StdN';
+  font-size: 30px
 }
