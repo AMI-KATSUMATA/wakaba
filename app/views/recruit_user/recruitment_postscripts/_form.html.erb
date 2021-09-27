@@ -1,10 +1,10 @@
 <%= form_with(model:[recruitment, postscript], url: recruit_user_recruitment_recruitment_postscripts_path(recruitment.id), remote: true) do |f| %>
-  <div class="row d-flex justify-content-center mt-2 pt-4 border-top">
+  <div class="row d-flex justify-content-center mt-2 pt-4">
     <div class="col-10">
       <%= f.text_area :postscript, :size=>"60x5", placeholder: "追記事項を入力してください", class: "form-control" %>
     </div>
   </div>
-  <div class=" row d-flex justify-content-center mt-2">
-    <%= f.submit "送信する", class: "btn btn-outline-secondary" %>
+  <div class=" row d-flex justify-content-end pr-5 mr-5 mt-2">
+    <%= f.submit "送信", class: "btn btn-outline-secondary" %>
   </div>
 <% end %>

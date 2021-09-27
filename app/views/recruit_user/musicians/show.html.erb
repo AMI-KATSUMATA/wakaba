@@ -1,6 +1,6 @@
 <div class="container-fluid mx-0 p-0">
-  <div class="row pt-5">
-    <div class="col-4">
+  <div class="row d-flex justify-content-center">
+    <div class="col-3 my-3 py-3 ml-auto mr-0 rounded">
       <div class="container-fluid mx-0 p-0">
         <div class="row d-flex justify-content-center">
           <% if @musician.profile_image.attached? %>
@@ -10,7 +10,7 @@
           <% end %>
         </div>
         <div class="row pt-2 d-flex justify-content-center">
-          <div class="col-auto">
+          <div class="col-auto text-break">
             <h4><strong><%= @musician.nickname %></strong></h4>
           </div>
           <div class="col-auto">
@@ -20,12 +20,8 @@
           </div>
         </div>
 
-        <div class="row pt-2 d-flex justify-content-center">
+        <div class="row pt-2 px-2 pb-2 d-flex justify-content-center text-break border-bottom">
           <%= @musician.introduction %>
-        </div>
-
-        <div class="row d-flex justify-content-center">
-          <div class="border text-center"></div>
         </div>
 
         <div>
@@ -36,7 +32,7 @@
       </div>
     </div>
 
-    <div class="col-8">
+    <div class="col-7 mr-auto ml-0">
       <div class="container">
         <div class="row mb-4 pr-5 mr-5 d-flex justify-content-end">
           <p class="row d-flex justify-content-center">
@@ -50,19 +46,19 @@
             <h5 class="text-center">まだ依頼の投稿はありません</h5>
           <% else %>
             <div class="col-9">
-              <table class="table table-borderless text-secondary p-0">
+              <table class="table table-borderless text-secondary text-break p-0">
                 <% @recruitments.each do |recruitment| %>
                   <tbody>
                     <tr>
                       <td class="text-center" style="width: 70%">
                         <%= link_to recruit_user_recruitment_path(recruitment), class:"text-secondary" do %>
-                          <%= recruitment.title %>
+                          <strong class="h6"><%= recruitment.title %></strong>
                         <% end %>
                       </td>
 
                       <td class="text-center" style="width: 30%">
                         <% if recruitment.is_closed == true %>
-                          <p class="text-white bg-secondary"><%= recruitment.is_closed = "募集終了" %></p>
+                          <p class="text-white bg-secondary rounded"><%= recruitment.is_closed = "募集終了" %></p>
                         <% else %>
                           <p><%= recruitment.is_closed = "募集中" %></p>
                         <% end %>

@@ -1,8 +1,8 @@
-<div class="container-fluid mt-5 mx-0 p-5">
+<div class="container-fluid mx-0 p-5">
   <div class=" row d-flex justify-content-center">
-    <div class="col-8">
-      <div class=" row d-flex justify-content-center border-bottom ml-5 pl-5">
-        <div class="col-auto d-flex justify-content-start">
+    <div class="col-8 issue rounded pt-4">
+      <div class=" row d-flex justify-content-center border-bottom mx-5 pl-5">
+        <div class="col-auto d-flex justify-content-start text-border">
           <h5><%= @issue.recruitment.title %></h5>
         </div>
         <div class="col mr-5">
@@ -13,25 +13,25 @@
         </div>
       </div>
 
-      <div class="row d-flex justify-content-center border bg-white rounded mt-5 mb-5 py-4 mx-auto">
+      <div class="row d-flex justify-content-center border bg-white rounded my-5 py-4 mx-auto">
         <div class="container-fluid">
           <div class="row d-flex justify-content-start mt-3">
             <div class="col-auto align-middle pl-5" >
               <%= link_to recruit_user_creator_path(@issue.creator), class:"text-secondary" do %>
                 <% if @issue.creator.profile_image.attached? %>
-                  <%= image_tag @issue.creator.profile_image, class: "rounded-circle", size: "40x40" %>
+                  <%= image_tag @issue.creator.profile_image, class: "rounded-circle", size: "50x50" %>
                 <% else %>
-                  <%= image_tag 'no_image.jpg', class: "rounded-circle", size: "40x40" %>
+                  <%= image_tag 'no_image.jpg', class: "rounded-circle", size: "50x50" %>
                 <% end %>
               <% end %>
             </div>
-            <div class="col-auto align-middle ml-4">
+            <div class="col-auto align-middle my-auto ml-2">
               <%= link_to recruit_user_creator_path(@issue.creator), class:"text-secondary" do %>
                 <%= @issue.creator.nickname %>
               <% end %>
             </div>
           </div>
-          <div class="row mt-2 mx-5"><%= @issue.recruitment.detail %></div>
+          <div class="row mt-2 mx-5 text-break"><%= @issue.recruitment.detail %></div>
           <div class="row mt-2 mx-5 border-bottom">
             <p class="col-auto px-0 mx-0">依頼単価</p>
             <p class="col-auto">¥<%= @issue.recruitment.price %></p>
@@ -50,12 +50,12 @@
           <% else %>
             <div class="row mt-2 mx-5">
               <p class="col-auto px-0 mx-0">ステータス</p>
-              <p class="col-auto px-0 mx-0 text-danger"><small>*作成完了後は進捗状況の変更とメッセージの送信はできません</small></p>
+              <p class="col-auto pl-3 px-0 mx-0 text-danger"><small>*作成完了後は進捗状況の変更とメッセージの送信はできません</small></p>
             </div>
             <div class="row mt-2 mx-5">
-              <%= form_with model: @issue, url: recruit_user_issue_path(@issue), method: :patch, local:true do |f| %>
-                <%= f.select :status, Issue.statuses.keys %>
-                <%= f.submit "更新" , class: "btn btn-outline-secondary btn-sm" %>
+              <%= form_with model: @issue, url: recruit_user_issue_path(@issue), method: :patch, local:true, class:"form-inline" do |f| %>
+                <%= f.select :status, Issue.statuses.keys, {}, class:"form-control form-inline" %>
+                <%= f.submit "更新" , class: "btn btn-outline-secondary btn-sm form-inline ml-3" %>
               <% end %>
             </div>
           <% end %>

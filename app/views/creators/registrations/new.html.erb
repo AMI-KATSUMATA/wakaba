@@ -38,21 +38,21 @@
             <tr>
               <th class="p-0 mb-2"><%= f.label :"電話番号" %></th>
               <td class="p-0">
-　              <%= f.text_field :phone_number, autofocus: true, class: "form-control mb-2" %>
+　              <%= f.text_field :phone_number, :size => "30*30", autofocus: true, class: "form-control mb-2" %>
               </td>
             </tr>
 
             <tr>
               <th class="mb-2"><%= f.label :"メールアドレス" %></th>
               <td class="pt-0 pb-0 pr-0 pl-3">
-                <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control mb-2" %>
+                <%= f.email_field :email, :size => "40*30", autofocus: true, autocomplete: "email", class: "form-control mb-2" %>
               </td>
             </tr>
 
             <tr>
               <th class="p-0 ml-2 mb-2"><%= f.label :"パスワード" %></th>
               <td class="pt-0 pb-0 pr-0 pl-3">
-                <%= f.password_field :password, autocomplete: "new-password", placeholder: "6~16字で設定してください", class: "form-control mb-2" %>
+                <%= f.password_field :password, :size => "40*30", autocomplete: "new-password", placeholder: "6~16字で設定してください", class: "form-control mb-2" %>
               </td>
             </tr>
 
@@ -70,10 +70,11 @@
         </div>
       <% end %>
     </div>
-    <div class="row d-flex justify-content-center pt-4">
-      <%= link_to new_creator_session_path, class:"text-secondary" do %>
-        <p><i class="far fa-hand-point-right fa-2x"></i>つくりてでログインする</p>
-      <% end %>
-    </div>
-    <!--%= render "creators/shared/links" %>-->
+  <div class="row d-flex justify-content-center pt-4">
+    <%= link_to new_creator_session_path, class:"text-secondary" do %>
+      <p><i class="far fa-hand-point-right fa-2x"></i>つくりてでログインする</p>
+    <% end %>
   </div>
+  <!--%= render "creators/shared/links" %>-->
+</div>
+<div class="container p-5"></div>

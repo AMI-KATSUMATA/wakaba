@@ -21,21 +21,21 @@
           </div>
         </div>
 
-        <div class="row pt-2 d-flex justify-content-center">
+        <div class="row pt-2 d-flex justify-content-center text-break">
           <%= @creator.introduction %>
         </div>
 
         <% if @creator.schedule.present? %>
           <div class="row d-flex pt-2 justify-content-center">
             <p class="col-auto text-center"><small><strong>スケジュール</strong></small></p>
-            <p clss="col-auto text-center"><small><%= @creator.schedule %></small></p>
+            <p clss="col-auto text-center text-break"><small><%= @creator.schedule %></small></p>
           </div>
         <% end %>
 
         <% if @creator.price.present? %>
           <div class="row d-flex justify-content-center">
             <p class="col-auto text-center"><small><strong>参考価格</strong></small></p>
-            <p class="col-auto text-center"><small><%= @creator.price %></small></p>
+            <p class="col-auto text-center text-break"><small><%= @creator.price %></small></p>
           </div>
         <% end %>
 

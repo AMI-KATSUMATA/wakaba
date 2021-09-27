@@ -2,7 +2,7 @@
   <div class=" row d-flex justify-content-center">
     <div class="col-8">
       <div class=" row d-flex justify-content-center ml-5 pl-5">
-        <div class="col-auto d-flex justify-content-start">
+        <div class="col-auto d-flex justify-content-start text-break">
           <h5><%= @recruitment.title %></h5>
         </div>
 
@@ -23,12 +23,12 @@
           <div class="row d-flex justify-content-start mt-3">
             <div class="col-auto align-middle pl-5" >
               <% if @recruitment.musician.profile_image.attached? %>
-                <%= image_tag @recruitment.musician.profile_image, class: "rounded-circle", size: "40x40" %>
+                <%= image_tag @recruitment.musician.profile_image, class: "rounded-circle", size: "50x50" %>
               <% else %>
-                <%= image_tag 'no_image.jpg', class: "rounded-circle", size: "40x40" %>
+                <%= image_tag 'no_image.jpg', class: "rounded-circle", size: "50x50" %>
               <% end %>
             </div>
-            <div class="col-auto align-middle ml-4">
+            <div class="col-auto my-auto">
               <%= @recruitment.musician.nickname %>
             </div>
             <div class="col align-middle text-right mr-3">
@@ -36,7 +36,7 @@
             </div>
           </div>
 
-          <div class="row mt-4 mb-3 mx-5">
+          <div class="row mt-4 mb-3 mx-5 text-break">
             <%= @recruitment.detail %>
           </div>
           <div class="row mt-2 mx-5 border-bottom">
@@ -58,7 +58,7 @@
                 <%= l recruitment_postscript.created_at %>
               </div>
             </div>
-            <div class="row mt-2 mx-5">
+            <div class="row mt-2 mx-5 text-break">
               <%= recruitment_postscript.postscript %>
             </div>
           </div>
