@@ -1,55 +1,52 @@
-<div class="container-fluid mt-5 mx-0 p-5">
+<div class="container-fluid mx-0 p-5">
   <div class=" row d-flex justify-content-center">
-    <div class="col-8">
-      <div class=" row d-flex justify-content-center">
-        <div class="col-auto d-flex justify-content-start">
-          <h5><%= @recruitment.title %></h5>
-        </div>
-      </div>
+    <div class="col-8 mx-auto py-4 recruitment rounded">
 
-      <div class=" row d-flex justify-content-center mt-2">
-        <div class="border text-center"></div>
-      </div>
-
-      <div class="row d-flex justify-content-center border bg-white rounded mt-5 mb-5 py-4 mx-auto">
+      <div class="row d-flex justify-content-center border bg-white mt-5 mb-5 py-4 mx-auto">
         <div class="container-fluid">
+          <div class=" row d-flex justify-content-center pb-2 mx-3 border-bottom">
+            <div class="col-auto d-flex justify-content-start text-break">
+              <h5><%= @recruitment.title %></h5>
+            </div>
+          </div>
+
           <div class="row d-flex justify-content-start mt-3">
-            <div class="col-auto align-middle pl-5" >
+            <div class="col-auto align-middle ml-3 pl-5" >
               <% if @recruitment.musician.profile_image.attached? %>
-                <%= image_tag @recruitment.musician.profile_image, class: "rounded-circle", size: "40x40" %>
+                <%= image_tag @recruitment.musician.profile_image, class: "rounded-circle", size: "50x50" %>
               <% else %>
-                <%= image_tag 'no_image.jpg', class: "rounded-circle", size: "40x40" %>
+                <%= image_tag 'no_image.jpg', class: "rounded-circle", size: "50x50" %>
               <% end %>
             </div>
-            <div class="col-auto align-middle ml-4">
+            <div class="col-auto align-middle ml-2 my-auto">
               <%= @recruitment.musician.nickname %>
             </div>
             <div class="col align-middle text-right mr-3">
               <%= l @recruitment.created_at %>
             </div>
           </div>
-          <div class="row mt-4 mb-3 mx-5">
+          <div class="row mt-4 mb-3 mx-5 text-break">
             <%= @recruitment.detail %>
           </div>
           <div class="row mt-2 mx-5 border-bottom">
-            <p class="col-auto px-0 mx-0">依頼単価</p>
+            <p class="col-auto mx-0">依頼単価</p>
             <p class="col-auto">¥<%= @recruitment.price %></p>
           </div>
           <div class="row mt-2 mx-5 border-bottom">
-            <p class="col-auto px-0 mx-0">完成目安</p>
+            <p class="col-auto mx-0">完成目安</p>
             <p class="col-auto"><%= @recruitment.deadline %></p>
           </div>
           <div class="row mt-2 mx-5 border-bottom">
-            <p class="col-auto px-0 mx-0">エントリー数</p>
+            <p class="col-auto mx-0">エントリー数</p>
             <p class="col-auto"><%= @recruitment.entries.count %></p>
           </div>
           <div class="row mt-2 mx-5 border-bottom">
-            <p class="col-auto px-0 mx-0">募集状況</p>
+            <p class="col-auto mx-0">募集状況</p>
             <% if @recruitment.musician == current_musician %>
               <%= form_with model: @recruitment, url: recruit_user_recruitment_path(@recruitment.id), method: :patch, local:true do |f| %>
                 <div class="col-auto ml-3">
                   <%= f.radio_button :is_closed, "false", checked: true %>募集中<%= f.radio_button :is_closed, "true" %>募集終了
-                  <%= f.submit '更新', class: "btn btn-outline-secondary ml-5" %>
+                  <%= f.submit '更新', class: "btn btn-outline-secondary ml-3" %>
                 </div>
               <% end %>
 
@@ -79,7 +76,7 @@
 
 　      <% if @entry_creators.blank? %>
 　        <div class="row d-flex justify-content-center mt-2">
-            <%= link_to "依頼を削除する", private_recruit_user_recruitment_path(@recruitment), method: :patch, "data-confirm" => "本当に削除してよろしいですか？", class: "btn btn-outline-secondary"  %>
+            <%= link_to "依頼を削除する", private_recruit_user_recruitment_path(@recruitment), method: :patch, "data-confirm" => "本当に削除してよろしいですか？", class: "btn btn-secondary"  %>
           </div>
           <div class="row d-flex justify-content-center">
             <div class="text-danger"><small>*つくりてのエントリー後は依頼の削除はできません</small></div>

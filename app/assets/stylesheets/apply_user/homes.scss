@@ -50,6 +50,7 @@
   font-size: 30px
 }
 
+
 .about_musician {
   width: 100%;
   height: 400px;
@@ -67,4 +68,18 @@
 .musician {
   font-family: 'ヒラギノ角ゴ StdN W8', 'Hiragino Kaku Gothic StdN';
   font-size: 30px
+}
+
+.slider{
+  background-color: #F5F4F4;
+}
+
+// フェードイン
+.about_creator {
+  //  フェードイン速度の調整 
+  transition: .7s ease-in-out ;
+}
+
+.about_musician {
+  transition: .7s ease-in-out ;
 }

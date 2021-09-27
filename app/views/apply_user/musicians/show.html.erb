@@ -21,7 +21,7 @@
             </div>
           </div>
         </div>
-        <div class="row pt-2 d-flex justify-content-center">
+        <div class="row pt-2 d-flex justify-content-center text-break">
           <%= @musician.introduction %>
         </div>
       </div>
@@ -38,7 +38,7 @@
                 <% @recruitments.each do |recruitment| %>
                   <tbody>
                     <tr>
-                      <td class="text-center" style="width: 70%">
+                      <td class="text-center text-break" style="width: 70%">
                         <%= link_to recruitment_path(recruitment), class:"text-secondary" do %>
                           <%= recruitment.title %>
                         <% end %>

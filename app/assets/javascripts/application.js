@@ -85,3 +85,70 @@ $(document).on('turbolinks:load', function () {
     event.preventDefault();
   });
 });
+
+// フェードイン
+
+// 左
+$(document).on('turbolinks:load', function () {
+  //画面をスクロールするとイベントが発動する
+  $(window).scroll(function() {
+
+    //フェードインさせたい要素の位置をずらす
+    $('.fadein-l').css({
+      'opacity': '0',
+      'transform': 'translateX(-30px)'
+    });
+
+    //スクロールバーの位置を取得
+    var scroll = $(window).scrollTop();
+
+    //ウィンドウの高さを取得
+    var windowHeight = $(window).height();
+
+    $('.fadein-l').each(function() {
+      //フェードインさせたい要素の縦位置を取得
+      var elemPos = $(this).offset().top;
+
+      //要素がウィンドウの中に入ってから200pxスクロールしたら要素をフェードインする
+      if (scroll > elemPos - windowHeight + 200) {
+        $(this).css({
+          'opacity': '1',
+          'transform': 'translateX(0)'
+        });
+      }
+    });
+  });
+});
+
+// 右
+$(document).on('turbolinks:load', function () {
+  //画面をスクロールするとイベントが発動する
+  $(window).scroll(function() {
+
+    //フェードインさせたい要素の位置をずらす
+    $('.fadein-r').css({
+      'opacity': '0',
+      'transform': 'translateX(30px)'
+    });
+
+    //スクロールバーの位置を取得
+    var scroll = $(window).scrollTop();
+
+    //ウィンドウの高さを取得
+    var windowHeight = $(window).height();
+
+    $('.fadein-r').each(function() {
+      //フェードインさせたい要素の縦位置を取得
+      var elemPos = $(this).offset().top;
+
+      //要素がウィンドウの中に入ってから200pxスクロールしたら要素をフェードインする
+      if (scroll > elemPos - windowHeight + 200) {
+        $(this).css({
+          'opacity': '1',
+          'transform': 'translateX(0)'
+        });
+      }
+    });
+  });
+});
+

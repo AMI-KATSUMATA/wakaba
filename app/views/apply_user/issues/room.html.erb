@@ -20,10 +20,9 @@
         <%= f.text_field :content, class:"form-control mb-3", id: "message-text-form" %>
         <%= f.file_field :image, id: "message-image-form" %>
         <%= f.hidden_field :issue_id, value: @issue.id %>
-        <%= f.submit "送信", class:"btn btn-outline-secondary btn-sm" %>
+        <%= f.submit "送信", class:"btn btn-outline-secondary btn-sm", id: "dm-btn" %>
       <% end %>
     </div>
   <% end %>
 </div>
-
 
