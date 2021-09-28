@@ -28,7 +28,7 @@ CDジャケットのデザインやカメラマン等を低コスト高品質で
 <a href="https://docs.google.com/spreadsheets/d/1PqdzZvd-djw4wVDC28hlUuJvwNK-evGFzMtj8Ir8e-g/edit?usp=sharing">こちら</a>
 
 ## チャレンジ要素一覧
-https://docs.google.com/spreadsheets/d/1njii3RLyKSY5IHW3VAZaP4Og9RINuHAobC6AgrepmBU/edit?usp=sharing
+<a href="https://docs.google.com/spreadsheets/d/1njii3RLyKSY5IHW3VAZaP4Og9RINuHAobC6AgrepmBU/edit?usp=sharing">こちら</a>
 ## 開発環境
 - OS：Linux(CentOS)
 - 言語：HTML,CSS,JavaScript,Ruby
@@ -37,5 +37,4 @@ https://docs.google.com/spreadsheets/d/1njii3RLyKSY5IHW3VAZaP4Og9RINuHAobC6Agrep
 - IDE：Cloud9
 
 ## 使用素材
-- 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。
-- 使用しない場合は、使用素材の項目をREADMEから削除してください。
+- 画像素材　O-DAN(https://o-dan.net/ja/)
