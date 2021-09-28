@@ -1,6 +1,6 @@
 <div class="container-fluid mx-0 p-0">
   <div class="row d-flex justify-content-center m-5 p-5">
-    <div class="col-8 d-flex justify-content-center" id="messages">
+    <div class="col-8 d-flex justify-content-center scroll" id="messages">
       <%= render "apply_user/issues/messages", messages: @messages %>
     </div>
   </div>
@@ -26,3 +26,7 @@
   <% end %>
 </div>
 
+<script>
+  const $scrollAuto = $('.scroll');
+  $scrollAuto.animate({scrollTop: ($scrollAuto[0].scrollHeight + 800)}, 'fast')
+</script>

@@ -1,7 +1,7 @@
 <% if messages.blank? %>
   <h5 class="text-center">メッセージはありません</h5>
 <% else %>
-  <div class="container-fluid mx-0 p-0" id="scroll-inner">
+  <div class="container-fluid mx-0 p-0">
       <% messages.each do |message| %>
         <% if message.creator %>
           <div class="row d-flex justify-content-end">

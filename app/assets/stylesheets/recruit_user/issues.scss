@@ -56,4 +56,9 @@
   line-height: 2.5;
 }
 
+.scroll {
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    height: 500px;
+}
 

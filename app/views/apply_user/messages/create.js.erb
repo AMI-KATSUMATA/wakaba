@@ -1,4 +1,5 @@
 $("#messages").html("<%= j(render "apply_user/issues/messages", messages: @messages) %>");
 $("#message-text-form").val("");
 $("#message-image-form").val("");
+$('.scroll').animate({ scrollTop: $('.scroll')[0].scrollHeight});
 

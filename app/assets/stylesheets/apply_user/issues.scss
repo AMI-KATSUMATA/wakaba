@@ -62,4 +62,8 @@
 }
 
 
-
+.scroll {
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    height: 500px;
+}
