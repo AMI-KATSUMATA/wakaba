@@ -1,0 +1,44 @@
+<div class="container-fluid mx-0 p-5">
+  <div class="row d-flex justify-content-center">
+    <% if @notifications.blank? %>
+      <h5 class="text-center">通知はありません</h5>
+    <% else %>
+      <div class="col-9 notifications">
+        <table class="table table-borderless text-secondary p-0">
+          <% @notifications.each do |notification| %>
+            <tbody>
+              <tr>
+                <td class="text-center">
+                  <% if notification.action == 'entry' %>
+                    <u>
+                      <%= link_to recruit_user_creator_path(notification.visitor_creator_id), class:"text-secondary" do %>
+                        <%= notification.visitor_creator.nickname %>
+                      <% end %>
+                    </u>
+                    さんがあなたの
+                    <u>
+                      <%= link_to "依頼",recruit_user_recruitment_path(notification.entry.recruitment_id), class:"text-secondary" %>
+                    </u>
+                    にエントリーしました
+                  <% else %>
+                    <u>
+                      <%= link_to recruit_user_creator_path(notification.visitor_creator_id), class:"text-secondary" do %>
+                        <%= notification.visitor_creator.nickname %>
+                      <% end %>
+                    </u>
+                    さんが
+                    <u>
+                      <%= link_to "メッセージ", room_recruit_user_issue_path(notification.message.issue_id), class:"text-secondary" %>
+                    </u>
+                    を送信しました
+                  <% end %>
+                </td>
+              </tr>
+            </tbody>
+          <% end %>
+        </table>
+      </div>
+    <% end %>
+  </div>
+  <div class="container p-3"></div>
+</div>

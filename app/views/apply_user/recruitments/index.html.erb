@@ -1,0 +1,44 @@
+<div class="container-fluid mx-0 p-0">
+  <div class=" row d-flex justify-content-center">
+    <div class="col-auto">
+      <h4 class="text-center mt-5 mb-3"><strong>募集中の依頼一覧</strong></h4>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center m-5">
+    <div class="col-10">
+      <table class="table table-borderless text-secondary p-0">
+        <% @recruitments.each do |recruitment| %>
+          <tbody>
+            <tr>
+              <td class="text-center align-middle" style="width: 50%">
+                <%= link_to recruitment_path(recruitment), class:"text-secondary" do %>
+                  <%= recruitment.title %>
+                <% end %>
+              </td>
+
+              <td class="text-center row" style="width: 50%">
+                <div class="col-auto">
+                  <%= link_to musician_path(recruitment.musician_id), class:"text-secondary" do %>
+                    <% if recruitment.musician.profile_image.attached? %>
+                      <%= image_tag recruitment.musician.profile_image, class: "rounded-circle", size: "40x40" %>
+                    <% else %>
+                      <%= image_tag 'no_image.jpg', class: "rounded-circle", size: "40x40" %>
+                    <% end %>
+                  <% end %>
+                </div>
+                <div class="col-auto my-auto">
+                  <%= link_to musician_path(recruitment.musician_id), class:"text-secondary" do %>
+                    <%= recruitment.musician.nickname %>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+      <div class="row d-flex justify-content-center p-5">
+        <%= paginate @recruitments %>
+      </div>
+    </div>
+  </div>
+</div>

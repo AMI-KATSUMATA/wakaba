@@ -1,0 +1,38 @@
+<div class="container-fluid mt-5 mx-0 p-5">
+  <div class=" row d-flex justify-content-center">
+    <div class="col-8 artwork-show rounded py-5">
+      <div class=" row d-flex justify-content-start ml-5 pl-5">
+        <div class=col-auto>
+          <% if @artwork.creator.profile_image.attached? %>
+            <%= image_tag @artwork.creator.profile_image, class: "rounded-circle", size: "40x40" %>
+          <% else %>
+            <%= image_tag 'no_image.jpg', class: "rounded-circle", size: "40x40" %>
+          <% end %>
+        </div>
+        <div class="col-auto align-middle">
+          <%= link_to recruit_user_creator_path(@artwork.creator), class:"text-secondary" do %>
+            <%= @artwork.creator.nickname %>
+          <% end %>
+        </div>
+        <div class="col-auto align-middle  justify-content-end">
+          <small><%= l @artwork.created_at %></small>
+        </div>
+      </div>
+
+      <div class=" row d-flex justify-content-center mt-2">
+        <div class="border text-center"></div>
+      </div>
+
+      <div class=" row d-flex justify-content-center mt-5">
+        <%= image_tag @artwork.artwork_image, class: "rounded", size: "400x400" %>
+      </div>
+
+      <div class=" row d-flex justify-content-center">
+        <div class="col-5 d-flex justify-content-center mt-3 text-break">
+          <%= @artwork.description %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container p-5"></div>
+</div>

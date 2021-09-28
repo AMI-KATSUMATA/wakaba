@@ -1,0 +1,47 @@
+<div class="container-fluid mx-0 p-0">
+  <div class=" row d-flex justify-content-center">
+    <div class="col-auto">
+      <h4 class="text-center mt-5 mb-3"><strong>お気に入りつのりて</strong></h4>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center m-5">
+    <% if @musicians.blank? %>
+      <h5 class="text-center">お気に入りつのりてはありません</h5>
+    <% else %>
+      <div class="col-6">
+        <table class="table table-borderless text-secondary p-0">
+          <% @musicians.each do |musician| %>
+            <tdoby>
+              <tr>
+                <td class="text-center my-auto" style="width: 35%">
+                  <%= link_to musician_path(musician) do %>
+                    <% if musician.profile_image.attached? %>
+                      <%= image_tag musician.profile_image, class: "rounded-circle", size: "80x80" %>
+                    <% else %>
+                      <%= image_tag 'no_image.jpg', class: "rounded-circle", size: "80x80" %>
+                    <% end %>
+                  <% end %>
+                </td>
+
+                <td class="text-center align-middle" style="width: 40%">
+                  <%= link_to musician_path(musician), class:"text-secondary" do %>
+                    <%= musician.nickname %>
+                  <% end %>
+                </td>
+
+                <td class="text-center align-middle" style="width: 25%">
+                  <div id="favorite_musicians_buttoms_<%= musician.id %>">
+                    <%= render partial: 'apply_user/favorites/favorite_musician', locals: { musician: musician } %>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          <% end %>
+        </table>
+        <div class="row d-flex justify-content-center p-4">
+          <%= paginate @musicians %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

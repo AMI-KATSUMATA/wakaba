@@ -1,0 +1,58 @@
+<% if messages.blank? %>
+  <h5 class="text-center">メッセージはありません</h5>
+<% else %>
+  <div class="container-fluid mx-0 p-0">
+    <% messages.each do |message| %>
+      <% if message.creator %>
+        <div class="row d-flex justify-content-start">
+          <div class="col-4 d-flex justify-content-start">
+            <div class="container-fluid mx-0 p-0">
+              <div class="row d-flex justify-content-start">
+                <span>
+                  <% if message.creator.profile_image.attached? %>
+                    <%= image_tag message.creator.profile_image, class: "rounded-circle", size: "40x40" %>
+                  <% else %>
+                    <%= image_tag 'no_image.jpg', class: "rounded-circle", size: "40x40" %>
+                  <% end %>
+                </span>
+                <% if message.content.present? %>
+                  <div class="row d-flex justify-content-end ml-2">
+                    <span class="my-auto p-2 text-left bg-light rounded"><%= message.content %></span>
+                  </div>
+                <% end %>
+                <% if message.image.attached? %>
+                  <div class="row d-flex justify-content-end ml-2">
+                    <span class="p-2 text-center bg-light rounded"><%= image_tag message.image, size: "200x200", class: 'message-image rounded' %></span>
+                  </div>
+                <% end %>
+              </div>
+              <div class="row d-flex justify-content-start mb-2">
+                <small><%= l message.created_at %></small>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <div class="row d-flex justify-content-end">
+          <div class="col-4 d-flex justify-content-end">
+            <div class="container-fluid mx-0 p-0">
+             <% if message.content.present? %>
+            <div class="row d-flex justify-content-end">
+              <span class="p-2 text-left bg-light rounded"><%= message.content %></span>
+            </div>
+          <% end %>
+          <% if message.image.attached? %>
+            <div class="row d-flex justify-content-end">
+              <span class="p-2 text-center bg-light rounded"><%= image_tag message.image, size: "200x200", class: 'message-image rounded' %></span>
+            </div>
+          <% end %>
+          <div class="row d-flex justify-content-end mb-2">
+            <small><%= l message.created_at %></small>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

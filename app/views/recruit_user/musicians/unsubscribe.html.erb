@@ -1,0 +1,15 @@
+<div class="container-fluid mt-5 mb-5 pb-5 mx-0 p-0">
+  <div class="container p-5"></div>
+    <div class="row d-flex justify-content-center pb-5 mb-5">
+      <h4>退会処理を実行しますか？</h4>
+    </div>
+    <div class="row d-flex justify-content-center">
+      <%= link_to "続行", withdraw_recruit_user_musician_path(@musician), method: :patch, "data-confirm" => "本当に退会しますか？", class: "btn btn-outline-danger col-2 mr-4" %>
+      <%= link_to "キャンセル", recruit_user_musician_path(@musician), class: "btn btn-outline-secondary col-2" %>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center">
+    <small class="text-danger">*退会済みのアカウントではログインできません</small>
+  </div>
+  <div class="container p-5 m-4"></div>
+</div>

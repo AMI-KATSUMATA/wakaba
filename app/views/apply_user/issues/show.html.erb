@@ -1,0 +1,54 @@
+<div class="container-fluid mt-5 mx-0 p-5">
+  <div class=" row d-flex justify-content-center">
+    <div class="col-8">
+      <div class=" row d-flex justify-content-center ml-5 pl-5">
+        <div class="col-auto d-flex justify-content-start">
+          <h5><%= @issue.recruitment.title %></h5>
+        </div>
+        <div class="col-auto">
+          (<%= @issue.status %>)
+        </div>
+        <div class="col mr-5 pr-5">
+          <%= link_to room_issue_path(@issue), class:"text-secondary d-flex justify-content-end" do %>
+            <i class="far fa-envelope fa-lg"></i>
+          <% end %>
+        </div>
+      </div>
+      <div class=" row d-flex justify-content-center mt-2">
+        <div class="border text-center"></div>
+      </div>
+
+      <div class="row d-flex justify-content-center border bg-white rounded mt-5 mb-5 py-4 mx-auto">
+        <div class="container-fluid">
+          <div class="row d-flex justify-content-start mt-3">
+            <div class="col-auto align-middle pl-5" >
+              <%= link_to musician_path(@issue.musician), class:"text-secondary" do %>
+                <% if @issue.musician.profile_image.attached? %>
+                  <%= image_tag @issue.musician.profile_image, class: "rounded-circle", size: "40x40" %>
+                <% else %>
+                  <%= image_tag 'no_image.jpg', class: "rounded-circle", size: "40x40" %>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="col-auto align-middle ml-4">
+              <%= link_to musician_path(@issue.musician), class:"text-secondary" do %>
+                <%= @issue.musician.nickname %>
+              <% end %>
+            </div>
+          </div>
+          <div class="row mt-2 mx-5 text-break">
+            <%= @issue.recruitment.detail %>
+          </div>
+          <div class="row mt-2 mx-5 border-bottom">
+            <p class="col-auto px-0 mx-0">依頼単価</p>
+            <p class="col-auto">¥<%= @issue.recruitment.price %></p>
+          </div>
+          <div class="row mt-2 mx-5 border-bottom">
+            <p class="col-auto px-0 mx-0">完成目安</p>
+            <p class="col-auto"><%= @issue.recruitment.deadline %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="container-fluid mx-0 p-0">
+  <div class="row d-flex justify-content-center m-5 p-5">
+    <div class="col-8 d-flex justify-content-center scroll" id="messages">
+      <%= render "apply_user/issues/messages", messages: @messages %>
+    </div>
+  </div>
+  <div class="container p-5 m-5"></div>
+</div>
+
+<div class="container-fluid mx-0 px-0">
+  <% if @issue.status == "作成完了" %>
+    <div class="row d-flex justify-content-center mt-5 mb-5 p-5 border-top fixed-bottom bg-white">
+      <p class="text-center">
+        作成終了後はメッセージの送信はできません
+      </p>
+    </div>
+  <% else %>
+    <div class="row d-flex justify-content-center mt-5 mb-5 p-5 border-top fixed-bottom bg-white" >
+      <%= form_with model: @message, url: message_path, remote: true do |f| %>
+        <%= f.text_field :content, class:"form-control mb-3", id: "message-text-form" %>
+        <%= f.file_field :image, id: "message-image-form" %>
+        <%= f.hidden_field :issue_id, value: @issue.id %>
+        <%= f.submit "送信", class:"btn btn-outline-secondary btn-sm", id: "dm-btn" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  const $scrollAuto = $('.scroll');
+  $scrollAuto.animate({scrollTop: ($scrollAuto[0].scrollHeight + 800)}, 'fast')
+</script>

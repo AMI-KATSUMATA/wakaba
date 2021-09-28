@@ -1,0 +1,51 @@
+<div class="container-fluid mx-0 p-0">
+  <div class=" row d-flex justify-content-center">
+    <div class="col-auto">
+      <h4 class="text-center mt-5 mb-3"><strong>お気に入り依頼</strong></h4>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center m-5">
+    <% if @recruitments.blank? %>
+      <h5 class="text-center">お気に入り依頼はありません</h5>
+    <% else %>
+      <div class="col-9">
+        <table class="table table-borderless text-secondary p-0">
+          <% @recruitments.each do |recruitment| %>
+            <tdoby>
+              <tr>
+                <td class="text-center" style="width: 35%">
+                  <%= link_to recruitment_path(recruitment), class:"text-secondary" do %>
+                    <%= recruitment.title %>
+                  <% end %>
+                </td>
+
+                <td class="text-center" style="width: 35%">
+                  <%= link_to musician_path(recruitment.musician_id), class:"text-secondary" do %>
+                    <%= recruitment.musician.nickname %>
+                  <% end %>
+                </td>
+
+                <td class="text-center" style="width: 15%">
+                  <% if recruitment.is_closed == true %>
+                    <%= recruitment.is_closed = "募集終了" %>
+                  <% else %>
+                    <%= recruitment.is_closed = "募集中" %>
+                  <% end %>
+                </td>
+                
+                <td class="text-center" style="width: 15%">
+                  <div id="favorite_recruitments_buttoms_<%= recruitment.id %>">
+                    <%= render partial: 'apply_user/favorites/favorite_recruitment', locals: { recruitment: recruitment } %>
+                  </div>
+                </td>
+              </tr>
+            </tdoby>
+          <% end %>
+        </table>
+        <div class="row d-flex justify-content-center p-4">
+          <%= paginate @recruitments %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

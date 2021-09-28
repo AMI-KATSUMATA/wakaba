@@ -1,0 +1,52 @@
+<div class="container p-4"></div>
+<div class="container-fluid mx-0 p-0">
+  <div class="row d-flex justify-content-center">
+    <div class="col-auto">
+      <h4 class="text-center mt-5"><strong>つのりてログイン</strong></h4>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt-5 mx-0 p-0">
+  <div class=" row d-flex justify-content-center">
+   <%= form_with model: @musician, url: musician_session_path, local: true do |f| %>
+    <table class="table table-borderless form-inline text-secondary p-0">
+        <tbody>
+          <tr>
+            <th class="mb-2 pr-5 pb-5 p-0"><%= f.label :メールアドレス %></th>
+            <td class="p-0">
+              <%= f.email_field :email, :size => "40*30", autofocus: true, autocomplete: "email", class:"form-control pb-4" %>
+            </td>
+          </tr>
+
+          <tr>
+            <th class="mb-2 pr-5 pb-5 p-0"><%= f.label :パスワード %></th>
+            <td class="p-0">
+              <%= f.password_field :password, :size => "40*30", autocomplete: "current-password", class:"form-control pb-4" %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!--　% if devise_mapping.rememberable? %>-->
+      <!--  <div class="field">-->
+      <!--    %= f.check_box :remember_me %>-->
+      <!--    %= f.label :remember_me %>-->
+      <!--  </div>-->
+      <!--　% end %>-->
+
+      <div class="row d-flex justify-content-center">
+        <%= f.submit "ログイン", class: "btn btn-outline-secondary col-3" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="row d-flex justify-content-center p-5">
+    <%= link_to new_musician_registration_path, class:"text-secondary" do %>
+      <p><i class="far fa-hand-point-right fa-2x"></i>つのりてでアカウントをつくる</p>
+    <% end %>
+  </div>
+  <div class="container p-4"></div>
+<!--%= render "musicians/shared/links" %>-->
+</div>
+

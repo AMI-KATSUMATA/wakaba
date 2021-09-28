@@ -1,0 +1,42 @@
+<div class="container-fluid mt-5 mx-0 p-0">
+  <div class=" row d-flex justify-content-center">
+    <%= form_with model: @recruitment, url: recruit_user_recruitments_path, local:true, class:"new_recruitment rounded col-6 py-2 pb-5" do |f| %>
+      <table class="table table-borderless text-secondary p-0">
+        <tbody>
+          <tr>
+            <th class="text-center"><%= f.label :title, "タイトル" %></th>
+            <td class="pl-3"><%= f.text_field :title, class:"form-control" %></td>
+          </tr>
+
+          <tr>
+            <th class="text-center"><%= f.label :deadline, "完成目安" %></th>
+            <td class="pl-3"><%= f.date_field :deadline, class:"form-control col-5" %></td>
+          </tr>
+
+          <tr>
+            <th class="text-center"><%= f.label :price, "依頼単価" %></th>
+            <td class="form-inline"><strong>¥</strong><%= f.number_field :price, min: 1, class:"form-control form-inline ml-2" %></td>
+          </tr>
+
+          <tr>
+            <th class="text-center"><%= f.label :detail, "詳細" %></th>
+            <td class="pl-3"><%= f.text_area :detail, class:"form-control" %></td>
+          </tr>
+
+          <tr>
+            <th class="text-center"><%= f.label :is_closed, "募集状況" %></th>
+            <td class="pl-5 text-left">
+              <%= f.radio_button :is_closed, "false", checked: true %> 募集中
+              <%= f.radio_button :is_closed, "true", class:"pl-3" %> 募集終了
+            </td>
+          </tr>
+        </tbody>
+　    </table>
+
+      <div class="row d-flex justify-content-center">
+        <%= f.submit '投稿', class: "btn btn-secondary col-3" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="container p-5 m-5"></div>
+</div>

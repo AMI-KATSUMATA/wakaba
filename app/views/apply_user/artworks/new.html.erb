@@ -1,0 +1,24 @@
+<div class="container-fluid mt-5 pt-5 mx-0 p-0">
+  <div class=" row d-flex justify-content-center">
+    <div class="col-4 new-artwork rounded p-3">
+      <%= form_with model: @artwork, url: artworks_path, local:true do |f| %>
+        <table class="table table-borderless text-secondary p-0">
+          <tbody>
+            <tr>
+              <td><%= f.file_field :artwork_image %></td>
+            </tr>
+  
+            <tr>
+              <td><%= f.text_area :description, size: "30x10", class:"form-control" %></td>
+            </tr>
+          </tbody>
+        </table>
+  
+        <div class="row d-flex justify-content-center">
+          <%= f.submit '投稿', class: "btn btn-outline-secondary col-3" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="container p-5"></div>
+  </div>
+</div>

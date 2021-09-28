@@ -1,0 +1,19 @@
+      <% recruitment.recruitment_postscripts.each do |recruitment_postscript| %>
+        <div class="row d-flex justify-content-center border bg-white rounded mt-5 mb-5 py-4 mx-auto">
+          <div class="container-fluid">
+            <div class="row d-flex justify-content-start mt-3">
+              <div class="col align-middle text-right mr-3">
+                <%= l recruitment_postscript.created_at %>
+              </div>
+            </div>
+            <div class="row mt-2 mx-5">
+              <%= recruitment_postscript.postscript %>
+            </div>
+            <% if recruitment_postscript.musician == current_musician %>
+              <div class="row d-flex justify-content-end mt-5 mr-5">
+                <%= link_to "削除", recruit_user_recruitment_recruitment_postscript_path(recruitment_postscript.recruitment, recruitment_postscript), method: :delete, remote: true, class: "btn btn-outline-secondary" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>

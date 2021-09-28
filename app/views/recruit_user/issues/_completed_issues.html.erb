@@ -1,0 +1,53 @@
+<div class="container-fluid mx-0 p-0">
+  <div class="row d-flex justify-content-center">
+    <div class="col-auto">
+      <h4 class="text-center mt-5 mb-3"><strong><h4>完了した依頼</strong></h4>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center m-5">
+    <% if completed_issues.blank? %>
+      <h5 class="text-center">作成が完了した依頼はありません</h5>
+    <% else %>
+      <div class="col-12">
+        <table class="table table-borderless text-secondary p-0">
+          <% completed_issues.each do |completed_issue| %>
+            <tbody>
+              <tr>
+                <td class="text-center" style="width: 30%">
+                  <%= link_to recruit_user_issue_path(completed_issue), class:"text-secondary" do %>
+                    <%= completed_issue.recruitment.title %>
+                  <% end %>
+                </td>
+
+                <td class="text-center" style="width: 30%">
+                  <%= link_to recruit_user_creator_path(completed_issue.creator_id), class:"text-secondary" do %>
+                    <%= completed_issue.creator.nickname %>
+                  <% end %>
+                </td>
+
+                <td class="text-center" style="width: 15%">
+                  <%= completed_issue.status %>
+                </td>
+
+                <td class="text-center" style="width: 10%">
+                <!--DM-->
+                  <%= link_to room_recruit_user_issue_path(completed_issue), class:"text-secondary" do %>
+                    <i class="far fa-envelope fa-lg"></i>
+                  <% end %>
+                </td>
+
+                <td class="text-center" style="width: 15%">
+                  <%= link_to "詳細", recruit_user_issue_path(completed_issue), class:"btn btn-secondary" %>
+                </td>
+              </tr>
+            </tbody>
+          <% end %>
+        </table>
+        <div class="row d-flex justify-content-center p-5">
+          <%= paginate completed_issues %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="container p-3"></div>
+</div>

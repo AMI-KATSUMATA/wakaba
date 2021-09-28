@@ -1,0 +1,43 @@
+<div class="container-fluid mx-0 pt-3">
+  <div class=" row d-flex justify-content-center">
+    <div class="col-auto">
+      <h4 class="text-center mt-5 mb-3"><strong>エントリー中の依頼</strong></h4>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center mt-5">
+    <% if @recruitments.blank? %>
+      <h5>エントリー中の依頼はありません</h5>
+    <% else %>
+      <div class="col-9">
+        <table class="table table-borderless text-secondary p-0">
+          <% @recruitments.each do |recruitment| %>
+            <tbody>
+              <tr>
+                <td class="text-center" style="width: 40%">
+                  <%= link_to recruitment_path(recruitment), class:"text-secondary" do %>
+                    <%= recruitment.title %>
+                  <% end %>
+                </td>
+
+                <td class="text-center" style="width: 30%">
+                  <%= link_to musician_path(recruitment.musician_id), class:"text-secondary" do %>
+                    <%= recruitment.musician.nickname %>
+                  <% end %>
+                </td>
+
+                <td class="text-center" style="width: 30%">
+                  <div id="entries_buttoms_<%= recruitment.id %>">
+                    <%= render partial: 'apply_user/entries/entry', locals: { recruitment: recruitment } %>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            <% end %>
+          </table>
+        </div>
+      <% end %>
+    </div>
+    <div class="row d-flex justify-content-center p-4">
+      <%= paginate @recruitments %>
+    </div>
+  </div>
