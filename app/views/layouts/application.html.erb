@@ -45,13 +45,13 @@
                 <% end %>
               </div>
             </li>
-            
+
             <div id="sp-menu">
               <li class="nav-item">
                 <div class="border-bottom pb-2 pl-4 mx-3 text-left">
                   <span>
                     <% if current_creator.profile_image.attached? %>
-                      <%= image_tag message.musician.profile_image, class: "rounded-circle", size: "40x40" %>
+                      <%= image_tag current_creator.profile_image, class: "rounded-circle", size: "40x40" %>
                     <% else %>
                       <%= image_tag 'no_image.jpg', class: "rounded-circle", size: "40x40" %>
                     <% end %>
@@ -111,13 +111,13 @@
                 <% end %>
               </div>
             </li>
-          
+
             <div id="sp-menu">
               <li class="nav-item">
                 <div class="border-bottom pb-2 pl-4 mx-3 text-left">
                   <span>
                     <% if current_musician.profile_image.attached? %>
-                      <%= image_tag message.musician.profile_image, class: "rounded-circle", size: "40x40" %>
+                      <%= image_tag current_musician.profile_image, class: "rounded-circle", size: "40x40" %>
                     <% else %>
                       <%= image_tag 'no_image.jpg', class: "rounded-circle", size: "40x40" %>
                     <% end %>
@@ -163,7 +163,7 @@
                 <% end %>
               </li>
             </div>
-            
+
             <div id="hm-icon">
               <a class="menu-trigger" href="#">
                 <span></span>
@@ -192,7 +192,7 @@
             <!--  <li class="nav-item">-->
             <!--    %= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link text-dark" %>-->
             <!--  </li>-->
-            
+
             <!--ログイン前-->
             <% else %>
               <div id="sp-menu">
@@ -231,7 +231,7 @@
         </div>
       </nav>
     </header>
-    
+
     <!--フラッシュメッセージ-->
       <div class="text-center">
         <% if flash[:alert] %>
@@ -253,11 +253,11 @@
    　    <% else %>
   　     <% end %>
   　   </div>
-  　   
+
       <div class="text-secondary">
         <%= yield %>
       </div>
-      
+
       <footer class="bg-white shadow text-center text-lg-start">
         <div class="text-center fixed-bottom p-3 bg-light">
           sprout
