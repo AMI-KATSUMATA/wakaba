@@ -46,11 +46,12 @@ ActiveRecord::Schema.define(version: 2021_09_10_101338) do
   end
 
   create_table "artworks", force: :cascade do |t|
-    t.integer "creator_id", null: false
+    t.integer "creator_id"
     t.text "description", limit: 1000
     t.boolean "is_private", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_artworks_on_creator_id"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -59,6 +60,8 @@ ActiveRecord::Schema.define(version: 2021_09_10_101338) do
     t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_contacts_on_creator_id"
+    t.index ["musician_id"], name: "index_contacts_on_musician_id"
   end
 
   create_table "creators", force: :cascade do |t|
@@ -85,37 +88,48 @@ ActiveRecord::Schema.define(version: 2021_09_10_101338) do
   end
 
   create_table "entries", force: :cascade do |t|
-    t.integer "creator_id", null: false
-    t.integer "recruitment_id", null: false
+    t.integer "creator_id"
+    t.integer "recruitment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_entries_on_creator_id"
+    t.index ["recruitment_id"], name: "index_entries_on_recruitment_id"
   end
 
   create_table "favorites", force: :cascade do |t|
-    t.integer "creator_id", null: false
+    t.integer "creator_id"
     t.integer "musician_id"
     t.integer "recruitment_id"
     t.string "subject", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_favorites_on_creator_id"
+    t.index ["musician_id"], name: "index_favorites_on_musician_id"
+    t.index ["recruitment_id"], name: "index_favorites_on_recruitment_id"
   end
 
   create_table "issues", force: :cascade do |t|
-    t.integer "recruitment_id", null: false
-    t.integer "creator_id", null: false
-    t.integer "musician_id", null: false
+    t.integer "recruitment_id"
+    t.integer "creator_id"
+    t.integer "musician_id"
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_issues_on_creator_id"
+    t.index ["musician_id"], name: "index_issues_on_musician_id"
+    t.index ["recruitment_id"], name: "index_issues_on_recruitment_id"
   end
 
   create_table "messages", force: :cascade do |t|
     t.integer "creator_id"
     t.integer "musician_id"
-    t.integer "issue_id", null: false
+    t.integer "issue_id"
     t.text "content", limit: 5000
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_messages_on_creator_id"
+    t.index ["issue_id"], name: "index_messages_on_issue_id"
+    t.index ["musician_id"], name: "index_messages_on_musician_id"
   end
 
   create_table "musicians", force: :cascade do |t|
@@ -152,18 +166,23 @@ ActiveRecord::Schema.define(version: 2021_09_10_101338) do
     t.boolean "is_musician", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["entry_id"], name: "index_notifications_on_entry_id"
+    t.index ["issue_id"], name: "index_notifications_on_issue_id"
+    t.index ["message_id"], name: "index_notifications_on_message_id"
   end
 
   create_table "recruitment_postscripts", force: :cascade do |t|
     t.text "postscript", limit: 2000, null: false
-    t.integer "musician_id", null: false
-    t.integer "recruitment_id", null: false
+    t.integer "musician_id"
+    t.integer "recruitment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["musician_id"], name: "index_recruitment_postscripts_on_musician_id"
+    t.index ["recruitment_id"], name: "index_recruitment_postscripts_on_recruitment_id"
   end
 
   create_table "recruitments", force: :cascade do |t|
-    t.integer "musician_id", null: false
+    t.integer "musician_id"
     t.string "title", limit: 200, null: false
     t.text "detail", limit: 2000, null: false
     t.date "deadline", null: false
@@ -172,7 +191,7 @@ ActiveRecord::Schema.define(version: 2021_09_10_101338) do
     t.boolean "is_private", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["title"], name: "index_recruitments_on_title"
+    t.index ["musician_id"], name: "index_recruitments_on_musician_id"
   end
 
 end
