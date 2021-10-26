@@ -48,7 +48,7 @@ Rails.application.routes.draw do
     end
 
     # entry
-    get '/entries' => 'entries#entries', as:'entries'
+    get '/entries' => 'entries#index', as:'entries'
 
     # favorite
     get '/favorite_recruitments' => 'favorites#favorite_recruitments', as:'favorite_recruitments'
